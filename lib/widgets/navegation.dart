@@ -33,7 +33,9 @@ class BarraNavegacion extends StatelessWidget {
             ),
             IconButton(
               icon: const Icon(Icons.notifications),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/notification');
+              },
             ),
           ],
         ),
