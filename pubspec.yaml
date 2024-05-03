@@ -65,6 +65,11 @@ flutter:
   - assets/icons/campana.png
   - assets/icons/silla.png
   - assets/icons/rayo.png
+  - assets/icons/ciclismo.png
+  - assets/icons/correr.png
+  - assets/icons/estirar.png
+  - assets/icons/meditacion.png
+  - assets/icons/nadador.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
