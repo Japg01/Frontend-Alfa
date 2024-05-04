@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       home: HomeScreen(),
       routes: {
-        '/notification': (context) => const NotificationScreen(),
+        '/notification': (context) => NotificationScreen(),
       },
     );
   }

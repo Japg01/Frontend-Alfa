@@ -29,7 +29,10 @@ class BarraNavegacion extends StatelessWidget {
             IconButton(
               icon: Image.asset('assets/icons/campana.png'),
               onPressed: () {
-                Navigator.pushNamed(context, '/notification');
+                //si estoy en /notification y presiono la campana, no hace nada
+                if (ModalRoute.of(context)!.settings.name != '/notification') {
+                  Navigator.pushNamed(context, '/notification');
+                }
               },
             ),
           ],
