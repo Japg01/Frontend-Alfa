@@ -7,51 +7,59 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const Icon(
-              Icons.notifications_none,
-              size: 100.0,
-              color: Colors.grey, // Use the primary color of your app
-            ),
-            const Text(
-              "Can't find notifications",
+          child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.only(top: 16.0),
+            child: Text(
+              "Let's explore more content around you.",
               style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.grey, // Use the text color of your app
+                color: Colors.grey,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 16.0),
-              child: Text(
-                "Let's explore more content around you.",
-                style: TextStyle(
-                  color: Colors.grey, // Again, use the text color of your app
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+            ),
+            onPressed: () {
+              // Add your onPressed code here!
+            },
+            child: Ink(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [
+                    Color(0xFF4F14A0), // Start color
+                    Color(0xFF8066FF), // End color
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ),
+                borderRadius: BorderRadius.circular(30.0),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Add your onPressed code here!
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Colors.purple, // Use the accent color of your app
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+              child: Container(
+                alignment: Alignment.center,
+                constraints: const BoxConstraints(
+                  maxWidth: double.infinity,
+                  minHeight: 50.0,
+                ),
+                child: const Text(
+                  'Back to Feed',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  textAlign: TextAlign.center,
                 ),
-                child: const Text('Back to Feed'),
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+        ],
+      )),
     );
   }
 }
