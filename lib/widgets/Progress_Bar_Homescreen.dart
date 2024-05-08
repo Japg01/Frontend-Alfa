@@ -31,7 +31,6 @@ class ProgressSection extends StatelessWidget {
   }
 }
 
-
 class CustomCircularPercentIndicator extends StatelessWidget {
   final double radius;
   final double lineWidth;
