@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    const splash = AssetImage('Frontend-Alfa/assets/images/splash.png');
+    const splash = AssetImage('assets/logo/Fondo Morado.png');
     return Container(
         decoration: const BoxDecoration(
             image: DecorationImage(image: splash, fit: BoxFit.cover)));
