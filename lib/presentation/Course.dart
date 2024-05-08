@@ -170,7 +170,6 @@ class YogaBody extends StatelessWidget {
                           scrollDirection: Axis.vertical, // Slide up and down
                         ),
                         items: imageUrls.map((url) {
-                          int index = imageUrls.indexOf(url);
                           return Builder(
                             builder: (BuildContext context) {
                               return Image.network(
