@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/homescreen.dart';
-
 import 'presentation/notificationscreen/notificationscreen.dart';
 
 void main() {
@@ -16,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Gymnastic Center',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: HomeScreen(),
       routes: {
