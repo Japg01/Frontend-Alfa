@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'Course.dart';
 
 class Widgets_Tips_Detailed extends StatefulWidget {

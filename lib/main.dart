@@ -1,3 +1,5 @@
+import 'package:alfa_soyzen/presentation/Course.dart';
+import 'package:alfa_soyzen/presentation/Tips_topics.dart';
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/homescreen.dart';
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: (Yoga_basics()),
       routes: {
         '/notification': (context) => NotificationScreen(),
       },
