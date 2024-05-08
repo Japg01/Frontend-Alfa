@@ -1,4 +1,4 @@
-import 'package:alfa_soyzen/presentation/location_screen.dart';
+import 'package:alfa_soyzen/presentation/auth/location_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const PasswordChanged());

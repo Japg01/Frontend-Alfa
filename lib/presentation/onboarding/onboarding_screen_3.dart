@@ -1,84 +1,94 @@
-import 'package:alfa_soyzen/presentation/onboarding_screen_2.dart';
-import 'package:alfa_soyzen/presentation/onboarding_screen_3.dart';
-import 'package:alfa_soyzen/presentation/verification_screen.dart';
+import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_1.dart';
+import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_2.dart';
+import 'package:alfa_soyzen/presentation/auth/verification_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const OnBoardingScreen1());
+void main() => runApp(const OnBoardingScreen3());
 
-class OnBoardingScreen1 extends StatelessWidget {
-  const OnBoardingScreen1({super.key});
+class OnBoardingScreen3 extends StatelessWidget {
+  const OnBoardingScreen3({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: Center(
             child: Column(
       children: [
-        const SizedBox(height: 50),
-        yogaImage(),
-        const SizedBox(height: 20),
-        yogaDaily(),
-        const SizedBox(height: 90),
-        const BarraNavegacion(),
+        SizedBox(height: 100),
+        YogaImage(),
+        SizedBox(height: 65),
+        YogaDaily(),
+        SizedBox(height: 90),
+        BarraNavegacion(),
       ],
     )));
   }
 }
 
-Widget yogaImage() {
-  return SizedBox(
-    height: 304.0,
-    width: 328.0,
-    child: Image.asset('assets/images/yoga1.png'),
-  );
+class YogaImage extends StatelessWidget {
+  const YogaImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 208.0,
+      width: 290.0,
+      child: Image.asset('assets/images/yoga3.png'),
+    );
+  }
 }
 
-Widget yogaDaily() {
-  return const Column(
-    children: [
-      SizedBox(
-        width: 55,
-        height: 28,
-        child: Text('Yoga',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color(0xFF4F14A0),
-              fontWeight: FontWeight.w400,
-              fontSize: 22,
-              fontFamily: 'PTSans',
-            )),
-      ),
-      SizedBox(height: 10),
-      SizedBox(
-          width: 190,
-          height: 49,
-          child: Text(
-            'Daily Yoga',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Color(0xFF222222),
-                fontWeight: FontWeight.w700,
-                fontSize: 38,
-                fontFamily: 'PTSans'),
-          )),
-      SizedBox(height: 20),
-      SizedBox(
-        width: 290,
-        height: 45,
-        child: Text(
-          'Do your practice of physical exercise and \n relaxation make helthy',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Color(0xFF677294),
-              fontWeight: FontWeight.w400,
-              fontSize: 15,
-              fontFamily: 'PTSans'),
+class YogaDaily extends StatelessWidget {
+  const YogaDaily({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        SizedBox(
+          width: 63,
+          height: 28,
+          child: Text('Meets',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Color(0xFF4F14A0),
+                fontWeight: FontWeight.w400,
+                fontSize: 22,
+                fontFamily: 'PTSans',
+              )),
         ),
-      ),
-      SizedBox(height: 35),
-      Buttom(),
-    ],
-  );
+        SizedBox(height: 10),
+        SizedBox(
+            width: 200,
+            height: 49,
+            child: Text(
+              'Community',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Color(0xFF222222),
+                  fontWeight: FontWeight.w700,
+                  fontSize: 38,
+                  fontFamily: 'PTSans'),
+            )),
+        SizedBox(height: 20),
+        SizedBox(
+          width: 290,
+          height: 45,
+          child: Text(
+            'Do your practice of physical exercise and \nrelaxation make helthy',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Color(0xFF677294),
+                fontWeight: FontWeight.w400,
+                fontSize: 15,
+                fontFamily: 'PTSans'),
+          ),
+        ),
+        SizedBox(height: 35),
+        Buttom(),
+      ],
+    );
+  }
 }
 
 class Buttom extends StatelessWidget {
@@ -91,7 +101,7 @@ class Buttom extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (_) => const OnBoardingScreen2(),
+            builder: (_) => const VerificationScreen(),
           ));
         },
         child: const Row(
@@ -155,8 +165,12 @@ class BarraNavegacion extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   IconButton(
-                    icon: const Icon(Icons.radio_button_checked),
-                    onPressed: () {},
+                    icon: const Icon(Icons.radio_button_unchecked),
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (_) => const OnBoardingScreen1(),
+                      ));
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.radio_button_unchecked),
@@ -167,12 +181,8 @@ class BarraNavegacion extends StatelessWidget {
                     },
                   ),
                   IconButton(
-                    icon: const Icon(Icons.radio_button_unchecked),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (_) => const OnBoardingScreen3(),
-                      ));
-                    },
+                    icon: const Icon(Icons.radio_button_checked),
+                    onPressed: () {},
                   ),
                 ],
               ),

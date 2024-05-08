@@ -1,4 +1,4 @@
-import 'package:alfa_soyzen/presentation/password_changed_screen.dart';
+import 'package:alfa_soyzen/presentation/auth/password_changed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 

@@ -1,12 +1,12 @@
-import 'package:alfa_soyzen/presentation/onboarding_screen_1.dart';
-import 'package:alfa_soyzen/presentation/onboarding_screen_2.dart';
-import 'package:alfa_soyzen/presentation/verification_screen.dart';
+import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_1.dart';
+import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_3.dart';
+import 'package:alfa_soyzen/presentation/auth/verification_screen.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const OnBoardingScreen3());
+void main() => runApp(const OnBoardingScreen2());
 
-class OnBoardingScreen3 extends StatelessWidget {
-  const OnBoardingScreen3({super.key});
+class OnBoardingScreen2 extends StatelessWidget {
+  const OnBoardingScreen2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,9 @@ class OnBoardingScreen3 extends StatelessWidget {
         body: Center(
             child: Column(
       children: [
-        SizedBox(height: 100),
+        SizedBox(height: 90),
         YogaImage(),
-        SizedBox(height: 65),
+        SizedBox(height: 53),
         YogaDaily(),
         SizedBox(height: 90),
         BarraNavegacion(),
@@ -31,9 +31,9 @@ class YogaImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 208.0,
-      width: 290.0,
-      child: Image.asset('assets/images/yoga3.png'),
+      height: 231.01,
+      width: 329.0,
+      child: Image.asset('assets/images/yoga2.png'),
     );
   }
 }
@@ -46,9 +46,9 @@ class YogaDaily extends StatelessWidget {
     return const Column(
       children: [
         SizedBox(
-          width: 63,
+          width: 109,
           height: 28,
-          child: Text('Meets',
+          child: Text('Meditation',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Color(0xFF4F14A0),
@@ -59,10 +59,10 @@ class YogaDaily extends StatelessWidget {
         ),
         SizedBox(height: 10),
         SizedBox(
-            width: 200,
+            width: 233,
             height: 49,
             child: Text(
-              'Community',
+              'Yoga Classes',
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Color(0xFF222222),
@@ -72,10 +72,10 @@ class YogaDaily extends StatelessWidget {
             )),
         SizedBox(height: 20),
         SizedBox(
-          width: 290,
+          width: 260,
           height: 45,
           child: Text(
-            'Do your practice of physical exercise and \nrelaxation make helthy',
+            'Meditation is the key to Productivity. \nHappiness & Longevity',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Color(0xFF677294),
@@ -101,7 +101,7 @@ class Buttom extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (_) => const VerificationScreen(),
+            builder: (_) => const OnBoardingScreen3(),
           ));
         },
         child: const Row(
@@ -173,16 +173,16 @@ class BarraNavegacion extends StatelessWidget {
                     },
                   ),
                   IconButton(
+                    icon: const Icon(Icons.radio_button_checked),
+                    onPressed: () {},
+                  ),
+                  IconButton(
                     icon: const Icon(Icons.radio_button_unchecked),
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (_) => const OnBoardingScreen2(),
+                        builder: (_) => const OnBoardingScreen3(),
                       ));
                     },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.radio_button_checked),
-                    onPressed: () {},
                   ),
                 ],
               ),

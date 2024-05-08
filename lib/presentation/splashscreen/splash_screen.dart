@@ -1,4 +1,4 @@
-import 'package:alfa_soyzen/presentation/onboarding_screen_1.dart';
+import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
