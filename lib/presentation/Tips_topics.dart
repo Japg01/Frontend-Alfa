@@ -1,19 +1,26 @@
-import 'dart:math';
+<<<<<<< HEAD
+=======
+>>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
 
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/navegation.dart';
 import 'Tips_Detailed.dart';
 
 class Tips_n_Topics extends StatelessWidget {
+  const Tips_n_Topics({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+<<<<<<< HEAD
+      title: "Tips",
+      debugShowCheckedModeBanner: false,
+=======
       debugShowCheckedModeBanner: false,
       title: "Tips",
+>>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
       home: Tips_n_Topics_Screen(),
     );
   }
@@ -115,14 +122,23 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen>{
               color: Colors.white, width: 35.0, height: 35.0),
         ),
       ),
+<<<<<<< HEAD
+      body: Expanded(
+        bottomNavigationBar: const BarraNavegacion(),
+        child: Tips_n_Topics_body(
+=======
       body: Tips_n_Topics_body(
+>>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
           imageUrls: imageUrls,
           titles: imageTitles,
           categories: Categories,
           dates: dates,
           subtitles: imageSubtitles,
+<<<<<<< HEAD
+        ),
+=======
+>>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
       ),
-      bottomNavigationBar: const BarraNavegacion(),
     );
   }
 }
@@ -140,11 +156,87 @@ class Tips_n_Topics_body extends StatelessWidget {
     required this.titles,
     required this.categories,
     required this.dates,
+<<<<<<< HEAD
+    required this.subtitles
+=======
     required this.subtitles,
+>>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
   });
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
+
+
+    return Column(
+      children: [
+            SizedBox(
+              height: 240,
+              child: HorizontalCarousel(
+                imageUrls: imageUrls,
+                titles: titles,
+                categories: categories,
+                dates: dates,
+              ),
+            ),
+            SizedBox(
+              height: 40,
+              child:
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child:
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Recent Post", style: TextStyle( fontSize: 24)),
+                            Positioned(
+                              child: ElevatedButton(
+                                  onPressed: /* navigate a una pantalla */ null,
+                                  style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
+                                  ),
+                                  child: const Text('See All >', style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12
+                                  )
+                                  )
+                              )
+                            ),
+                          ]
+                      ),
+                )
+            ),
+            /*Flexible(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: bottomInset, left: 8,right: 8),
+                child: ListView.builder(
+                  itemCount: panels.length,
+                  itemBuilder: (context, index) {
+                    final panel = panels[index];
+                    return Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(16.0),
+                              ),
+                              child: Image.network(
+                                panel['urlImage']!,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 16.0),
+                          Expanded(
+                            child: Text(
+                              panel['description']!,
+                              style: TextStyle(
+                                fontSize: 16.0,
+                              ),
+=======
     return Flex(
       direction: Axis.vertical,
       children: [
@@ -286,17 +378,26 @@ class NewYogaClassesPanelGrid extends StatelessWidget {
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12.0,
+>>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
                             ),
                           ),
                         ],
                       ),
+<<<<<<< HEAD
+                    );
+                  },
+                ),
+              ),
+            ),*/
+=======
                     ),
                   ],
                 ),
-              );
+              )
             },
           ),
         ),
+>>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
       ],
     );
   }
@@ -433,7 +534,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
             ),
           ),
         ),
-        Padding(padding: EdgeInsets.all(3),
+        Padding(padding: const EdgeInsets.all(3),
           child:
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -467,7 +568,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
 
 class Tips_n_Topics_appbar extends StatefulWidget implements PreferredSizeWidget {
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + 50);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight + 50);
 
   final String title;
   final List<String> categories = [
@@ -481,7 +582,7 @@ class Tips_n_Topics_appbar extends StatefulWidget implements PreferredSizeWidget
 
   final void Function(int) onCategoryTapped;
 
-  Tips_n_Topics_appbar({
+  Tips_n_Topics_appbar({super.key, 
     required this.title,
     required this.onCategoryTapped,
   });
@@ -496,14 +597,14 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.only(
+      borderRadius: const BorderRadius.only(
         bottomRight: Radius.circular(50),
       ),
       child: AppBar(
         title: Row(
           children: [
             const BackButton(color: Colors.white),
-            SizedBox(width: 10.0),
+            const SizedBox(width: 10.0),
             Text(
               widget.title,
               style: const TextStyle(color: Colors.white, fontSize: 18),
@@ -511,7 +612,7 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
           ],
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(20.0),
+          preferredSize: const Size.fromHeight(20.0),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 16.0),
             child: SizedBox(
@@ -550,7 +651,7 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
                                     shape: BoxShape.circle,
                                   ),
                                 ),
-                                SizedBox(width: 10.0),
+                                const SizedBox(width: 10.0),
                                 Expanded(
                                   child: Text(
                                     widget.categories[index],

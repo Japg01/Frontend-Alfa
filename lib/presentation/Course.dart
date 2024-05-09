@@ -1,16 +1,16 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/widgets.dart';
 
 import '../widgets/navegation.dart';
 
 class Yoga_basics extends StatelessWidget {
+  const Yoga_basics({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Yoga Basics for Beginners',
       home: YogaHomePage(),
@@ -19,6 +19,8 @@ class Yoga_basics extends StatelessWidget {
 }
 
 class YogaHomePage extends StatefulWidget {
+  const YogaHomePage({super.key});
+
   @override
   _YogaHomePageState createState() => _YogaHomePageState();
 }
@@ -59,9 +61,7 @@ class _YogaHomePageState extends State<YogaHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: YogaAppBar(
-        title: "Yoga Basics for Beginners"
-      ),
+      appBar: const YogaAppBar(title: "Yoga Basics for Beginners"),
       body: YogaBody(
         imageUrls: imageUrls,
         imageTitles: imageTitles,
@@ -101,12 +101,12 @@ class _YogaHomePageState extends State<YogaHomePage> {
 
 class YogaAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   final String title;
 
-  YogaAppBar({
-      required this.title,
+  const YogaAppBar({super.key, 
+    required this.title,
   });
 
   @override
@@ -115,12 +115,11 @@ class YogaAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(50),
-          )
-      ),
+        bottomRight: Radius.circular(50),
+      )),
       backgroundColor: Colors.deepPurple,
       foregroundColor: Colors.transparent,
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+      titleTextStyle: const TextStyle(color: Colors.white, fontSize: 18),
       leading: const BackButton(color: Colors.white),
     );
   }
@@ -135,7 +134,8 @@ class YogaBody extends StatelessWidget {
 
   final List<String> imageDescriptions;
 
-  const YogaBody({super.key,
+  const YogaBody({
+    super.key,
     required this.imageUrls,
     required this.imageTitles,
     required this.imageSubtitles,
@@ -159,25 +159,24 @@ class YogaBody extends StatelessWidget {
                 children: [
                   ClipRect(
                       child: CarouselSlider(
-                        options: CarouselOptions(
-                          height: 270,
-                          autoPlay: true,
-                          onPageChanged: onPageChanged,
-                          scrollDirection: Axis.vertical, // Slide up and down
-                        ),
-                        items: imageUrls.map((url) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return Image.network(
-                                url,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                              );
-                            },
+                    options: CarouselOptions(
+                      height: 270,
+                      autoPlay: true,
+                      onPageChanged: onPageChanged,
+                      scrollDirection: Axis.vertical, // Slide up and down
+                    ),
+                    items: imageUrls.map((url) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Image.network(
+                            url,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
                           );
-                        }).toList(),
-                      )
-                  ),
+                        },
+                      );
+                    }).toList(),
+                  )),
                   Positioned(
                     top: 16,
                     left: 16,
@@ -204,7 +203,8 @@ class YogaBody extends StatelessWidget {
                     top: 16,
                     right: 16,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
                         color: Colors.deepPurple,
                         borderRadius: BorderRadius.circular(30),
@@ -233,7 +233,7 @@ class YogaBody extends StatelessWidget {
                           ],
                         ),
                       ),
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -263,13 +263,11 @@ class YogaBody extends StatelessWidget {
                   ),
                 ],
               ),
-            )
-        ),
+            )),
         Expanded(
           flex: 0,
-          child:
-            Padding(
-              padding: EdgeInsets.all(16),
+          child: Padding(
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -277,10 +275,8 @@ class YogaBody extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Text(
                         imageDescriptions[currentIndex],
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.grey[800]
-                        ),
+                        style:
+                            TextStyle(fontSize: 16.0, color: Colors.grey[800]),
                       ),
                     ),
                   ),
@@ -295,7 +291,9 @@ class YogaBody extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Level', style: TextStyle(fontWeight: FontWeight.bold)),
+                              Text('Level',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
                               Text('Beginner'),
                             ],
                           ),
@@ -308,7 +306,9 @@ class YogaBody extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Weeks', style: TextStyle(fontWeight: FontWeight.bold)),
+                              Text('Weeks',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
                               Text('4'),
                             ],
                           ),
@@ -321,7 +321,9 @@ class YogaBody extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Mins', style: TextStyle(fontWeight: FontWeight.bold)),
+                              Text('Mins',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
                               Text('30'),
                             ],
                           ),
@@ -330,26 +332,24 @@ class YogaBody extends StatelessWidget {
                     ],
                   ),
                 ],
-              )
-            ),
+              )),
         ),
         NewYogaClassesCarousel(
             newImageUrls: imageUrls,
             newImageTitles: imageTitles,
-            newImageSubtitles: imageSubtitles
-        ), // Add more widgets for the rest of the Yoga app content
+            newImageSubtitles:
+                imageSubtitles), // Add more widgets for the rest of the Yoga app content
       ],
     );
   }
 }
-
 
 class NewYogaClassesCarousel extends StatelessWidget {
   final List<String> newImageUrls;
   final List<String> newImageTitles;
   final List<String> newImageSubtitles;
 
-  NewYogaClassesCarousel({
+  const NewYogaClassesCarousel({super.key, 
     required this.newImageUrls,
     required this.newImageTitles,
     required this.newImageSubtitles,
@@ -379,13 +379,14 @@ class NewYogaClassesCarousel extends StatelessWidget {
               enlargeCenterPage: false,
               enableInfiniteScroll: true,
               autoPlay: false,
-              autoPlayInterval: Duration(seconds: 5),
+              autoPlayInterval: const Duration(seconds: 5),
               scrollDirection: Axis.vertical, // Change to vertical scrolling
               viewportFraction: 1.0, // Show two items per slide
             ),
             items: List.generate(
-              (newImageUrls.length + 1) ~/ 2, // Divide the length by 2 to get the number of slides
-                  (index) {
+              (newImageUrls.length + 1) ~/
+                  2, // Divide the length by 2 to get the number of slides
+              (index) {
                 final startIndex = index * 2;
                 final endIndex = min(startIndex + 2, newImageUrls.length);
                 return Builder(
@@ -399,12 +400,14 @@ class NewYogaClassesCarousel extends StatelessWidget {
                               for (int i = startIndex; i < endIndex; i++)
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0, vertical: 4.0),
                                     child: Stack(
                                       fit: StackFit.expand,
                                       children: [
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(9.0),
+                                          borderRadius:
+                                              BorderRadius.circular(9.0),
                                           child: Image.network(
                                             newImageUrls[i],
                                             fit: BoxFit.cover,
@@ -420,7 +423,8 @@ class NewYogaClassesCarousel extends StatelessWidget {
                                             ),
                                             decoration: BoxDecoration(
                                               color: Colors.deepPurple,
-                                              borderRadius: BorderRadius.circular(20.0),
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
                                             ),
                                             child: const Text(
                                               'New',
@@ -451,7 +455,8 @@ class NewYogaClassesCarousel extends StatelessWidget {
                                           left: 12.0,
                                           right: 12.0,
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 newImageTitles[i],
@@ -491,4 +496,3 @@ class NewYogaClassesCarousel extends StatelessWidget {
     );
   }
 }
-

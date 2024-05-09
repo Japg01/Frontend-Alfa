@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/Course.dart';
+import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/Tips_topics.dart';
 import 'package:alfa_soyzen/presentation/homescreen.dart';
 import 'presentation/notificationscreen/notificationscreen.dart';
@@ -15,8 +16,9 @@ class MyApp extends StatelessWidget {
       title: 'Gymnastic Center',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
       ),
-      home: (Yoga_basics()),
+      home: (const Yoga_basics()),
       routes: {
         '/notification': (context) => NotificationScreen(),
       },
