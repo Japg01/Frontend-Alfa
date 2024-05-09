@@ -119,8 +119,7 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
         dates: dates,
         subtitles: imageSubtitles,
         ),
-      ),
-    );
+      );
   }
 }
 
@@ -292,7 +291,7 @@ class NewYogaClassesPanelGrid extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              );
             },
           ),
         ),
