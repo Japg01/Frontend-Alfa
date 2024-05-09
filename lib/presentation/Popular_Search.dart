@@ -1,5 +1,5 @@
 import 'package:alfa_soyzen/widgets/searchbar.dart';
-import 'package:alfa_soyzen/widgets/navegation.dart';
+//import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:flutter/material.dart';
 
 class PopularSearch extends StatefulWidget {
