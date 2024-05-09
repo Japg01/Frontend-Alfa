@@ -1,13 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/Course.dart';
 import 'package:alfa_soyzen/presentation/Tips_topics.dart';
-import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/homescreen.dart';
-
 import 'presentation/notificationscreen/notificationscreen.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
