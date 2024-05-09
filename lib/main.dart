@@ -1,3 +1,6 @@
+import 'package:alfa_soyzen/presentation/Popular_Search.dart';
+import 'package:alfa_soyzen/presentation/auth/verification_screen.dart';
+import 'package:alfa_soyzen/presentation/splashscreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/Course.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +23,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: WelcomeScreen(),
+      home: const SplashScreen(),
       routes: {
         '/home': (context) => HomeScreen(),
         '/notification': (context) => NotificationScreen(),
         '/settings': (context) => const SettingsPage(),
+        '/verification': (context) => const VerificationScreen(),
+        '/popularSearch': (context) => const PopularSearch(),
       },
     );
   }

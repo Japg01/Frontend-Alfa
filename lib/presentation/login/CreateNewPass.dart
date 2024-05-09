@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CreatePasswordPage extends StatefulWidget {
-  const CreatePasswordPage({Key? key}) : super(key: key);
+  const CreatePasswordPage({super.key});
 
   @override
   _CreatePasswordPageState createState() => _CreatePasswordPageState();
@@ -23,7 +23,8 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
         image: DecorationImage(
           image: const AssetImage("assets/images/fondo.png"),
           fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(myColor.withOpacity(0.2), BlendMode.color),
+          colorFilter:
+              ColorFilter.mode(myColor.withOpacity(0.2), BlendMode.color),
         ),
       ),
       child: Scaffold(
@@ -85,7 +86,8 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
         const SizedBox(height: 20),
         _buildInputField(newPasswordController, labelText: "New Password"),
         const SizedBox(height: 20),
-        _buildInputField(confirmPasswordController, labelText: "Confirm Password"),
+        _buildInputField(confirmPasswordController,
+            labelText: "Confirm Password"),
         const SizedBox(height: 20),
         _buildSubmitButton(),
         const SizedBox(height: 10),
@@ -93,7 +95,8 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
     );
   }
 
-  Widget _buildInputField(TextEditingController controller, {String? labelText}) {
+  Widget _buildInputField(TextEditingController controller,
+      {String? labelText}) {
     return TextField(
       controller: controller,
       obscureText: true,
@@ -108,15 +111,13 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
     return ElevatedButton(
       onPressed: () {
         // Aquí iría la lógica para verificar las contraseñas y enviarlas al backend
-        debugPrint("New Password: ${newPasswordController.text}");
-        debugPrint("Confirm Password: ${confirmPasswordController.text}");
+        Navigator.pushNamed(context, "/verification");
       },
       style: ElevatedButton.styleFrom(
-        shape: const StadiumBorder(),
-        elevation: 20,
-        minimumSize: const Size.fromHeight(60),
-        backgroundColor: Colors.deepPurple
-      ),
+          shape: const StadiumBorder(),
+          elevation: 20,
+          minimumSize: const Size.fromHeight(60),
+          backgroundColor: Colors.deepPurple),
       child: const Text(
         "Create",
         style: TextStyle(color: Colors.white),

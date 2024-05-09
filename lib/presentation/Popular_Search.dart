@@ -55,7 +55,7 @@ class _PopularSearch extends State<PopularSearch> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
+                        padding: EdgeInsets.only(
                           top: 0.0,
                           left: 0,
                           right: 0,
@@ -142,14 +142,10 @@ class _PopularSearch extends State<PopularSearch> {
               titleSpacing: 0.0,
               backgroundColor: Colors.transparent,
               elevation: 0,
-              title: Row(
+              iconTheme: const IconThemeData(color: Colors.white),
+              title: const Row(
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    color: Colors.white,
-                    onPressed: () {},
-                  ),
-                  const Text(
+                  Text(
                     'Popular Search',
                     style: TextStyle(
                       color: Colors.white,

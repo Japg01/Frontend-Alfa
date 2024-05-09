@@ -117,12 +117,15 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const TextField(
-                      decoration: InputDecoration(
+                    child: TextField(
+                      decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.search),
                         labelText: 'Buscar',
                         border: InputBorder.none,
                       ),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/popularSearch');
+                      },
                     ),
                   ),
                 ),
