@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
+import 'package:alfa_soyzen/presentation/Course.dart';
 
-=======
->>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
-import 'Course.dart';
 
 class Widgets_Tips_Detailed extends StatefulWidget {
-
   final String title;
   final String desc;
   final String urlTitleImage;
 
-  const Widgets_Tips_Detailed({super.key, 
-    required this.title,
-    required this.desc,
-    required this.urlTitleImage
-  });
+  const Widgets_Tips_Detailed(
+      {super.key,
+      required this.title,
+      required this.desc,
+      required this.urlTitleImage});
 
   @override
-  _tips_detail createState() => _tips_detail(title: title,desc: desc, urlTitleImage: urlTitleImage);
+  _tips_detail createState() =>
+      _tips_detail(title: title, desc: desc, urlTitleImage: urlTitleImage);
 }
 
 class _tips_detail extends State<Widgets_Tips_Detailed> {
@@ -35,11 +32,8 @@ class _tips_detail extends State<Widgets_Tips_Detailed> {
   final String desc;
   final String urlTitleImage;
 
-  _tips_detail({
-    required this.title,
-    required this.desc,
-    required this.urlTitleImage
-  });
+  _tips_detail(
+      {required this.title, required this.desc, required this.urlTitleImage});
 
   final TextEditingController _commentController = TextEditingController();
 
@@ -82,7 +76,8 @@ class _tips_detail extends State<Widgets_Tips_Detailed> {
                 ),
                 Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: bottomInset, left: 8,right: 8),
+                    padding:
+                        EdgeInsets.only(bottom: bottomInset, left: 8, right: 8),
                     child: ListView.builder(
                       itemCount: panels.length,
                       itemBuilder: (context, index) {

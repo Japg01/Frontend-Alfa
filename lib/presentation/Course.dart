@@ -1,5 +1,6 @@
 import 'dart:math';
-
+import 'package:alfa_soyzen/widgets/sidebarmenu.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -10,11 +11,7 @@ class Yoga_basics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Yoga Basics for Beginners',
-      home: YogaHomePage(),
-    );
+    return const YogaHomePage(); // Directly return the page without wrapping it in another MaterialApp
   }
 }
 
@@ -95,6 +92,7 @@ class _YogaHomePageState extends State<YogaHomePage> {
         ),
       ),
       bottomNavigationBar: const BarraNavegacion(),
+      drawer: const SideBarMenu(),
     );
   }
 }
@@ -105,7 +103,8 @@ class YogaAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
 
-  const YogaAppBar({super.key, 
+  const YogaAppBar({
+    super.key,
     required this.title,
   });
 
@@ -349,7 +348,8 @@ class NewYogaClassesCarousel extends StatelessWidget {
   final List<String> newImageTitles;
   final List<String> newImageSubtitles;
 
-  const NewYogaClassesCarousel({super.key, 
+  const NewYogaClassesCarousel({
+    super.key,
     required this.newImageUrls,
     required this.newImageTitles,
     required this.newImageSubtitles,

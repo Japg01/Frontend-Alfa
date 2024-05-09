@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-=======
->>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
+import 'package:carousel_slider/carousel_options.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -14,28 +12,20 @@ class Tips_n_Topics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-<<<<<<< HEAD
       title: "Tips",
       debugShowCheckedModeBanner: false,
-=======
-      debugShowCheckedModeBanner: false,
-      title: "Tips",
->>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
       home: Tips_n_Topics_Screen(),
     );
   }
 }
 
-class Tips_n_Topics_Screen extends StatefulWidget{
-
+class Tips_n_Topics_Screen extends StatefulWidget {
   const Tips_n_Topics_Screen({super.key});
   @override
   _Tips_n_Topics_state createState() => _Tips_n_Topics_state();
-
 }
 
-class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen>{
-
+class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
   List<String> imageUrls = [
     'https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-trainer-in-gym-royalty-free-image-1584723855.jpg',
     'https://i0.wp.com/www.muscleandfitness.com/wp-content/uploads/2018/12/Personal-Trainer-Training-Partner-GettyImages-654427364.jpg?quality=86&strip=all',
@@ -94,9 +84,9 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen>{
             case 0:
               break;
             case 1:
-            // Handle Strength Training category tapping
+              // Handle Strength Training category tapping
               break;
-          // Add cases for the rest of the categories
+            // Add cases for the rest of the categories
             default:
               break;
           }
@@ -122,22 +112,13 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen>{
               color: Colors.white, width: 35.0, height: 35.0),
         ),
       ),
-<<<<<<< HEAD
-      body: Expanded(
-        bottomNavigationBar: const BarraNavegacion(),
-        child: Tips_n_Topics_body(
-=======
       body: Tips_n_Topics_body(
->>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
-          imageUrls: imageUrls,
-          titles: imageTitles,
-          categories: Categories,
-          dates: dates,
-          subtitles: imageSubtitles,
-<<<<<<< HEAD
+        imageUrls: imageUrls,
+        titles: imageTitles,
+        categories: Categories,
+        dates: dates,
+        subtitles: imageSubtitles,
         ),
-=======
->>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
       ),
     );
   }
@@ -156,87 +137,11 @@ class Tips_n_Topics_body extends StatelessWidget {
     required this.titles,
     required this.categories,
     required this.dates,
-<<<<<<< HEAD
-    required this.subtitles
-=======
     required this.subtitles,
->>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
   });
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-
-
-    return Column(
-      children: [
-            SizedBox(
-              height: 240,
-              child: HorizontalCarousel(
-                imageUrls: imageUrls,
-                titles: titles,
-                categories: categories,
-                dates: dates,
-              ),
-            ),
-            SizedBox(
-              height: 40,
-              child:
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child:
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text("Recent Post", style: TextStyle( fontSize: 24)),
-                            Positioned(
-                              child: ElevatedButton(
-                                  onPressed: /* navigate a una pantalla */ null,
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
-                                  ),
-                                  child: const Text('See All >', style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 12
-                                  )
-                                  )
-                              )
-                            ),
-                          ]
-                      ),
-                )
-            ),
-            /*Flexible(
-              child: Padding(
-                padding: EdgeInsets.only(bottom: bottomInset, left: 8,right: 8),
-                child: ListView.builder(
-                  itemCount: panels.length,
-                  itemBuilder: (context, index) {
-                    final panel = panels[index];
-                    return Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(16.0),
-                              ),
-                              child: Image.network(
-                                panel['urlImage']!,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 16.0),
-                          Expanded(
-                            child: Text(
-                              panel['description']!,
-                              style: TextStyle(
-                                fontSize: 16.0,
-                              ),
-=======
     return Flex(
       direction: Axis.vertical,
       children: [
@@ -260,7 +165,8 @@ class Tips_n_Topics_body extends StatelessWidget {
                 ElevatedButton(
                   onPressed: /* navigate a una pantalla */ null,
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.transparent),
                   ),
                   child: const Text(
                     'See All >',
@@ -274,12 +180,11 @@ class Tips_n_Topics_body extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(child:
-          NewYogaClassesPanelGrid(
-            newImageUrls: imageUrls,
-            newImageTitles: titles,
-            newImageSubtitles: subtitles)
-        )
+        Expanded(
+            child: NewYogaClassesPanelGrid(
+                newImageUrls: imageUrls,
+                newImageTitles: titles,
+                newImageSubtitles: subtitles))
       ],
     );
   }
@@ -290,7 +195,8 @@ class NewYogaClassesPanelGrid extends StatelessWidget {
   final List<String> newImageTitles;
   final List<String> newImageSubtitles;
 
-  NewYogaClassesPanelGrid({
+  const NewYogaClassesPanelGrid({
+    super.key,
     required this.newImageUrls,
     required this.newImageTitles,
     required this.newImageSubtitles,
@@ -310,7 +216,8 @@ class NewYogaClassesPanelGrid extends StatelessWidget {
             itemCount: newImageUrls.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
@@ -378,18 +285,10 @@ class NewYogaClassesPanelGrid extends StatelessWidget {
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12.0,
->>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
                             ),
                           ),
                         ],
                       ),
-<<<<<<< HEAD
-                    );
-                  },
-                ),
-              ),
-            ),*/
-=======
                     ),
                   ],
                 ),
@@ -397,7 +296,6 @@ class NewYogaClassesPanelGrid extends StatelessWidget {
             },
           ),
         ),
->>>>>>> 26c0a7911d925d75961b69b53ff6108620266e97
       ],
     );
   }
@@ -473,27 +371,27 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                             children: [
                               ElevatedButton(
                                 style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent)
-                                ),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.transparent)),
                                 onPressed: () => navigateToDetailed(
                                     context,
                                     widget.titles[index],
                                     "Descripcion Descripcion Descripcion Descripcion Descripcion ",
                                     widget.imageUrls[index]),
-                                child:
-                                  Text(
-                                    widget.titles[index],
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16.0,
-                                    ),
+                                child: Text(
+                                  widget.titles[index],
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
                                   ),
+                                ),
                               ),
                               const SizedBox(height: 8.0),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     widget.categories[index],
@@ -534,39 +432,39 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
             ),
           ),
         ),
-        Padding(padding: const EdgeInsets.all(3),
-          child:
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              widget.imageUrls.length,
-                  (index) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: CircleAvatar(
-                  radius: 5.0,
-                  backgroundColor: _currentPage == index
-                      ? Theme.of(context).primaryColor
-                      : Colors.grey.withOpacity(0.5),
+        Padding(
+            padding: const EdgeInsets.all(3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                widget.imageUrls.length,
+                (index) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: CircleAvatar(
+                    radius: 5.0,
+                    backgroundColor: _currentPage == index
+                        ? Theme.of(context).primaryColor
+                        : Colors.grey.withOpacity(0.5),
+                  ),
                 ),
               ),
-            ),
-          )
-        ),
+            )),
       ],
     );
   }
 
-  void navigateToDetailed(BuildContext context,String title, String description, String url_){
-      Navigator.push(
+  void navigateToDetailed(
+      BuildContext context, String title, String description, String url_) {
+    Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Widgets_Tips_Detailed(desc: description,title: title ,urlTitleImage: url_ ))
-      );
+        MaterialPageRoute(
+            builder: (context) => Widgets_Tips_Detailed(
+                desc: description, title: title, urlTitleImage: url_)));
   }
-
 }
 
-
-class Tips_n_Topics_appbar extends StatefulWidget implements PreferredSizeWidget {
+class Tips_n_Topics_appbar extends StatefulWidget
+    implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight + 50);
 
@@ -581,6 +479,7 @@ class Tips_n_Topics_appbar extends StatefulWidget implements PreferredSizeWidget
   ];
 
   final void Function(int) onCategoryTapped;
+
 
   Tips_n_Topics_appbar({super.key, 
     required this.title,
@@ -614,7 +513,8 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(20.0),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 6.0, vertical: 16.0),
             child: SizedBox(
               height: 20.0,
               child: ListView.separated(
@@ -674,7 +574,8 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
                     ),
                   );
                 },
-                separatorBuilder: (context, index) => const SizedBox(width: 16.0),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(width: 16.0),
               ),
             ),
           ),
@@ -685,6 +586,3 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
     );
   }
 }
-
-
-
