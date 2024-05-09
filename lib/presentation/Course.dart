@@ -1,6 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/widgets.dart';
+
+import '../widgets/navegation.dart';
 
 class Yoga_basics extends StatelessWidget {
   @override
@@ -51,13 +56,6 @@ class _YogaHomePageState extends State<YogaHomePage> {
 
   int currentIndex = 0;
 
-  void _addNewImage() {
-    setState(() {
-      imageUrls.add('https://example.com/new_image.jpg');
-      imageTitles.add('New Image');
-      imageSubtitles.add('New Subtitle');
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +72,6 @@ class _YogaHomePageState extends State<YogaHomePage> {
             currentIndex = index;
           });
         },
-        onAddNewImage: _addNewImage,
         imageDescriptions: descriptions,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -135,7 +132,6 @@ class YogaBody extends StatelessWidget {
   final List<String> imageSubtitles;
   final int currentIndex;
   final Function(int, CarouselPageChangedReason) onPageChanged;
-  final VoidCallback onAddNewImage;
 
   final List<String> imageDescriptions;
 
@@ -145,26 +141,26 @@ class YogaBody extends StatelessWidget {
     required this.imageSubtitles,
     required this.currentIndex,
     required this.onPageChanged,
-    required this.onAddNewImage,
     required this.imageDescriptions,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Flex(
+      direction: Axis.vertical,
       children: [
         ClipRRect(
             borderRadius: const BorderRadius.only(
               bottomRight: Radius.circular(45),
             ),
             child: SizedBox(
-              height: 300,
+              height: 270,
               child: Stack(
                 children: [
                   ClipRect(
                       child: CarouselSlider(
                         options: CarouselOptions(
-                          height: 300,
+                          height: 270,
                           autoPlay: true,
                           onPageChanged: onPageChanged,
                           scrollDirection: Axis.vertical, // Slide up and down
@@ -183,21 +179,26 @@ class YogaBody extends StatelessWidget {
                       )
                   ),
                   Positioned(
-                      top: 16,
-                      left: 16,
-                      child: ElevatedButton(
-                          onPressed: onAddNewImage,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.deepPurple,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                          ),
-                          child: const Text('New', style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12
-                          )
-                          )
-                      )
+                    top: 16,
+                    left: 16,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0,
+                        vertical: 6.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: const Text(
+                        'New',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.0,
+                        ),
+                      ),
+                    ),
                   ),
                   Positioned(
                     top: 16,
@@ -356,157 +357,137 @@ class NewYogaClassesCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(12),
-            child: Text(
-              'More Most Popular Courses',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                ),
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.all(12),
+          child: Text(
+            'More Most Popular Courses',
+            style: TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          SizedBox(
-            height: 120.0,
-            child: CarouselSlider(
-              options: CarouselOptions(
-                height: 150.0,
-                aspectRatio: 1.0,
-                enlargeCenterPage: false,
-                enableInfiniteScroll: true,
-                autoPlay: false,
-                autoPlayInterval: Duration(seconds: 5),
-                scrollDirection: Axis.horizontal,
-                  viewportFraction: 0.4
-              ),
-              items: List.generate(newImageUrls.length, (index) {
+        ),
+        SizedBox(
+          height: 180.0, // Adjust the height to accommodate two items per slide
+          child: CarouselSlider(
+            options: CarouselOptions(
+              height: 180.0, // Adjust the height of each item
+              aspectRatio: 2.0, // Adjust the aspect ratio to fit two items
+              enlargeCenterPage: false,
+              enableInfiniteScroll: true,
+              autoPlay: false,
+              autoPlayInterval: Duration(seconds: 5),
+              scrollDirection: Axis.vertical, // Change to vertical scrolling
+              viewportFraction: 1.0, // Show two items per slide
+            ),
+            items: List.generate(
+              (newImageUrls.length + 1) ~/ 2, // Divide the length by 2 to get the number of slides
+                  (index) {
+                final startIndex = index * 2;
+                final endIndex = min(startIndex + 2, newImageUrls.length);
                 return Builder(
                   builder: (BuildContext context) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(9.0),
-                            child: Image.network(
-                              newImageUrls[index],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Positioned(
-                            top: 12.0,
-                            right: 12.0,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12.0,
-                                vertical: 6.0,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.deepPurple,
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: const Text(
-                                'New',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12.0,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned.fill(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: [
-                                    Colors.black.withOpacity(0.3),
-                                    Colors.transparent,
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 12.0,
-                            left: 12.0,
-                            right: 12.0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  newImageTitles[index],
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14.0,
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 180.0,
+                          child: Row(
+                            children: [
+                              for (int i = startIndex; i < endIndex; i++)
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                                    child: Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(9.0),
+                                          child: Image.network(
+                                            newImageUrls[i],
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: 12.0,
+                                          right: 12.0,
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 12.0,
+                                              vertical: 6.0,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: Colors.deepPurple,
+                                              borderRadius: BorderRadius.circular(20.0),
+                                            ),
+                                            child: const Text(
+                                              'New',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 12.0,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned.fill(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                begin: Alignment.bottomCenter,
+                                                end: Alignment.topCenter,
+                                                colors: [
+                                                  Colors.black.withOpacity(0.3),
+                                                  Colors.transparent,
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 12.0,
+                                          left: 12.0,
+                                          right: 12.0,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                newImageTitles[i],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14.0,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 4.0),
+                                              Text(
+                                                newImageSubtitles[i],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 12.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(height: 4.0),
-                                Text(
-                                  newImageSubtitles[index],
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12.0,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     );
                   },
                 );
-              }),
+              },
             ),
           ),
-        ],
-    );
-  }
-}
-
-class BarraNavegacion extends StatelessWidget {
-  const BarraNavegacion({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 10.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            IconButton(
-              icon: Image.asset('assets/icons/hogar.png'),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Image.asset('assets/icons/silla.png'),
-              onPressed: () {},
-            ),
-            const SizedBox(width: 48),
-            IconButton(
-              icon: Image.asset('assets/icons/ajustes.png'),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Image.asset('assets/icons/campana.png'),
-              onPressed: () {},
-            ),
-          ],
         ),
-      ),
+      ],
     );
   }
 }
