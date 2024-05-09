@@ -29,7 +29,12 @@ class BarraNavegacion extends StatelessWidget {
             const SizedBox(width: 48),
             IconButton(
               icon: Image.asset('assets/icons/ajustes.png'),
-              onPressed: () {},
+              onPressed: () {
+                //si estoy en /settings y presiono el icono de ajustes, no hace nada
+                if (ModalRoute.of(context)!.settings.name != '/settings') {
+                  Navigator.pushNamed(context, '/settings');
+                }
+              },
             ),
             IconButton(
               icon: Image.asset('assets/icons/campana.png'),

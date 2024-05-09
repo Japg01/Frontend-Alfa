@@ -3,6 +3,7 @@ import 'package:alfa_soyzen/presentation/Tips_topics.dart';
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/homescreen.dart';
 import 'presentation/notificationscreen/notificationscreen.dart';
+import 'presentation/settingscreen/settingsscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => HomeScreen(),
         '/notification': (context) => NotificationScreen(),
+        '/settings': (context) => const SettingsPage(),
       },
     );
   }
