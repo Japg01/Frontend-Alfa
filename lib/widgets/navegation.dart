@@ -15,7 +15,12 @@ class BarraNavegacion extends StatelessWidget {
           children: <Widget>[
             IconButton(
               icon: Image.asset('assets/icons/hogar.png'),
-              onPressed: () {},
+              onPressed: () {
+                //si estoy en /home y presiono el icono de la casa, no hace nada
+                if (ModalRoute.of(context)!.settings.name != '/home') {
+                  Navigator.pushNamed(context, '/home');
+                }
+              },
             ),
             IconButton(
               icon: Image.asset('assets/icons/silla.png'),

@@ -3,6 +3,8 @@ import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:flutter/material.dart';
 
 class PopularSearch extends StatefulWidget {
+  const PopularSearch({super.key});
+
   @override
   _PopularSearch createState() => _PopularSearch();
 }
@@ -24,7 +26,7 @@ class _PopularSearch extends State<PopularSearch> {
       child: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.purple,
               image: DecorationImage(
                 image: AssetImage('assets/logo/Fondo Morado.png'),
@@ -38,7 +40,7 @@ class _PopularSearch extends State<PopularSearch> {
           ),
           Card(
             elevation: 20.0,
-            margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 70.0),
+            margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 70.0),
             child: ListView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               shrinkWrap: true,
@@ -53,7 +55,7 @@ class _PopularSearch extends State<PopularSearch> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 0.0,
                           left: 0,
                           right: 0,
@@ -68,21 +70,21 @@ class _PopularSearch extends State<PopularSearch> {
           ),
           Card(
             elevation: 20.0,
-            margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 140.0),
+            margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 140.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 categoriasBotones(),
-                SizedBox(height: 30),
-                Text(
+                const SizedBox(height: 30),
+                const Text(
                   'Popular Courses',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
-                Container(
+                const SizedBox(height: 20),
+                SizedBox(
                   height: 200,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
@@ -109,14 +111,14 @@ class _PopularSearch extends State<PopularSearch> {
                     ],
                   ),
                 ),
-                Text(
+                const Text(
                   'Programs Master',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 programsMaster(
                   '30 day yoga challenge',
                   'Ralph Edwards',
@@ -143,11 +145,11 @@ class _PopularSearch extends State<PopularSearch> {
               title: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back),
                     color: Colors.white,
                     onPressed: () {},
                   ),
-                  Text(
+                  const Text(
                     'Popular Search',
                     style: TextStyle(
                       color: Colors.white,
@@ -196,7 +198,7 @@ class _PopularSearch extends State<PopularSearch> {
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all<EdgeInsets>(
-                  EdgeInsets.symmetric(
+                  const EdgeInsets.symmetric(
                     vertical: 8.0,
                     horizontal: 18.0,
                   ),
@@ -234,7 +236,7 @@ class _PopularSearch extends State<PopularSearch> {
       },
       child: Container(
         width: 200.0,
-        margin: EdgeInsets.only(right: 20.0),
+        margin: const EdgeInsets.only(right: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -255,12 +257,12 @@ class _PopularSearch extends State<PopularSearch> {
                       height: 100.0,
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -268,22 +270,22 @@ class _PopularSearch extends State<PopularSearch> {
                       maxLines: 2,
                     ),
                   ),
-                  SizedBox(height: 5.0),
+                  const SizedBox(height: 5.0),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
                       children: [
                         Text(
                           category,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 10.0,
                             color: Colors.deepPurple,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           date,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 10.0,
                             color: Colors.grey,
                           ),
@@ -303,8 +305,8 @@ class _PopularSearch extends State<PopularSearch> {
   Widget programsMaster(
       String title, String instructor, String difficulty, String imagePath) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
-      padding: EdgeInsets.all(5.0),
+      margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 0.0),
+      padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
@@ -318,23 +320,23 @@ class _PopularSearch extends State<PopularSearch> {
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5.0),
+                const SizedBox(height: 5.0),
                 Text(
                   instructor,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 10.0,
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(height: 5.0),
+                const SizedBox(height: 5.0),
                 Text(
                   difficulty,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 10.0,
                     color: Colors.deepPurple,
                   ),
@@ -342,7 +344,7 @@ class _PopularSearch extends State<PopularSearch> {
               ],
             ),
           ),
-          SizedBox(width: 10.0),
+          const SizedBox(width: 10.0),
           Container(
             width: 80.0,
             height: 80.0,

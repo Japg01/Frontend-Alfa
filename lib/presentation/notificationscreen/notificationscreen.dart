@@ -1,3 +1,4 @@
+import 'package:alfa_soyzen/presentation/Course.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/navegation.dart';
@@ -82,6 +83,7 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const YogaAppBar(title: "Notifications"),
       body: notifications.isEmpty
           ? buildNoNotifications(context)
           : buildNotificationsList(context),
@@ -115,8 +117,8 @@ class NotificationScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            width: 100,
-            height: 100,
+            width: 150,
+            height: 170,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/icons/notiBell.png'),
@@ -129,8 +131,10 @@ class NotificationScreen extends StatelessWidget {
             "Can't find notifications",
             style: TextStyle(
               fontSize: 18,
+              //PT Sans
+              fontFamily: 'PTSans',
               fontWeight: FontWeight.bold,
-              color: Colors.black54,
+              color: Color(0xFF222222),
             ),
           ),
           const SizedBox(height: 8),
