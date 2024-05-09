@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:alfa_soyzen/presentation/homescreen.dart';
-
-import 'presentation/notificationscreen/notificationscreen.dart';
+import 'package:alfa_soyzen/presentation/login/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,10 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
-      routes: {
-        '/notification': (context) => NotificationScreen(),
-      },
+      home: WelcomeScreen(),
     );
   }
 }
