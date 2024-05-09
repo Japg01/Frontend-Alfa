@@ -34,9 +34,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar({Key? key, required GlobalKey<ScaffoldState> scaffoldKey})
-      : _scaffoldKey = scaffoldKey,
-        super(key: key);
+  const CustomAppBar({super.key, required GlobalKey<ScaffoldState> scaffoldKey})
+      : _scaffoldKey = scaffoldKey;
 
   final GlobalKey<ScaffoldState> _scaffoldKey;
 
