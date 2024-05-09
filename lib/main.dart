@@ -1,13 +1,12 @@
-import 'package:alfa_soyzen/presentation/Course.dart';
-import 'package:alfa_soyzen/presentation/Tips_topics.dart';
 import 'package:flutter/material.dart';
+import 'package:alfa_soyzen/presentation/Course.dart';
+import 'package:flutter/material.dart';
+import 'package:alfa_soyzen/presentation/Tips_topics.dart';
 import 'package:alfa_soyzen/presentation/homescreen.dart';
 import 'presentation/notificationscreen/notificationscreen.dart';
 import 'presentation/settingscreen/settingsscreen.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -18,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Gymnastic Center',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: (const Yoga_basics()),
       routes: {

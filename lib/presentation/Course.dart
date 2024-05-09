@@ -1,10 +1,8 @@
 import 'dart:math';
-
 import 'package:alfa_soyzen/widgets/sidebarmenu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/widgets.dart';
 
 import '../widgets/navegation.dart';
 

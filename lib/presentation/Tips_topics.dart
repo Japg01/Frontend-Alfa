@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_options.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/navegation.dart';
@@ -12,8 +12,8 @@ class Tips_n_Topics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: "Tips",
+      debugShowCheckedModeBanner: false,
       home: Tips_n_Topics_Screen(),
     );
   }
@@ -118,8 +118,8 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
         categories: Categories,
         dates: dates,
         subtitles: imageSubtitles,
+        ),
       ),
-      bottomNavigationBar: const BarraNavegacion(),
     );
   }
 }
@@ -292,7 +292,7 @@ class NewYogaClassesPanelGrid extends StatelessWidget {
                     ),
                   ],
                 ),
-              );
+              )
             },
           ),
         ),
@@ -480,8 +480,8 @@ class Tips_n_Topics_appbar extends StatefulWidget
 
   final void Function(int) onCategoryTapped;
 
-  Tips_n_Topics_appbar({
-    super.key,
+
+  Tips_n_Topics_appbar({super.key, 
     required this.title,
     required this.onCategoryTapped,
   });

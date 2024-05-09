@@ -51,7 +51,7 @@ class _PopularSearch extends State<PopularSearch> {
                     borderRadius: BorderRadius.circular(12.0),
                     color: Colors.white,
                   ),
-                  child: Column(
+                  child: const Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(

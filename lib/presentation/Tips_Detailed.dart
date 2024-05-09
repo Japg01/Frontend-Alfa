@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/Course.dart';
 
+
 class Widgets_Tips_Detailed extends StatefulWidget {
   final String title;
   final String desc;
