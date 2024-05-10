@@ -196,8 +196,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _loginUser() async {
-    final url = Uri.parse(
-        'https://backend-alfa-production.up.railway.app/auth/login'); // Reemplaza 'tu.backend.com' por la URL de tu backend
+    final url =
+        Uri.parse('https://backend-alfa-production.up.railway.app/auth/login');
     final response = await http.post(
       url,
       body: {

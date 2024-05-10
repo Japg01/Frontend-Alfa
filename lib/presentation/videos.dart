@@ -1,5 +1,4 @@
 
-import 'package:alfa_soyzen/widgets/videoplayer.dart';
 
 import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:flutter/material.dart';

@@ -117,7 +117,7 @@ Widget _buildInputField(TextEditingController controller, {isPassword = false, S
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) {
-            return CreatePasswordPage();
+            return const CreatePasswordPage();
           }),);
         // Aquí iría la lógica para enviar el correo electrónico al backend para recuperar la contraseña
         debugPrint("Email: ${emailController.text}");
