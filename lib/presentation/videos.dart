@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/widgets/videoplayer.dart';
 import 'package:alfa_soyzen/widgets/navegation.dart';
 
-class Videos extends StatelessWidget {
+class Videos extends StatefulWidget {
   const Videos({Key? key}) : super(key: key);
+
+  @override
+  _VideosState createState() => _VideosState();
+}
+
+class _VideosState extends State<Videos> {
+  int _selectedCategoryIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +68,7 @@ class Videos extends StatelessWidget {
                 titleSpacing: 0.0,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
+                automaticallyImplyLeading: false,
                 title: const Row(
                   children: [
                     Text(
@@ -71,9 +79,6 @@ class Videos extends StatelessWidget {
                     ),
                   ],
                 ),
-                iconTheme: IconThemeData(
-                    color:
-                        Colors.white), // Cambia el color de la flecha a blanco
               ),
             ),
             Positioned(
@@ -135,28 +140,41 @@ class Videos extends StatelessWidget {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           String categoryName = categories[index];
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 5,
-                  height: 20,
-                  child: Icon(
-                    Icons.circle,
-                    size: 10,
-                    color: Colors.white,
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                _selectedCategoryIndex = index;
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 5,
+                    height: 20,
+                    child: Icon(
+                      Icons.circle,
+                      size: 10,
+                      color: index == _selectedCategoryIndex
+                          ? Colors.white
+                          : Colors
+                              .grey, // Cambia el color del círculo según esté seleccionado o no
+                    ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  categoryName,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
+                  SizedBox(width: 8),
+                  Text(
+                    categoryName,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: index == _selectedCategoryIndex
+                          ? Colors.white
+                          : Colors
+                              .grey, // Cambia el color del texto según esté seleccionado o no
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },

@@ -29,11 +29,21 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         backgroundColor: Colors.black,
         title: Text(
           'Video Player',
-          style: TextStyle(color: Colors.white), // Texto del título
+          style: TextStyle(color: Colors.white),
+        ),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
         ),
       ),
       body: Container(
-        color: Colors.black, // Fondo de la pantalla
+        color: Colors.black,
         child: Center(
           child: FutureBuilder(
             future: _initializeVideoPlayerFuture,
