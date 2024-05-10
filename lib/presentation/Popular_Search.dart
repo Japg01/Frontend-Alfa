@@ -27,7 +27,6 @@ class _PopularSearch extends State<PopularSearch> {
         children: <Widget>[
           Container(
             decoration: const BoxDecoration(
-              color: Colors.purple,
               image: DecorationImage(
                 image: AssetImage('assets/logo/Fondo Morado.png'),
                 fit: BoxFit.cover,
@@ -48,7 +47,7 @@ class _PopularSearch extends State<PopularSearch> {
                 Container(
                   height: 50.0,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(32.0),
                     color: Colors.white,
                   ),
                   child: const Column(
@@ -131,6 +130,18 @@ class _PopularSearch extends State<PopularSearch> {
                   'Level 5',
                   'assets/icons/Yoga Ejemplo.png',
                 ),
+                programsMaster(
+                  '30 day yoga challenge',
+                  'Ralph Edwards',
+                  'Level 5',
+                  'assets/icons/Yoga Ejemplo.png',
+                ),
+                programsMaster(
+                  '30 day yoga challenge',
+                  'Ralph Edwards',
+                  'Level 5',
+                  'assets/icons/Yoga Ejemplo.png',
+                ),
               ],
             ),
           ),
@@ -140,7 +151,7 @@ class _PopularSearch extends State<PopularSearch> {
             right: 0.0,
             child: AppBar(
               titleSpacing: 0.0,
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.deepPurple,
               elevation: 0,
               iconTheme: const IconThemeData(color: Colors.white),
               title: const Row(
