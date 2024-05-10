@@ -1,5 +1,4 @@
 import 'package:alfa_soyzen/widgets/searchbar.dart';
-import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:flutter/material.dart';
 
 class PopularSearch extends StatefulWidget {
@@ -106,7 +105,6 @@ class _PopularSearch extends State<PopularSearch> {
                         'Feb 19, 2020',
                         'assets/icons/Yoga Ejemplo.png',
                       ),
-                      // Agrega más cursos según sea necesario
                     ],
                   ),
                 ),
@@ -151,7 +149,7 @@ class _PopularSearch extends State<PopularSearch> {
             right: 0.0,
             child: AppBar(
               titleSpacing: 0.0,
-              backgroundColor: Colors.deepPurple,
+              backgroundColor: Colors.transparent,
               elevation: 0,
               iconTheme: const IconThemeData(color: Colors.white),
               title: const Row(
@@ -185,9 +183,6 @@ class _PopularSearch extends State<PopularSearch> {
       'Most Popular',
     ];
 
-    // Al inicio, 'For Women' está seleccionado
-    categoriaSeleccionada = 'For Women';
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -195,12 +190,16 @@ class _PopularSearch extends State<PopularSearch> {
           spacing: 10.0,
           runSpacing: 5.0,
           children: categorias.map((categoria) {
+            bool isSelected = categoria == categoriaSeleccionada;
+
             return ElevatedButton(
               onPressed: () {
                 setState(() {
-                  // Actualiza la categoría seleccionada al hacer clic en un botón
-                  categoriaSeleccionada =
-                      categoriaSeleccionada == categoria ? null : categoria;
+                  if (isSelected) {
+                    categoriaSeleccionada = null;
+                  } else {
+                    categoriaSeleccionada = categoria;
+                  }
                 });
               },
               style: ButtonStyle(
@@ -212,8 +211,7 @@ class _PopularSearch extends State<PopularSearch> {
                 ),
                 backgroundColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {
-                    // Establece el color de fondo según si está seleccionado o no
-                    return categoria == categoriaSeleccionada
+                    return isSelected
                         ? Colors.deepPurple
                         : Colors.deepPurple[100]!;
                   },
@@ -223,9 +221,8 @@ class _PopularSearch extends State<PopularSearch> {
                 categoria,
                 style: TextStyle(
                   fontSize: 14.0,
-                  color: categoria == categoriaSeleccionada
-                      ? Colors.deepPurple[100]!
-                      : Colors.deepPurple,
+                  color:
+                      isSelected ? Colors.deepPurple[100]! : Colors.deepPurple,
                 ),
               ),
             );
@@ -238,9 +235,7 @@ class _PopularSearch extends State<PopularSearch> {
   Widget PopularCourses(
       String title, String category, String date, String imagePath) {
     return GestureDetector(
-      onTap: () {
-        // Manejar la acción cuando se hace clic en el curso
-      },
+      onTap: () {},
       child: Container(
         width: 200.0,
         margin: const EdgeInsets.only(right: 20.0),

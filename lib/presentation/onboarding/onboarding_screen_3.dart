@@ -1,7 +1,6 @@
 import 'package:alfa_soyzen/presentation/login/home.dart';
 import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_1.dart';
 import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_2.dart';
-import 'package:alfa_soyzen/presentation/auth/verification_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const OnBoardingScreen3());
