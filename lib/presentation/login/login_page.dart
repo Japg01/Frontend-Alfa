@@ -1,4 +1,5 @@
 import 'package:alfa_soyzen/presentation/homescreen.dart';
+import 'package:alfa_soyzen/presentation/login/forgotpass.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
@@ -111,10 +112,11 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 20),
           TextButton(
             onPressed: () {
-              //             Navigator.push(
-              //               context,
-              //               MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
-              //             );
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ForgotPasswordPage()),
+              );
             },
             child: const Text("Forgot password?"),
           ),
@@ -153,7 +155,8 @@ class _LoginPageState extends State<LoginPage> {
         if (emailController.text.isNotEmpty &&
             passwordController.text.isNotEmpty) {
           if (EmailValidator.validate(emailController.text)) {
-            _loginUser(); // Llama a la función para iniciar sesión
+            //_loginUser(); // Llama a la función para iniciar sesión
+            Navigator.pushNamed(context, "/home");
           } else {
             showDialog(
               context: context,
@@ -224,7 +227,6 @@ class _LoginPageState extends State<LoginPage> {
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('name', data['name'] ?? 'Nombre de Usuario');
       prefs.setString('uuid', data['id'] ?? 'ID de Usuario');
-      prefs.setString('imageUrl', data['url'] ?? 'URL de la imagen aquí');
 
       Navigator.push(
         context,

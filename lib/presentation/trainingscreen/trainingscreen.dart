@@ -94,7 +94,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  // Navigate to see all courses
+                  Navigator.pushNamed(context, '/videos');
                 },
                 child: const Text('See all >'),
               ),

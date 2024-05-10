@@ -1,8 +1,6 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
-import 'Tips_Detailed.dart';
+import 'package:alfa_soyzen/presentation/Tips_Detailed.dart';
 
 class Tips_n_Topics extends StatelessWidget {
   const Tips_n_Topics({super.key});
@@ -25,11 +23,11 @@ class Tips_n_Topics_Screen extends StatefulWidget {
 
 class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
   List<String> imageUrls = [
-    'https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-trainer-in-gym-royalty-free-image-1584723855.jpg',
-    'https://i0.wp.com/www.muscleandfitness.com/wp-content/uploads/2018/12/Personal-Trainer-Training-Partner-GettyImages-654427364.jpg?quality=86&strip=all',
-    'https://serviceninjas.in/wp-content/uploads/2021/12/yoga-2.jpg',
-    'https://www.doyou.com/wp-content/uploads/2021/01/Kathryn-Budig-Yoga.jpg',
-    'https://production-next-images-cdn.thumbtack.com/i/440633394583134208/desktop/standard/400square-legacy',
+    'ass,ets/icons/Yoga Ejemplo.png',
+    'assets/icons/Yoga Ejemplo.png',
+    'assets/icons/Yoga Ejemplo.png',
+    'assets/icons/Yoga Ejemplo.png',
+    'assets/icons/Yoga Ejemplo.png'
   ];
   List<String> imageTitles = [
     'Tip 1',
@@ -116,8 +114,8 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
         categories: Categories,
         dates: dates,
         subtitles: imageSubtitles,
-        ),
-      );
+      ),
+    );
   }
 }
 
@@ -218,13 +216,13 @@ class NewYogaClassesPanelGrid extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    ClipRRect(
+                    /*ClipRRect(
                       borderRadius: BorderRadius.circular(9.0),
-                      child: Image.network(
+                      child: Image.asset(
                         newImageUrls[index],
                         fit: BoxFit.cover,
                       ),
-                    ),
+                    ),*/
                     Positioned(
                       top: 12.0,
                       right: 12.0,
@@ -341,12 +339,12 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                   borderRadius: BorderRadius.circular(20.0),
                   child: Stack(
                     children: [
-                      Positioned.fill(
-                        child: Image.network(
+                      /*Positioned.fill(
+                        child: Image.asset(
                           widget.imageUrls[index],
                           fit: BoxFit.cover,
                         ),
-                      ),
+                      ),*/
                       Positioned(
                         bottom: 0,
                         left: 0,
@@ -477,8 +475,8 @@ class Tips_n_Topics_appbar extends StatefulWidget
 
   final void Function(int) onCategoryTapped;
 
-
-  Tips_n_Topics_appbar({super.key, 
+  Tips_n_Topics_appbar({
+    super.key,
     required this.title,
     required this.onCategoryTapped,
   });

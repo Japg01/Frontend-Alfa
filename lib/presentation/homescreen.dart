@@ -20,11 +20,49 @@ class HomeScreen extends StatelessWidget {
         body: ListView(
           children: <Widget>[
             const ProgressSection(),
-            buildSection('Categoria de Yoga', 70, 70, 8, backendService),
-            buildSection('Procesos Populares', 130, 120, 8, backendService),
-            buildSection('Videos de Cursos', 140, 200, 8, backendService),
-            buildSection('Nuestros últimos Blogs', 155, 120, 8, backendService),
-            buildSection('Consejos y temas', 155, 120, 8, backendService),
+            buildSection('Categoria de Yoga', 70, 70, 8, onViewMorePressed: () {
+              print('Ver más presionado');
+            }, backendService),
+            buildSection(
+              'Procesos Populares',
+              130,
+              120,
+              8,
+              onViewMorePressed: () {
+                print('Ver más presionado');
+              },
+              backendService,
+            ),
+            buildSection(
+              'Videos de Cursos',
+              140,
+              200,
+              8,
+              onViewMorePressed: () {
+                print('Ver más presionado');
+              },
+              backendService,
+            ),
+            buildSection(
+              'Nuestros últimos Blogs',
+              155,
+              120,
+              8,
+              onViewMorePressed: () {
+                print('Ver más presionado');
+              },
+              backendService,
+            ),
+            buildSection(
+              'Consejos y temas',
+              155,
+              120,
+              8,
+              onViewMorePressed: () {
+                // Navigator.pushNamed(context, '/tipsTopics');
+              },
+              backendService,
+            ),
           ],
         ),
       ),
@@ -46,7 +84,6 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   String name = 'Nombre de Usuario';
   String uuid = 'ID de Usuario';
-  String imageUrl = 'URL de la imagen aquí';
   int? _selectedDayIndex = 1; // Por defecto, 'Hoy' está seleccionado
   final List<String> _days = ['Mañana', 'Hoy', 'Ayer'];
 
@@ -61,8 +98,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     setState(() {
       name = prefs.getString('name') ?? 'Nombre de Usuario';
       uuid = prefs.getString('uuid') ?? 'ID de Usuario';
-      imageUrl = prefs.getString('imageUrl') ??
-          'URL de la imagen aquí'; // Obtiene la URL de la imagen
+      // Obtiene la URL de la imagen
     });
   }
 
@@ -105,23 +141,21 @@ class _CustomAppBarState extends State<CustomAppBar> {
                               color: Colors.white)),
                     ],
                   ),
-                  CircleAvatar(
-                    backgroundImage:
-                        NetworkImage(imageUrl), // Usa la URL de la imagen
-                    radius: 30,
-                  ),
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
+                onTap: () {
+                  Navigator.pushNamed(context, '/popularSearch');
+                },
                 textAlign: TextAlign.center,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Buscar...',
                   filled: true,
                   fillColor: Colors.white,
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: Icon(Icons.search),
                 ),
               ),
             ),
@@ -173,7 +207,7 @@ class BackendService {
 
 Widget buildSection(String title, double height, double width, int itemCount,
     BackendService backendService,
-    {bool showMoreButton = true}) {
+    {bool showMoreButton = true, required Null Function() onViewMorePressed}) {
   var items = backendService.getItems(); // Obtenemos los items del backend
 
   return Column(
@@ -191,7 +225,7 @@ Widget buildSection(String title, double height, double width, int itemCount,
             if (showMoreButton)
               TextButton(
                 onPressed: () {
-                  // Acción del botón "Ver más"
+                  onViewMorePressed();
                 },
                 child: const Text('Ver más'),
               ),
