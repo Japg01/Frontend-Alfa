@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Transform.scale(
                 scale: 0.3,
                 child: Image.asset(
-                  "assets/images/logo.png",
+                  "assets/images/Logo.png",
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -152,93 +152,94 @@ class _RegisterPageState extends State<RegisterPage> {
     return ElevatedButton(
       onPressed: () {
         if (acceptTerms) {
-          if (nameController.text.isNotEmpty &&
-              phoneController.text.isNotEmpty &&
-              emailController.text.isNotEmpty &&
-              passwordController.text.isNotEmpty) {
-            if (nameController.text.length >= 3 &&
-                nameController.text.length <= 30) {
-              if (phoneVerifi.hasMatch(phoneController.text) &&
-                  phoneController.text.length == 11) {
-                if (EmailValidator.validate(emailController.text)) {
-                  _registerUser();
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text("¡Attention!"),
-                        content: const Text("You must put a email"),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text("OK"),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              } else {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text("¡Attention!"),
-                      content: const Text("Please write a phone number valid"),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("OK"),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }
-            } else {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text("¡Attention!"),
-                    content: const Text(
-                        "The name must be between 3 and 30 caracters"),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("OK"),
-                      ),
-                    ],
-                  );
-                },
-              );
-            }
-          } else {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("¡Attention!"),
-                  content: const Text("Please complete all the flieds"),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("OK"),
-                    ),
-                  ],
-                );
-              },
-            );
-          }
+          Navigator.pushNamed(context, '/home');
+          //   if (nameController.text.isNotEmpty &&
+          //       phoneController.text.isNotEmpty &&
+          //       emailController.text.isNotEmpty &&
+          //       passwordController.text.isNotEmpty) {
+          //     if (nameController.text.length >= 3 &&
+          //         nameController.text.length <= 30) {
+          //       if (phoneVerifi.hasMatch(phoneController.text) &&
+          //           phoneController.text.length == 11) {
+          //         if (EmailValidator.validate(emailController.text)) {
+          //           _registerUser();
+          //         } else {
+          //           showDialog(
+          //             context: context,
+          //             builder: (BuildContext context) {
+          //               return AlertDialog(
+          //                 title: const Text("¡Attention!"),
+          //                 content: const Text("You must put a email"),
+          //                 actions: [
+          //                   TextButton(
+          //                     onPressed: () {
+          //                       Navigator.of(context).pop();
+          //                     },
+          //                     child: const Text("OK"),
+          //                   ),
+          //                 ],
+          //               );
+          //             },
+          //           );
+          //         }
+          //       } else {
+          //         showDialog(
+          //           context: context,
+          //           builder: (BuildContext context) {
+          //             return AlertDialog(
+          //               title: const Text("¡Attention!"),
+          //               content: const Text("Please write a phone number valid"),
+          //               actions: [
+          //                 TextButton(
+          //                   onPressed: () {
+          //                     Navigator.of(context).pop();
+          //                   },
+          //                   child: const Text("OK"),
+          //                 ),
+          //               ],
+          //             );
+          //           },
+          //         );
+          //       }
+          //     } else {
+          //       showDialog(
+          //         context: context,
+          //         builder: (BuildContext context) {
+          //           return AlertDialog(
+          //             title: const Text("¡Attention!"),
+          //             content: const Text(
+          //                 "The name must be between 3 and 30 caracters"),
+          //             actions: [
+          //               TextButton(
+          //                 onPressed: () {
+          //                   Navigator.of(context).pop();
+          //                 },
+          //                 child: const Text("OK"),
+          //               ),
+          //             ],
+          //           );
+          //         },
+          //       );
+          //     }
+          //   } else {
+          //     showDialog(
+          //       context: context,
+          //       builder: (BuildContext context) {
+          //         return AlertDialog(
+          //           title: const Text("¡Attention!"),
+          //           content: const Text("Please complete all the flieds"),
+          //           actions: [
+          //             TextButton(
+          //               onPressed: () {
+          //                 Navigator.of(context).pop();
+          //               },
+          //               child: const Text("OK"),
+          //             ),
+          //           ],
+          //         );
+          //       },
+          //     );
+          //   }
         } else {
           showDialog(
             context: context,
