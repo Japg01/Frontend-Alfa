@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Transform.scale(
                 scale: 0.3,
                 child: Image.asset(
-                  "assets/images/logo.png",
+                  "assets/images/Logo.png",
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -152,6 +152,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return ElevatedButton(
       onPressed: () {
         if (acceptTerms) {
+          Navigator.pushNamed(context, '/home');
           if (nameController.text.isNotEmpty &&
               phoneController.text.isNotEmpty &&
               emailController.text.isNotEmpty &&
