@@ -173,7 +173,7 @@ class BackendService {
 
 Widget buildSection(String title, double height, double width, int itemCount,
     BackendService backendService,
-    {bool showMoreButton = false}) {
+    {bool showMoreButton = true}) {
   var items = backendService.getItems(); // Obtenemos los items del backend
 
   return Column(
