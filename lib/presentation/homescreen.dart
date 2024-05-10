@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:alfa_soyzen/widgets/sidebarmenu.dart';
 import 'package:alfa_soyzen/widgets/progressbar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -16,7 +15,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(scaffoldKey: _scaffoldKey),
+      appBar: const CustomAppBar(),
       body: MiScaffold(
         body: ListView(
           children: <Widget>[
@@ -35,10 +34,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required GlobalKey<ScaffoldState> scaffoldKey})
-      : _scaffoldKey = scaffoldKey;
-
-  final GlobalKey<ScaffoldState> _scaffoldKey;
+  const CustomAppBar({super.key});
 
   @override
   _CustomAppBarState createState() => _CustomAppBarState();
@@ -48,14 +44,26 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
+  String name = 'Nombre de Usuario';
+  String uuid = 'ID de Usuario';
+  String imageUrl = 'URL de la imagen aquí';
+  int? _selectedDayIndex = 1; // Por defecto, 'Hoy' está seleccionado
   final List<String> _days = ['Mañana', 'Hoy', 'Ayer'];
-  int _selectedDayIndex = 1; // Por defecto, 'Hoy' está seleccionado
-  Future<Map<String, String>> _datosUsuarioFuture;
 
   @override
   void initState() {
     super.initState();
-    _datosUsuarioFuture = obtenerDatosUsuario();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = prefs.getString('name') ?? 'Nombre de Usuario';
+      uuid = prefs.getString('uuid') ?? 'ID de Usuario';
+      imageUrl = prefs.getString('imageUrl') ??
+          'URL de la imagen aquí'; // Obtiene la URL de la imagen
+    });
   }
 
   @override
@@ -72,63 +80,77 @@ class _CustomAppBarState extends State<CustomAppBar> {
         ),
       ),
       child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          child: Stack(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.topLeft,
-                child: FutureBuilder<Map<String, String>>(
-                  future: _datosUsuarioFuture,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<Map<String, String>> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else {
-                      final data = snapshot.data;
-                      if (data != null) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(data['nombreUsuario'] ?? 'Nombre de Usuario',
-                                style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                            Text(data['idUsuario'] ?? 'ID de Usuario',
-                                style: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                          ],
-                        );
-                      } else {
-                        return const Text(
-                            'No se pudieron obtener los datos del usuario.');
-                      }
-                    }
-                  },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(name,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                      Text(uuid,
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ],
+                  ),
+                  CircleAvatar(
+                    backgroundImage:
+                        NetworkImage(imageUrl), // Usa la URL de la imagen
+                    radius: 30,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: TextField(
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  hintText: 'Buscar...',
+                  filled: true,
+                  fillColor: Colors.white,
+                  prefixIcon: const Icon(Icons.search),
                 ),
               ),
-              // El resto de tu código...
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: _days.map((day) {
+                  int index = _days.indexOf(day);
+                  return FilterChip(
+                    label: Text(day),
+                    selected: _selectedDayIndex == index,
+                    onSelected: (bool selected) {
+                      setState(() {
+                        _selectedDayIndex = selected ? index : null;
+                      });
+                    },
+                    selectedColor: Colors.transparent,
+                    checkmarkColor: Colors.black,
+                    backgroundColor: Colors.transparent,
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
-}
-
-Future<Map<String, String>> obtenerDatosUsuario() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String nombreUsuario = prefs.getString('nombreUsuario') ?? '';
-  String idUsuario = prefs.getString('idUsuario') ?? '';
-  print('nombreUsuario: $nombreUsuario'); // Agrega esta línea
-  print('idUsuario: $idUsuario'); // Agrega esta línea
-  return {'nombreUsuario': nombreUsuario, 'idUsuario': idUsuario};
 }
 
 class BackendService {
@@ -145,7 +167,6 @@ class BackendService {
       {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 6'},
       {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 7'},
       {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 8'},
-      // Agrega más ítems aquí...
     ];
   }
 }
