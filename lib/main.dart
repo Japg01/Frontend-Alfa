@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/homescreen.dart';
-
 import 'presentation/notificationscreen/notificationscreen.dart';
 
 void main() {
