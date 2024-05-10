@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/login/login_page.dart';
-import 'package:alfa_soyzen/presentation/login/register.dart'; 
+import 'package:alfa_soyzen/presentation/login/register.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key});
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +13,16 @@ class WelcomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(
-            width: 200, 
-            height: 200, 
+            width: 200,
+            height: 200,
             child: Image.asset(
               "assets/images/Logo.png",
-              fit: BoxFit.cover, 
+              fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(height: 20), 
+          const SizedBox(height: 20),
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0), 
+            padding: EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               "Welcome to yoga",
               style: TextStyle(
@@ -30,12 +30,13 @@ class WelcomeScreen extends StatelessWidget {
                 fontSize: 32,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Roboto',
-                decoration: TextDecoration.none, 
+                decoration: TextDecoration.none,
               ),
             ),
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0), // Ajusta según tus necesidades
+            padding: EdgeInsets.symmetric(
+                vertical: 8.0), // Ajusta según tus necesidades
             child: Text(
               "Online class",
               style: TextStyle(
@@ -49,7 +50,9 @@ class WelcomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20), // Espacio entre el texto y los botones
           _buildButtonRow(context), // Agrega la fila de botones
-          const SizedBox(height: 20), // Espacio entre los botones y los iconos de redes sociales
+          const SizedBox(
+              height:
+                  20), // Espacio entre los botones y los iconos de redes sociales
           _buildSocialIconsRow(), // Agrega la fila de iconos de redes sociales
         ],
       ),
@@ -58,7 +61,8 @@ class WelcomeScreen extends StatelessWidget {
 
   Widget _buildButtonRow(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20), // Ajusta el espaciado horizontal
+      padding: const EdgeInsets.symmetric(
+          horizontal: 20), // Ajusta el espaciado horizontal
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -75,7 +79,7 @@ class WelcomeScreen extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
+          MaterialPageRoute(builder: (context) => const LoginPage()),
         );
       },
       style: ElevatedButton.styleFrom(
@@ -95,7 +99,7 @@ class WelcomeScreen extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => RegisterPage()),
+          MaterialPageRoute(builder: (context) => const RegisterPage()),
         );
       },
       style: ElevatedButton.styleFrom(
@@ -111,65 +115,64 @@ class WelcomeScreen extends StatelessWidget {
   }
 
   Widget _buildSocialIconsRow() {
-  return Column(
-    children: [
-      const SizedBox(height: 20), // Espacio entre el texto y los iconos de redes sociales
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: _buildGreyText("Or via social media"),
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {
-              // Lógica para el botón de Facebook
-            },
-            child: Image.asset(
-              'assets/images/facebook.png',
-              width: 50,
-              height: 50,
+    return Column(
+      children: [
+        const SizedBox(
+            height:
+                20), // Espacio entre el texto y los iconos de redes sociales
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: _buildGreyText("Or via social media"),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {
+                // Lógica para el botón de Facebook
+              },
+              child: Image.asset(
+                'assets/images/facebook.png',
+                width: 50,
+                height: 50,
+              ),
             ),
-          ),
-          SizedBox(width: 10),
-          GestureDetector(
-            onTap: () {
-              // Lógica para el botón de Twitter
-            },
-            child: Image.asset(
-              'assets/images/twitter.png',
-              width: 40,
-              height: 40,
+            const SizedBox(width: 10),
+            GestureDetector(
+              onTap: () {
+                // Lógica para el botón de Twitter
+              },
+              child: Image.asset(
+                'assets/images/twitter.png',
+                width: 40,
+                height: 40,
+              ),
             ),
-          ),
-          SizedBox(width: 10),
-          GestureDetector(
-            onTap: () {
-              // Lógica para el botón de Gmail
-            },
-            child: Image.asset(
-              'assets/images/gmail.png',
-              width: 40,
-              height: 40,
+            const SizedBox(width: 10),
+            GestureDetector(
+              onTap: () {
+                // Lógica para el botón de Gmail
+              },
+              child: Image.asset(
+                'assets/images/gmail.png',
+                width: 40,
+                height: 40,
+              ),
             ),
-          ),
-        ],
-      ),
-    ],
-  );
-}
+          ],
+        ),
+      ],
+    );
+  }
 
-Widget _buildGreyText(String text) {
-  return Text(
-    text,
-    style: const TextStyle(
-      color: Colors.grey,
-      fontSize: 14, // Tamaño del texto
-      fontFamily: 'Roboto', // Fuente del texto
-      decoration: TextDecoration.none
-    
-    ),
-  );
-}
-
+  Widget _buildGreyText(String text) {
+    return Text(
+      text,
+      style: const TextStyle(
+          color: Colors.grey,
+          fontSize: 14, // Tamaño del texto
+          fontFamily: 'Roboto', // Fuente del texto
+          decoration: TextDecoration.none),
+    );
+  }
 }
