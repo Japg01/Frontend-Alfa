@@ -1,7 +1,9 @@
+import 'package:alfa_soyzen/presentation/homescreen.dart';
 import 'package:flutter/material.dart';
-import 'package:alfa_soyzen/presentation/login/forgotpass.dart';
-import 'package:alfa_soyzen/presentation/login/register.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:email_validator/email_validator.dart';
+// import 'package:login/forgotpass.dart'; // Asegúrate de importar ForgotPasswordPage si no está definido
+// Importa la página de inicio de sesión si aún no lo has hecho
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,24 +20,22 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberUser = false;
 
   @override
-
-
   Widget build(BuildContext context) {
     myColor = Theme.of(context).primaryColor;
     mediaSize = MediaQuery.of(context).size;
-     // Devuelve un contenedor con una imagen de fondo y un Scaffold transparente
+
     return Container(
       decoration: BoxDecoration(
         color: myColor,
         image: DecorationImage(
-          image: const AssetImage("assets/images/fondo.png"), 
-          fit: BoxFit.cover, // fitcover ajusta la imagen para que cubra al contenedor
+          image: const AssetImage("assets/images/fondo.png"),
+          fit: BoxFit.cover,
           colorFilter:
               ColorFilter.mode(myColor.withOpacity(0.2), BlendMode.color),
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent, 
+        backgroundColor: Colors.transparent,
         body: Stack(
           children: [
             Positioned(
@@ -43,24 +43,24 @@ class _LoginPageState extends State<LoginPage> {
               left: 0,
               right: 0,
               child: Transform.scale(
-                scale: 0.5, // Escala deseada para reducir el tamaño de la imagen
+                scale: 0.5,
                 child: Image.asset(
-                  "assets/images/logoblanco.png", // Ruta de la imagen
-                  fit: BoxFit.cover, // Ajustar la imagen al contenedor
+                  "assets/images/logoblanco.png",
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            Positioned(bottom: 0, child: _buildBottom()), //posicionamiento de contenedor 
+            Positioned(bottom: 0, child: _buildBottom()),
           ],
         ),
       ),
     );
   }
-// Tarjeta donde va el formulario 
+
   Widget _buildBottom() {
     return SizedBox(
-      width: mediaSize.width, //ancho de pantalla
-      child: Card( 
+      width: mediaSize.width,
+      child: Card(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(100),
@@ -75,13 +75,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-// Construccion de los campos de texto de formulario
   Widget _buildForm() {
-    return SizedBox(height: 560,
-      child: Column( //organiza a los widgets hijos/ secundarios de forma vertical 
-        crossAxisAlignment: CrossAxisAlignment.center, // Alinea a los widgets hijos de forma central dentro de la columna
+    return SizedBox(
+      height: 560,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           const Text(
             "Login",
             style: TextStyle(
@@ -98,21 +98,19 @@ class _LoginPageState extends State<LoginPage> {
           _buildGreyText("Password"),
           _buildInputField(passwordController, isPassword: true),
           const SizedBox(height: 20),
-          // _buildRememberForgot(),
           const SizedBox(height: 20),
           _buildLoginButton(),
-          const SizedBox(height: 20), // Espacio adicional entre el botón de inicio de sesión y el botón de "Forgot your password?"
+          const SizedBox(height: 20),
           TextButton(
-        onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ForgotPasswordPage()), 
-      );
-        },
-        child: Text ("Forgot password?"),
-      ),
+            onPressed: () {
+              //             Navigator.push(
+              //               context,
+              //               MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+              //             );
+            },
+            child: const Text("Forgot password?"),
+          ),
           const SizedBox(height: 70),
-         
         ],
       ),
     );
@@ -141,15 +139,48 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLoginButton() {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) {
-            return RegisterPage();
-          }),
-        );
-
-        debugPrint("Email: ${emailController.text}");
-        debugPrint("Password: ${passwordController.text}");
+        if (emailController.text.isNotEmpty &&
+            passwordController.text.isNotEmpty) {
+          if (EmailValidator.validate(emailController.text)) {
+            _loginUser(); // Llama a la función para iniciar sesión
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("¡Attention!"),
+                  content: const Text("You must put a email"),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        } else {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("¡Attention!"),
+                content: const Text("Please complete all the flieds"),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("OK"),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
@@ -162,5 +193,46 @@ class _LoginPageState extends State<LoginPage> {
         style: TextStyle(color: Colors.white),
       ),
     );
+  }
+
+  Future<void> _loginUser() async {
+    final url = Uri.parse(
+        'https://backend-alfa-production.up.railway.app/auth/login'); // Reemplaza 'tu.backend.com' por la URL de tu backend
+    final response = await http.post(
+      url,
+      body: {
+        'email': emailController.text,
+        'password': passwordController.text,
+      },
+    );
+
+    if (response.statusCode == 201) {
+      // Si el inicio de sesión es exitoso, puedes navegar a otra página o mostrar un mensaje de éxito
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                HomeScreen()), // Reemplaza NextPage() con la página a la que deseas navegar después del inicio de sesión exitoso
+      );
+    } else {
+      // Si falla el inicio de sesión, puedes mostrar un mensaje de error
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: Text("Login failed. Error: ${response.body}"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 }
