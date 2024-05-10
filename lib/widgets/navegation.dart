@@ -24,7 +24,13 @@ class BarraNavegacion extends StatelessWidget {
             ),
             IconButton(
               icon: Image.asset('assets/icons/silla.png'),
-              onPressed: () {},
+              onPressed: () {
+                //si estoy en /course y presiono el icono de la silla, no hace nada
+                if (ModalRoute.of(context)!.settings.name !=
+                    '/trainingScreen') {
+                  Navigator.pushNamed(context, '/trainingScreen');
+                }
+              },
             ),
             const SizedBox(width: 48),
             IconButton(
