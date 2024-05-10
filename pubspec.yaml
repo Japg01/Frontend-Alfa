@@ -30,11 +30,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  percent_indicator: ^4.2.3
+  carousel_slider: ^4.2.1
+  video_player: ^2.6.0
+  appinio_video_player: ^1.2.2
+  http: ^1.2.1
+  email_validator: ^2.1.17
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
@@ -67,9 +72,17 @@ flutter:
     - assets/icons/ciclismo.png
     - assets/icons/correr.png
     - assets/icons/estirar.png
+    - assets/icons/notiBell.png
     - assets/icons/meditacion.png
     - assets/icons/nadador.png
+    - assets/icons/user.png
     - assets/icons/notiBell.png
+    - assets/images/
+    - assets/image/no_image_100x100.png
+    - assets/icons/Yoga Ejemplo.png
+    - assets/logo/Fondo Morado.png
+    - assets/videos/yogavideo.mp4
+    - lib/presentation/Tips_Detailed.dart
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

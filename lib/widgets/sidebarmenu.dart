@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:alfa_soyzen/presentation/profile.dart';
 
 class SideBarMenu extends StatelessWidget {
   const SideBarMenu({super.key});
@@ -10,7 +11,8 @@ class SideBarMenu extends StatelessWidget {
         canvasColor: Colors.transparent,
       ),
       child: ClipRRect(
-        borderRadius: const BorderRadius.only(bottomRight: Radius.circular(40.0)),
+        borderRadius:
+            const BorderRadius.only(bottomRight: Radius.circular(40.0)),
         child: Drawer(
           child: Container(
             decoration: const BoxDecoration(
@@ -25,10 +27,10 @@ class SideBarMenu extends StatelessWidget {
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: _crearBotones(),
+                    children: _crearBotones(context),
                   ),
                 ),
-                _crearBoton('Cerrar Sesión'),
+                _crearBoton('Cerrar Sesión', context),
                 const SizedBox(height: 10), // Espacio al final
               ],
             ),
@@ -38,7 +40,7 @@ class SideBarMenu extends StatelessWidget {
     );
   }
 
-  List<Widget> _crearBotones() {
+  List<Widget> _crearBotones(BuildContext context) {
     List<String> botones = [
       'Cuenta',
       'Notificaciones',
@@ -49,10 +51,10 @@ class SideBarMenu extends StatelessWidget {
       'Puntúanos',
       'Sobre nosotros'
     ];
-    return botones.map((boton) => _crearBoton(boton)).toList();
+    return botones.map((boton) => _crearBoton(boton, context)).toList();
   }
 
-  Widget _crearBoton(String texto) {
+  Widget _crearBoton(String texto, BuildContext context) {
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -64,7 +66,14 @@ class SideBarMenu extends StatelessWidget {
       child: Center(
         child: ListTile(
           title: Text(texto, style: const TextStyle(color: Colors.white)),
-          onTap: () {},
+          onTap: () {
+            if (texto == 'Cuenta') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PerfilUsuario()),
+              );
+            }
+          },
         ),
       ),
     );
