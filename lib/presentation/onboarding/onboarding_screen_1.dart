@@ -129,12 +129,12 @@ class BarraNavegacion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 70,
+      height: 100,
       child: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 100.0,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 20),
           child: Row(
             children: [
               ElevatedButton(
