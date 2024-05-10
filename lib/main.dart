@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/settings': (context) => const SettingsPage(),
         '/verification': (context) => const VerificationScreen(),
         '/popularSearch': (context) => const PopularSearch(),
+        //'/trainingScreen': (context) => const TrainingScreen(),
       },
     );
   }
