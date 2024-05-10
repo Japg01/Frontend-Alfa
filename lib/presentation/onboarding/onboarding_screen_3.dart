@@ -1,3 +1,4 @@
+import 'package:alfa_soyzen/presentation/login/home.dart';
 import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_1.dart';
 import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_2.dart';
 import 'package:alfa_soyzen/presentation/auth/verification_screen.dart';
@@ -101,7 +102,7 @@ class Buttom extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (_) => const VerificationScreen(),
+            builder: (_) => const WelcomeScreen(),
           ));
         },
         child: const Row(
@@ -150,7 +151,7 @@ class BarraNavegacion extends StatelessWidget {
               ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (_) => const VerificationScreen(),
+                      builder: (_) => const WelcomeScreen(),
                     ));
                   },
                   child: const Text('skip',

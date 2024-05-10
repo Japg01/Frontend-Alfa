@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'Course.dart';
+import 'package:alfa_soyzen/presentation/Course.dart';
+
 
 class Widgets_Tips_Detailed extends StatefulWidget {
-
   final String title;
   final String desc;
   final String urlTitleImage;
 
-  Widgets_Tips_Detailed({
-    required this.title,
-    required this.desc,
-    required this.urlTitleImage
-  });
+  const Widgets_Tips_Detailed(
+      {super.key,
+      required this.title,
+      required this.desc,
+      required this.urlTitleImage});
 
   @override
-  _tips_detail createState() => _tips_detail(title: title,desc: desc, urlTitleImage: urlTitleImage);
+  _tips_detail createState() =>
+      _tips_detail(title: title, desc: desc, urlTitleImage: urlTitleImage);
 }
 
 class _tips_detail extends State<Widgets_Tips_Detailed> {
@@ -31,11 +32,8 @@ class _tips_detail extends State<Widgets_Tips_Detailed> {
   final String desc;
   final String urlTitleImage;
 
-  _tips_detail({
-    required this.title,
-    required this.desc,
-    required this.urlTitleImage
-  });
+  _tips_detail(
+      {required this.title, required this.desc, required this.urlTitleImage});
 
   final TextEditingController _commentController = TextEditingController();
 
@@ -52,7 +50,7 @@ class _tips_detail extends State<Widgets_Tips_Detailed> {
               children: [
                 Flexible(
                   child: Padding(
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     child: Container(
                       color: Colors.white,
                       child: Column(
@@ -63,7 +61,7 @@ class _tips_detail extends State<Widgets_Tips_Detailed> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           Text(
                             desc,
                             style: const TextStyle(
@@ -78,13 +76,14 @@ class _tips_detail extends State<Widgets_Tips_Detailed> {
                 ),
                 Flexible(
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: bottomInset, left: 8,right: 8),
+                    padding:
+                        EdgeInsets.only(bottom: bottomInset, left: 8, right: 8),
                     child: ListView.builder(
                       itemCount: panels.length,
                       itemBuilder: (context, index) {
                         final panel = panels[index];
                         return Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
                               Expanded(
@@ -99,11 +98,11 @@ class _tips_detail extends State<Widgets_Tips_Detailed> {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 16.0),
+                              const SizedBox(width: 16.0),
                               Expanded(
                                 child: Text(
                                   panel['description']!,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16.0,
                                   ),
                                 ),
@@ -119,13 +118,13 @@ class _tips_detail extends State<Widgets_Tips_Detailed> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _commentController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Send comment',
                       border: OutlineInputBorder(),
                     ),
@@ -135,7 +134,7 @@ class _tips_detail extends State<Widgets_Tips_Detailed> {
                 CircleAvatar(
                   radius: 24.0,
                   child: IconButton(
-                    icon: Icon(Icons.send),
+                    icon: const Icon(Icons.send),
                     onPressed: () {
                       // Handle send comment logic here
                       print('Sent comment: ${_commentController.text}');

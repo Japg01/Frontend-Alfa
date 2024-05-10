@@ -36,7 +36,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               child: Transform.scale(
                 scale: 0.3,
                 child: Image.asset(
-                  "assets/images/logo.png",
+                  "assets/images/Logo.png",
                   fit: BoxFit.fitWidth,
                 ),
               ),

@@ -1,4 +1,6 @@
-//import 'package:alfa_soyzen/widgets/videoplayer.dart';
+
+import 'package:alfa_soyzen/widgets/videoplayer.dart';
+
 import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +43,7 @@ class Videos extends StatelessWidget {
         Stack(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.purple,
                 image: DecorationImage(
                   image: AssetImage('assets/logo/Fondo Morado.png'),
@@ -64,11 +66,11 @@ class Videos extends StatelessWidget {
                 title: Row(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back),
+                      icon: const Icon(Icons.arrow_back),
                       color: Colors.white,
                       onPressed: () {},
                     ),
-                    Text(
+                    const Text(
                       'Videos',
                       style: TextStyle(
                         color: Colors.white,
@@ -90,8 +92,8 @@ class Videos extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 30.0),
-        Padding(
+        const SizedBox(height: 30.0),
+        const Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
             'Video Course',
@@ -103,8 +105,8 @@ class Videos extends StatelessWidget {
           ),
         ),
         GridView.builder(
-          physics: ClampingScrollPhysics(), // Use ClampingScrollPhysics
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          physics: const ClampingScrollPhysics(), // Use ClampingScrollPhysics
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10.0,
             mainAxisSpacing: 0.0,
@@ -130,7 +132,7 @@ class Videos extends StatelessWidget {
       'For Women',
     ];
 
-    return Container(
+    return SizedBox(
       height: 20,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -141,7 +143,7 @@ class Videos extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               children: [
-                Container(
+                const SizedBox(
                   width: 5,
                   height: 20,
                   child: Icon(
@@ -150,10 +152,10 @@ class Videos extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   categoryName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white,
                   ),
@@ -177,7 +179,7 @@ class Videos extends StatelessWidget {
         );*/
       },
       child: Padding(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 20.0,
           left: 8,
           right: 8,
@@ -193,7 +195,7 @@ class Videos extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.4),
                 spreadRadius: 1,
                 blurRadius: 5,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               ),
             ],
           ),
