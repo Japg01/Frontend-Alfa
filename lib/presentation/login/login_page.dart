@@ -2,6 +2,8 @@ import 'package:alfa_soyzen/presentation/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 // import 'package:login/forgotpass.dart'; // Asegúrate de importar ForgotPasswordPage si no está definido
 // Importa la página de inicio de sesión si aún no lo has hecho
 
@@ -205,6 +207,13 @@ class _LoginPageState extends State<LoginPage> {
         'password': passwordController.text,
       },
     );
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> userData = jsonDecode(response.body);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('nombreUsuario', userData['name']);
+      await prefs.setString('idUsuario', userData['uuid']);
+    }
 
     if (response.statusCode == 201) {
       // Si el inicio de sesión es exitoso, puedes navegar a otra página o mostrar un mensaje de éxito

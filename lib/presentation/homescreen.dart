@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:alfa_soyzen/widgets/sidebarmenu.dart';
 import 'package:alfa_soyzen/widgets/progressbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -49,6 +50,13 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   final List<String> _days = ['Mañana', 'Hoy', 'Ayer'];
   int _selectedDayIndex = 1; // Por defecto, 'Hoy' está seleccionado
+  Future<Map<String, String>> _datosUsuarioFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _datosUsuarioFuture = obtenerDatosUsuario();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,14 +79,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
               Align(
                 alignment: Alignment.topLeft,
                 child: FutureBuilder<Map<String, String>>(
-                  future: obtenerDatosUsuario(),
+                  future: _datosUsuarioFuture,
                   builder: (BuildContext context,
                       AsyncSnapshot<Map<String, String>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CircularProgressIndicator();
                     } else if (snapshot.hasError) {
-                      return const Text(
-                          'Error al obtener los datos del usuario.');
+                      return Text('Error: ${snapshot.error}');
                     } else {
                       final data = snapshot.data;
                       if (data != null) {
@@ -86,12 +93,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(data['nombreUsuario'] ?? '',
+                            Text(data['nombreUsuario'] ?? 'Nombre de Usuario',
                                 style: const TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white)),
-                            Text(data['idUsuario'] ?? '',
+                            Text(data['idUsuario'] ?? 'ID de Usuario',
                                 style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -106,85 +113,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   },
                 ),
               ),
-              Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
-                  child: Container(
-                    height: 30,
-                    width: 328,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextField(
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        labelText: 'Buscar',
-                        border: InputBorder.none,
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, '/popularSearch');
-                      },
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: _days.map((day) {
-                    int index = _days.indexOf(day);
-                    return Column(
-                      children: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _selectedDayIndex = index;
-                            });
-                          },
-                          style: TextButton.styleFrom(
-                              backgroundColor: Colors.transparent),
-                          child: Text(day,
-                              style: TextStyle(
-                                  color: _selectedDayIndex == index
-                                      ? Colors.white
-                                      : Colors.white70)),
-                        ),
-                        if (_selectedDayIndex == index)
-                          Transform.rotate(
-                            angle: pi,
-                            child: const Icon(Icons.arrow_drop_down,
-                                color: Colors.white),
-                          )
-                      ],
-                    );
-                  }).toList(),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Colors.white,
-                  backgroundImage: const AssetImage(
-                      'assets/icons/user.png'), // Esto establecerá la imagen del usuario
-                  child: IconButton(
-                    icon: const Icon(Icons.menu, color: Colors.white),
-                    onPressed: () {
-                      if (widget._scaffoldKey.currentState?.isDrawerOpen ??
-                          false) {
-                        widget._scaffoldKey.currentState?.openDrawer();
-                      } else {
-                        widget._scaffoldKey.currentState?.openDrawer();
-                      }
-                    },
-                  ),
-                ),
-              ),
+              // El resto de tu código...
             ],
           ),
         ),
@@ -194,35 +123,58 @@ class _CustomAppBarState extends State<CustomAppBar> {
 }
 
 Future<Map<String, String>> obtenerDatosUsuario() async {
-  // Aquí es donde se haría la llamada al Back para obtener los datos del usuario.
-  await Future.delayed(const Duration(seconds: 2));
-  return {
-    'nombreUsuario': 'Nombre de Ejemplo',
-    'idUsuario': 'ID de Ejemplo',
-  };
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String nombreUsuario = prefs.getString('nombreUsuario') ?? '';
+  String idUsuario = prefs.getString('idUsuario') ?? '';
+  print('nombreUsuario: $nombreUsuario'); // Agrega esta línea
+  print('idUsuario: $idUsuario'); // Agrega esta línea
+  return {'nombreUsuario': nombreUsuario, 'idUsuario': idUsuario};
 }
 
 class BackendService {
-  // Simula la obtención de imágenes del backend
-  List<String> getImages() {
-    // Aquí puedes agregar la lógica para obtener las imágenes del backend
-    // Como no hay conexión, devolvemos una lista vacía
-    return [];
+  // Simula la obtención de ítems del backend
+  List<Map<String, String>> getItems() {
+    // Aquí puedes agregar la lógica para obtener los ítems del backend
+    // Como no hay conexión, devolvemos una lista de ítems de ejemplo
+    return [
+      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 1'},
+      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 2'},
+      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 3'},
+      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 4'},
+      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 5'},
+      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 6'},
+      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 7'},
+      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 8'},
+      // Agrega más ítems aquí...
+    ];
   }
 }
 
 Widget buildSection(String title, double height, double width, int itemCount,
-    BackendService backendService) {
-  var images = backendService.getImages();
+    BackendService backendService,
+    {bool showMoreButton = false}) {
+  var items = backendService.getItems(); // Obtenemos los items del backend
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
         padding: const EdgeInsets.only(top: 20.0, left: 8.0),
-        child: Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            if (showMoreButton)
+              TextButton(
+                onPressed: () {
+                  // Acción del botón "Ver más"
+                },
+                child: const Text('Ver más'),
+              ),
+          ],
         ),
       ),
       SizedBox(
@@ -231,10 +183,9 @@ Widget buildSection(String title, double height, double width, int itemCount,
           scrollDirection: Axis.horizontal,
           itemCount: itemCount,
           itemBuilder: (context, index) {
-            // Obtenemos la imagen del backend si está disponible, si no, usamos la imagen por defecto
-            String image = images.isNotEmpty
-                ? images[index]
-                : 'assets/image/no_image_100x100.png';
+            var item = items[index];
+            String image = item['image'] ?? 'assets/image/no_image_100x100.png';
+            String title = item['title'] ?? 'Titulo';
 
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -244,14 +195,29 @@ Widget buildSection(String title, double height, double width, int itemCount,
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: SizedBox(
-                    width: width,
-                    child: FadeInImage(
-                      placeholder:
-                          const AssetImage('assets/image/no_image_100x100.png'),
-                      image: AssetImage(image),
-                      fit: BoxFit.cover,
-                    ),
+                  child: Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: [
+                      SizedBox(
+                        width: width,
+                        child: FadeInImage(
+                          placeholder: const AssetImage(
+                              'assets/image/no_image_100x100.png'),
+                          image: AssetImage(image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

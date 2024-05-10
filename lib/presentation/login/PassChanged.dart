@@ -4,7 +4,7 @@ import 'package:alfa_soyzen/presentation/login/login_page.dart';
 void main() => runApp(const PasswordChanged());
 
 class PasswordChanged extends StatelessWidget {
-  const PasswordChanged({Key? key}) : super(key: key);
+  const PasswordChanged({super.key});
 
   @override
   Widget build(BuildContext context) {
