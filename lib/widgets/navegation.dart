@@ -15,7 +15,12 @@ class BarraNavegacion extends StatelessWidget {
           children: <Widget>[
             IconButton(
               icon: Image.asset('assets/icons/hogar.png'),
-              onPressed: () {},
+              onPressed: () {
+                //si estoy en /home y presiono el icono de la casa, no hace nada
+                if (ModalRoute.of(context)!.settings.name != '/home') {
+                  Navigator.pushNamed(context, '/home');
+                }
+              },
             ),
             IconButton(
               icon: Image.asset('assets/icons/silla.png'),
@@ -24,11 +29,21 @@ class BarraNavegacion extends StatelessWidget {
             const SizedBox(width: 48),
             IconButton(
               icon: Image.asset('assets/icons/ajustes.png'),
-              onPressed: () {},
+              onPressed: () {
+                //si estoy en /settings y presiono el icono de ajustes, no hace nada
+                if (ModalRoute.of(context)!.settings.name != '/settings') {
+                  Navigator.pushNamed(context, '/settings');
+                }
+              },
             ),
             IconButton(
               icon: Image.asset('assets/icons/campana.png'),
-              onPressed: () {},
+              onPressed: () {
+                //si estoy en /notification y presiono la campana, no hace nada
+                if (ModalRoute.of(context)!.settings.name != '/notification') {
+                  Navigator.pushNamed(context, '/notification');
+                }
+              },
             ),
           ],
         ),
