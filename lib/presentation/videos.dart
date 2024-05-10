@@ -1,11 +1,9 @@
-
-import 'package:alfa_soyzen/widgets/videoplayer.dart';
-
-import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:flutter/material.dart';
+import 'package:alfa_soyzen/widgets/videoplayer.dart';
+import 'package:alfa_soyzen/widgets/navegation.dart';
 
 class Videos extends StatelessWidget {
-  const Videos({super.key});
+  const Videos({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +61,9 @@ class Videos extends StatelessWidget {
                 titleSpacing: 0.0,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                title: Row(
+                title: const Row(
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                    const Text(
+                    Text(
                       'Videos',
                       style: TextStyle(
                         color: Colors.white,
@@ -78,6 +71,9 @@ class Videos extends StatelessWidget {
                     ),
                   ],
                 ),
+                iconTheme: IconThemeData(
+                    color:
+                        Colors.white), // Cambia el color de la flecha a blanco
               ),
             ),
             Positioned(
@@ -105,7 +101,7 @@ class Videos extends StatelessWidget {
           ),
         ),
         GridView.builder(
-          physics: const ClampingScrollPhysics(), // Use ClampingScrollPhysics
+          physics: const ClampingScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10.0,
@@ -113,7 +109,7 @@ class Videos extends StatelessWidget {
             childAspectRatio: 0.75,
           ),
           itemCount: 8,
-          shrinkWrap: true, // Remove shrinkWrap
+          shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return cajaVideo(context, 'assets/icons/Yoga Ejemplo.png',
                 'assets/videos/yogavideo.mp4');
@@ -171,12 +167,12 @@ class Videos extends StatelessWidget {
   Widget cajaVideo(BuildContext context, String coverImage, String videoPath) {
     return GestureDetector(
       onTap: () {
-        /*Navigator.push(
+        Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => VideoPlayerWidget(videoPath: videoPath),
+            builder: (context) => VideoPlayerScreen(videoPath: videoPath),
           ),
-        );*/
+        );
       },
       child: Padding(
         padding: const EdgeInsets.only(
