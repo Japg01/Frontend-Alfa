@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Transform.scale(
                 scale: 0.3,
                 child: Image.asset(
-                  "assets/images/Logo.png",
+                  "assets/images/logo.png",
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -152,97 +152,93 @@ class _RegisterPageState extends State<RegisterPage> {
     return ElevatedButton(
       onPressed: () {
         if (acceptTerms) {
-          Navigator.pushNamed(context, '/home');
-          // if (nameController
-          //         .text.isNotEmpty && //verifica si los campos están llenos
-          //     phoneController.text.isNotEmpty &&
-          //     emailController.text.isNotEmpty &&
-          //     passwordController.text.isNotEmpty) {
-          //   if (nameVerifi.hasMatch(nameController.text)) {
-          //     if (phoneVerifi.hasMatch(phoneController.text) &&
-          //         phoneController.text.length == 11) {
-          //       if (EmailValidator.validate(emailController.text)) {
-          //         //si todos los datos son validos se registra el usuario mediante el metodo RegisterUser
-
-          //         //funcion para registrar al usuario
-          //         //_registerUser();
-          //       } else {
-          //         showDialog(
-          //           context: context,
-          //           builder: (BuildContext context) {
-          //             return AlertDialog(
-          //               title: const Text("¡Attention!"),
-          //               content: const Text("You must put a email"),
-          //               actions: [
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     Navigator.of(context).pop();
-          //                   },
-          //                   child: const Text("OK"),
-          //                 ),
-          //               ],
-          //             );
-          //           },
-          //         );
-          //       }
-          //     } else {
-          //       showDialog(
-          //         context: context,
-          //         builder: (BuildContext context) {
-          //           return AlertDialog(
-          //             title: const Text("¡Attention!"),
-          //             content: const Text("Please write a phone number valid"),
-          //             actions: [
-          //               TextButton(
-          //                 onPressed: () {
-          //                   Navigator.of(context).pop();
-          //                 },
-          //                 child: const Text("OK"),
-          //               ),
-          //             ],
-          //           );
-          //         },
-          //       );
-          //     }
-          //   } else {
-          //     showDialog(
-          //       context: context,
-          //       builder: (BuildContext context) {
-          //         return AlertDialog(
-          //           title: const Text("¡Attention!"),
-          //           content: const Text(
-          //               "The name must be between 3 and 30 caracters"),
-          //           actions: [
-          //             TextButton(
-          //               onPressed: () {
-          //                 Navigator.of(context).pop();
-          //               },
-          //               child: const Text("OK"),
-          //             ),
-          //           ],
-          //         );
-          //       },
-          //     );
-          //   }
-          // } else {
-          //   showDialog(
-          //     context: context,
-          //     builder: (BuildContext context) {
-          //       return AlertDialog(
-          //         title: const Text("¡Attention!"),
-          //         content: const Text("Please complete all the flieds"),
-          //         actions: [
-          //           TextButton(
-          //             onPressed: () {
-          //               Navigator.of(context).pop();
-          //             },
-          //             child: const Text("OK"),
-          //           ),
-          //         ],
-          //       );
-          //     },
-          //   );
-          // }
+          if (nameController.text.isNotEmpty &&
+              phoneController.text.isNotEmpty &&
+              emailController.text.isNotEmpty &&
+              passwordController.text.isNotEmpty) {
+            if (nameController.text.length >= 3 &&
+                nameController.text.length <= 30) {
+              if (phoneVerifi.hasMatch(phoneController.text) &&
+                  phoneController.text.length == 11) {
+                if (EmailValidator.validate(emailController.text)) {
+                  _registerUser();
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("¡Attention!"),
+                        content: const Text("You must put a email"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("¡Attention!"),
+                      content: const Text("Please write a phone number valid"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text("¡Attention!"),
+                    content: const Text(
+                        "The name must be between 3 and 30 caracters"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("OK"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("¡Attention!"),
+                  content: const Text("Please complete all the flieds"),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         } else {
           showDialog(
             context: context,
@@ -276,62 +272,60 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-//   Future<void> _registerUser() async {
-//     //url para enviar solicitud de registro
-//     final url = Uri.parse(
-//         'http://172.21.112.1:3900/auth/register'); //se utiliza para acceder al endpoint de la back
-//     final response = await http.post(
-//       //realizamos una solicitud http POST con los datos del usuario
-//       url,
-//       body: {
-//         'name': nameController.text,
-//         'phone': phoneController.text,
-//         'email': emailController.text,
-//         'password': passwordController.text,
-//       },
-//     );
+  Future<void> _registerUser() async {
+    final url = Uri.parse(
+        'https://backend-alfa-production.up.railway.app/auth/register');
+    final response = await http.post(
+      url,
+      body: {
+        'name': nameController.text,
+        'phone': phoneController.text,
+        'email': emailController.text,
+        'password': passwordController.text,
+      },
+    );
 
-//     if (response.statusCode == 201) {
-//       // Si la respuesta es exitosa, mostrar un diálogo con la respuesta del backend
-//       showDialog(
-//         // ignore: use_build_context_synchronously
-//         context: context,
-//         builder: (BuildContext context) {
-//           return AlertDialog(
-//             title: const Text("Registro exitoso"),
-//             content: Text("Respuesta del servidor: ${response.body}"),
-//             actions: [
-//               TextButton(
-//                 onPressed: () {
-//                   Navigator.of(context).pop();
-//                 },
-//                 child: const Text("OK"),
-//               ),
-//             ],
-//           );
-//         },
-//       );
-//     } else {
-//       // Si la respuesta no es exitosa, mostrar un diálogo con un mensaje de error
-//       showDialog(
-//         // ignore: use_build_context_synchronously
-//         context: context,
-//         builder: (BuildContext context) {
-//           return AlertDialog(
-//             title: const Text("Error"),
-//             content: Text(
-//                 "No se pudo completar el registro. Error: ${response.body}"),
-//             actions: [
-//               TextButton(
-//                 onPressed: () {
-//                   Navigator.of(context).pop();
-//                 },
-//                 child: const Text("OK"),
-//               ),
-//             ],
-//           );
-//         },
-//       );
-//     }
-//   }
+    if (response.statusCode == 201) {
+      // Si la respuesta es exitosa, mostrar un diálogo con la respuesta del backend
+      showDialog(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Registro exitoso"),
+            content: Text("Respuesta del servidor: ${response.body}"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      // Si la respuesta no es exitosa, mostrar un diálogo con un mensaje de error
+      showDialog(
+        // ignore: use_build_context_synchronously
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: Text(
+                "No se pudo completar el registro. Error: ${response.body}"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 }
