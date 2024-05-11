@@ -52,7 +52,6 @@ class PerfilUsuario extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 35.0,
-                  backgroundImage: NetworkImage('URL_DE_LA_IMAGEN'),
                 ),
                 SizedBox(width: 10.0),
                 Column(

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
@@ -152,20 +153,16 @@ class _RegisterPageState extends State<RegisterPage> {
     return ElevatedButton(
       onPressed: () {
         if (acceptTerms) {
-          Navigator.pushNamed(context, '/home');
-          // if (nameController
-          //         .text.isNotEmpty && //verifica si los campos están llenos
+          // if (nameController.text.isNotEmpty &&
           //     phoneController.text.isNotEmpty &&
           //     emailController.text.isNotEmpty &&
           //     passwordController.text.isNotEmpty) {
-          //   if (nameVerifi.hasMatch(nameController.text)) {
+          //   if (nameController.text.length >= 3 &&
+          //       nameController.text.length <= 30) {
           //     if (phoneVerifi.hasMatch(phoneController.text) &&
           //         phoneController.text.length == 11) {
           //       if (EmailValidator.validate(emailController.text)) {
-          //         //si todos los datos son validos se registra el usuario mediante el metodo RegisterUser
-
-          //         //funcion para registrar al usuario
-          //         //_registerUser();
+          //         _registerUser();
           //       } else {
           //         showDialog(
           //           context: context,
@@ -243,6 +240,7 @@ class _RegisterPageState extends State<RegisterPage> {
           //     },
           //   );
           // }
+          Navigator.pushNamed(context, "/home");
         } else {
           showDialog(
             context: context,
@@ -277,11 +275,9 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
 //   Future<void> _registerUser() async {
-//     //url para enviar solicitud de registro
 //     final url = Uri.parse(
-//         'http://172.21.112.1:3900/auth/register'); //se utiliza para acceder al endpoint de la back
+//         'https://backend-alfa-production.up.railway.app/auth/register');
 //     final response = await http.post(
-//       //realizamos una solicitud http POST con los datos del usuario
 //       url,
 //       body: {
 //         'name': nameController.text,
@@ -334,4 +330,83 @@ class _RegisterPageState extends State<RegisterPage> {
 //       );
 //     }
 //   }
+// }
+
+  Future<void> _registerUser() async {
+    Dio dio = Dio();
+    const url = 'http://192.168.32.47/auth/register';
+    //const url = 'https://backend-alfa-production.up.railway.app/auth/register';
+    try {
+      Response response = await dio.post(
+        url,
+        data: {
+          'name': nameController.text,
+          'phone': phoneController.text,
+          'email': emailController.text,
+          'password': passwordController.text,
+        },
+      );
+
+      if (response.statusCode == 201) {
+        // Si la respuesta es exitosa, mostrar un diálogo con la respuesta del backend
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Registro exitoso"),
+              content: Text(
+                  "Respuesta del servidor: ${response.data}"), // Dio maneja la respuesta un poco diferente
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        // Si la respuesta no es exitosa, mostrar un diálogo con un mensaje de error
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: Text(
+                  "No se pudo completar el registro. Error: ${response.data}"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } on DioError catch (e) {
+      // Manejo de errores específicos de Dio
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error de Conexión"),
+            content: Text("No se pudo realizar la conexión: ${e.message}"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 }

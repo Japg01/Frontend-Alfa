@@ -1,16 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:alfa_soyzen/presentation/homescreen.dart';
 import 'package:alfa_soyzen/presentation/login/forgotpass.dart';
-import 'package:alfa_soyzen/presentation/login/register.dart';
-
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:email_validator/email_validator.dart';
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
+  // Abre LoginPage
   const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
-}
+} // Cierra LoginPage
 
 class _LoginPageState extends State<LoginPage> {
+  // Abre _LoginPageState
   late Color myColor;
   late Size mediaSize;
   TextEditingController emailController = TextEditingController();
@@ -18,49 +23,52 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberUser = false;
 
   @override
-
-
   Widget build(BuildContext context) {
+    // Abre build
     myColor = Theme.of(context).primaryColor;
     mediaSize = MediaQuery.of(context).size;
-     // Devuelve un contenedor con una imagen de fondo y un Scaffold transparente
+
     return Container(
+      // Abre Container
       decoration: BoxDecoration(
         color: myColor,
         image: DecorationImage(
-          image: const AssetImage("assets/images/fondo.png"), 
-          fit: BoxFit.cover, // fitcover ajusta la imagen para que cubra al contenedor
+          image: const AssetImage("assets/images/fondo.png"),
+          fit: BoxFit.cover,
           colorFilter:
               ColorFilter.mode(myColor.withOpacity(0.2), BlendMode.color),
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent, 
+        // Abre Scaffold
+        backgroundColor: Colors.transparent,
         body: Stack(
+          // Abre Stack
           children: [
             Positioned(
               top: -65,
               left: 0,
               right: 0,
               child: Transform.scale(
-                scale: 0.5, // Escala deseada para reducir el tamaño de la imagen
+                scale: 0.5,
                 child: Image.asset(
-                  "assets/images/logoblanco.png", // Ruta de la imagen
-                  fit: BoxFit.cover, // Ajustar la imagen al contenedor
+                  "assets/images/logoblanco.png",
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            Positioned(bottom: 0, child: _buildBottom()), //posicionamiento de contenedor 
+            Positioned(bottom: 0, child: _buildBottom()),
           ],
         ),
-      ),
-    );
-  }
-// Tarjeta donde va el formulario 
+      ), // Cierra Scaffold
+    ); // Cierra Container
+  } // Cierra build
+
   Widget _buildBottom() {
+    // Abre _buildBottom
     return SizedBox(
-      width: mediaSize.width, //ancho de pantalla
-      child: Card( 
+      width: mediaSize.width,
+      child: Card(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(100),
@@ -73,15 +81,16 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
+  } // Cierra _buildBottom
 
-// Construccion de los campos de texto de formulario
   Widget _buildForm() {
-    return SizedBox(height: 560,
-      child: Column( //organiza a los widgets hijos/ secundarios de forma vertical 
-        crossAxisAlignment: CrossAxisAlignment.center, // Alinea a los widgets hijos de forma central dentro de la columna
+    // Abre _buildForm
+    return SizedBox(
+      height: 560,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           const Text(
             "Login",
             style: TextStyle(
@@ -98,35 +107,36 @@ class _LoginPageState extends State<LoginPage> {
           _buildGreyText("Password"),
           _buildInputField(passwordController, isPassword: true),
           const SizedBox(height: 20),
-          // _buildRememberForgot(),
           const SizedBox(height: 20),
           _buildLoginButton(),
-          const SizedBox(height: 20), // Espacio adicional entre el botón de inicio de sesión y el botón de "Forgot your password?"
+          const SizedBox(height: 20),
           TextButton(
-        onPressed: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ForgotPasswordPage()), 
-      );
-        },
-        child: Text ("Forgot password?"),
-      ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ForgotPasswordPage()),
+              );
+            },
+            child: const Text("Forgot password?"),
+          ),
           const SizedBox(height: 70),
-         
         ],
       ),
     );
-  }
+  } // Cierra _buildForm
 
   Widget _buildGreyText(String text) {
+    // Abre _buildGreyText
     return Text(
       text,
       style: const TextStyle(color: Colors.grey),
     );
-  }
+  } // Cierra _buildGreyText
 
   Widget _buildInputField(TextEditingController controller,
       {isPassword = false}) {
+    // Abre _buildInputField
     return TextField(
       controller: controller,
       decoration: InputDecoration(
@@ -136,20 +146,55 @@ class _LoginPageState extends State<LoginPage> {
       ),
       obscureText: isPassword,
     );
-  }
+  } // Cierra _buildInputField
 
   Widget _buildLoginButton() {
+    // Abre _buildLoginButton
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) {
-            return RegisterPage();
-          }),
-        );
-
-        debugPrint("Email: ${emailController.text}");
-        debugPrint("Password: ${passwordController.text}");
+        if (emailController.text.isNotEmpty &&
+            passwordController.text.isNotEmpty) {
+          if (EmailValidator.validate(emailController.text)) {
+            //_loginUser(); // Llama a la función para iniciar sesión
+            Navigator.pushNamed(context, "/home");
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("¡Attention!"),
+                  content: const Text("You must put a email"),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        } else {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("¡Attention!"),
+                content: const Text("Please complete all the flieds"),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("OK"),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       },
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
@@ -162,5 +207,52 @@ class _LoginPageState extends State<LoginPage> {
         style: TextStyle(color: Colors.white),
       ),
     );
-  }
-}
+  } // Cierra _buildLoginButton
+
+  Future<void> _loginUser() async {
+    // Abre _loginUser
+    final url =
+        Uri.parse('https://backend-alfa-production.up.railway.app/auth/login');
+    final response = await http.post(
+      url,
+      body: {
+        'email': emailController.text,
+        'password': passwordController.text,
+      },
+    );
+
+    if (response.statusCode == 201) {
+      // Si el inicio de sesión es exitoso, puedes navegar a otra página o mostrar un mensaje de éxito
+      final data = jsonDecode(response.body);
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('name', data['name'] ?? 'Nombre de Usuario');
+      prefs.setString('uuid', data['id'] ?? 'ID de Usuario');
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                HomeScreen()), // Reemplaza NextPage() con la página a la que deseas navegar después del inicio de sesión exitoso
+      );
+    } else {
+      // Si falla el inicio de sesión, puedes mostrar un mensaje de error
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: Text("Login failed. Error: ${response.body}"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  } // Cierra _loginUser
+} // Cierra _LoginPageState
