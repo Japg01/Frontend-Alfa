@@ -1,6 +1,9 @@
+import '../widgets/navegation.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/Tips_Detailed.dart';
+
+import '../widgets/sidebarmenu.dart';
 
 class Tips_n_Topics extends StatelessWidget {
   const Tips_n_Topics({super.key});
@@ -23,11 +26,11 @@ class Tips_n_Topics_Screen extends StatefulWidget {
 
 class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
   List<String> imageUrls = [
-    'ass,ets/icons/Yoga Ejemplo.png',
-    'assets/icons/Yoga Ejemplo.png',
-    'assets/icons/Yoga Ejemplo.png',
-    'assets/icons/Yoga Ejemplo.png',
-    'assets/icons/Yoga Ejemplo.png'
+    'https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-trainer-in-gym-royalty-free-image-1584723855.jpg',
+    'https://i0.wp.com/www.muscleandfitness.com/wp-content/uploads/2018/12/Personal-Trainer-Training-Partner-GettyImages-654427364.jpg?quality=86&strip=all',
+    'https://serviceninjas.in/wp-content/uploads/2021/12/yoga-2.jpg',
+    'https://www.doyou.com/wp-content/uploads/2021/01/Kathryn-Budig-Yoga.jpg',
+    'https://production-next-images-cdn.thumbtack.com/i/440633394583134208/desktop/standard/400square-legacy',
   ];
   List<String> imageTitles = [
     'Tip 1',
@@ -53,11 +56,11 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
   ];
 
   List<String> descriptions = [
-    'Descripcion 1',
-    'Descripcion 2',
-    'Descripcion 3',
-    'Descripcion 4',
-    'Descripcion 5',
+    'Descripcion del Tip 1 . Descripcion del Tip 1 .Descripcion del Tip 1 .',
+    'Descripcion del Tip 2 . Descripcion del Tip 2 .Descripcion del Tip 2 .',
+    'Descripcion del Tip 3 . Descripcion del Tip 3 .Descripcion del Tip 3 .',
+    'Descripcion del Tip 4 . Descripcion del Tip 4 .Descripcion del Tip 4 .',
+    'Descripcion del Tip 5 . Descripcion del Tip 5 .Descripcion del Tip 5 .',
   ];
   List<String> dates = [
     '20/04/23',
@@ -114,7 +117,10 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
         categories: Categories,
         dates: dates,
         subtitles: imageSubtitles,
+        description: descriptions,
       ),
+      bottomNavigationBar: const BarraNavegacion(),
+      drawer: const SideBarMenu(),
     );
   }
 }
@@ -126,6 +132,8 @@ class Tips_n_Topics_body extends StatelessWidget {
   final List<String> dates;
   final List<String> subtitles;
 
+  final List<String> description;
+
   const Tips_n_Topics_body({
     super.key,
     required this.imageUrls,
@@ -133,6 +141,7 @@ class Tips_n_Topics_body extends StatelessWidget {
     required this.categories,
     required this.dates,
     required this.subtitles,
+    required this.description,
   });
 
   @override
@@ -147,6 +156,7 @@ class Tips_n_Topics_body extends StatelessWidget {
             titles: titles,
             categories: categories,
             dates: dates,
+            description: description,
           ),
         ),
         SizedBox(
@@ -216,13 +226,13 @@ class NewYogaClassesPanelGrid extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    /*ClipRRect(
+                    ClipRRect(
                       borderRadius: BorderRadius.circular(9.0),
-                      child: Image.asset(
+                      child: Image.network(
                         newImageUrls[index],
                         fit: BoxFit.cover,
                       ),
-                    ),*/
+                    ),
                     Positioned(
                       top: 12.0,
                       right: 12.0,
@@ -302,12 +312,15 @@ class HorizontalCarousel extends StatefulWidget {
   final List<String> categories;
   final List<String> dates;
 
+  final List<String> description;
+
   const HorizontalCarousel({
     super.key,
     required this.imageUrls,
     required this.titles,
     required this.categories,
     required this.dates,
+    required this.description,
   });
 
   @override
@@ -339,12 +352,12 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                   borderRadius: BorderRadius.circular(20.0),
                   child: Stack(
                     children: [
-                      /*Positioned.fill(
-                        child: Image.asset(
+                      Positioned.fill(
+                        child: Image.network(
                           widget.imageUrls[index],
                           fit: BoxFit.cover,
                         ),
-                      ),*/
+                      ),
                       Positioned(
                         bottom: 0,
                         left: 0,
@@ -372,7 +385,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                                 onPressed: () => navigateToDetailed(
                                     context,
                                     widget.titles[index],
-                                    "Descripcion Descripcion Descripcion Descripcion Descripcion ",
+                                    widget.description[index],
                                     widget.imageUrls[index]),
                                 child: Text(
                                   widget.titles[index],
@@ -497,12 +510,10 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
       child: AppBar(
         title: Row(
           children: [
-            const BackButton(color: Colors.white),
-            const SizedBox(width: 10.0),
             Text(
               widget.title,
-              style: const TextStyle(color: Colors.white, fontSize: 18),
-            ),
+              style: const TextStyle(color: Colors.white, fontSize: 20),
+            )
           ],
         ),
         bottom: PreferredSize(
@@ -577,6 +588,7 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
         ),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.transparent,
+        leading: const BackButton(color: Colors.white),
       ),
     );
   }

@@ -20,8 +20,12 @@ class HomeScreen extends StatelessWidget {
         body: ListView(
           children: <Widget>[
             const ProgressSection(),
-            buildSection('Categoria de Yoga', 70, 70, 8, onViewMorePressed: () {
-              print('Ver más presionado');
+            buildSection('Categoria de Yoga',
+                70,
+                70,
+                8,
+                onViewMorePressed: () {
+                  print('Ver más presionado');
             }, backendService),
             buildSection(
               'Procesos Populares',
@@ -39,7 +43,7 @@ class HomeScreen extends StatelessWidget {
               200,
               8,
               onViewMorePressed: () {
-                print('Ver más presionado');
+                  Navigator.pushNamed(context, '/courses');
               },
               backendService,
             ),
@@ -59,7 +63,7 @@ class HomeScreen extends StatelessWidget {
               120,
               8,
               onViewMorePressed: () {
-                // Navigator.pushNamed(context, '/tipsTopics');
+                  Navigator.pushNamed(context, '/tipsTopics');
               },
               backendService,
             ),
@@ -193,14 +197,14 @@ class BackendService {
     // Aquí puedes agregar la lógica para obtener los ítems del backend
     // Como no hay conexión, devolvemos una lista de ítems de ejemplo
     return [
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 1'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 2'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 3'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 4'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 5'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 6'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 7'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 8'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 1'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 2'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 3'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 4'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 5'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 6'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 7'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 8'},
     ];
   }
 }
@@ -239,7 +243,7 @@ Widget buildSection(String title, double height, double width, int itemCount,
           itemCount: itemCount,
           itemBuilder: (context, index) {
             var item = items[index];
-            String image = item['image'] ?? 'assets/image/no_image_100x100.png';
+            String image = item['image'] ?? 'assets/image/no-image-found-360x250.png';
             String title = item['title'] ?? 'Titulo';
 
             return Padding(
@@ -257,7 +261,7 @@ Widget buildSection(String title, double height, double width, int itemCount,
                         width: width,
                         child: FadeInImage(
                           placeholder: const AssetImage(
-                              'assets/image/no_image_100x100.png'),
+                              'assets/image/no-image-found-360x250.png'),
                           image: AssetImage(image),
                           fit: BoxFit.cover,
                         ),

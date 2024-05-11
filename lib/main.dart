@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Gymnastic Center',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
         scaffoldBackgroundColor: Colors.white,
       ),
       home: const SplashScreen(),
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/trainingScreen': (context) => const TrainingScreen(),
         '/tipsTopics': (context) => const Tips_n_Topics_Screen(),
         '/videos': (context) => const Videos(),
+        '/courses': (context) => const YogaHomePage(),
       },
     );
   }
