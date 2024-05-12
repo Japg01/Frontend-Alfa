@@ -36,7 +36,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
               child: Transform.scale(
                 scale: 0.3,
                 child: Image.asset(
-                  "assets/images/Logo.png",
+                  "assets/images/logo.png",
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -50,7 +50,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   Widget _buildBottom() {
     return SizedBox(
-      height: 500,
+      height: 600,
       width: mediaSize.width,
       child: Container(
         decoration: const BoxDecoration(
@@ -159,8 +159,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
   Widget _buildInputField(TextEditingController controller) {
     String pinCode = '';
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(width: 35),
+        const SizedBox(width: 0),
         Container(
           width: 50.0, // Ancho de cada cuadro
           height: 50.0, // Altura de cada cuadro

@@ -1,4 +1,5 @@
 import 'package:alfa_soyzen/presentation/homescreen.dart';
+import 'package:alfa_soyzen/presentation/login/forgotpass.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
@@ -103,10 +104,10 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 20),
           TextButton(
             onPressed: () {
-              //             Navigator.push(
-              //               context,
-              //               MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
-              //             );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+              );
             },
             child: const Text("Forgot password?"),
           ),
