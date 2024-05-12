@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:alfa_soyzen/widgets/sidebarmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
 import '../widgets/navegation.dart';
 
 class Yoga_basics extends StatelessWidget {
@@ -152,13 +151,13 @@ class YogaBody extends StatelessWidget {
               bottomRight: Radius.circular(45),
             ),
             child: SizedBox(
-              height: 270,
+              height: 300,
               child: Stack(
                 children: [
                   ClipRect(
                       child: CarouselSlider(
                     options: CarouselOptions(
-                      height: 270,
+                      height: 300,
                       autoPlay: true,
                       onPageChanged: onPageChanged,
                       scrollDirection: Axis.vertical, // Slide up and down

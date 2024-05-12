@@ -1,8 +1,9 @@
-
+import '../widgets/navegation.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:alfa_soyzen/presentation/Tips_Detailed.dart';
 
-import 'Tips_Detailed.dart';
+import '../widgets/sidebarmenu.dart';
 
 class Tips_n_Topics extends StatelessWidget {
   const Tips_n_Topics({super.key});
@@ -55,11 +56,11 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
   ];
 
   List<String> descriptions = [
-    'Descripcion 1',
-    'Descripcion 2',
-    'Descripcion 3',
-    'Descripcion 4',
-    'Descripcion 5',
+    'Descripcion del Tip 1 . Descripcion del Tip 1 .Descripcion del Tip 1 .',
+    'Descripcion del Tip 2 . Descripcion del Tip 2 .Descripcion del Tip 2 .',
+    'Descripcion del Tip 3 . Descripcion del Tip 3 .Descripcion del Tip 3 .',
+    'Descripcion del Tip 4 . Descripcion del Tip 4 .Descripcion del Tip 4 .',
+    'Descripcion del Tip 5 . Descripcion del Tip 5 .Descripcion del Tip 5 .',
   ];
   List<String> dates = [
     '20/04/23',
@@ -116,8 +117,11 @@ class _Tips_n_Topics_state extends State<Tips_n_Topics_Screen> {
         categories: Categories,
         dates: dates,
         subtitles: imageSubtitles,
-        ),
-      );
+        description: descriptions,
+      ),
+      bottomNavigationBar: const BarraNavegacion(),
+      drawer: const SideBarMenu(),
+    );
   }
 }
 
@@ -128,6 +132,8 @@ class Tips_n_Topics_body extends StatelessWidget {
   final List<String> dates;
   final List<String> subtitles;
 
+  final List<String> description;
+
   const Tips_n_Topics_body({
     super.key,
     required this.imageUrls,
@@ -135,6 +141,7 @@ class Tips_n_Topics_body extends StatelessWidget {
     required this.categories,
     required this.dates,
     required this.subtitles,
+    required this.description,
   });
 
   @override
@@ -149,6 +156,7 @@ class Tips_n_Topics_body extends StatelessWidget {
             titles: titles,
             categories: categories,
             dates: dates,
+            description: description,
           ),
         ),
         SizedBox(
@@ -304,12 +312,15 @@ class HorizontalCarousel extends StatefulWidget {
   final List<String> categories;
   final List<String> dates;
 
+  final List<String> description;
+
   const HorizontalCarousel({
     super.key,
     required this.imageUrls,
     required this.titles,
     required this.categories,
     required this.dates,
+    required this.description,
   });
 
   @override
@@ -374,7 +385,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                                 onPressed: () => navigateToDetailed(
                                     context,
                                     widget.titles[index],
-                                    "Descripcion Descripcion Descripcion Descripcion Descripcion ",
+                                    widget.description[index],
                                     widget.imageUrls[index]),
                                 child: Text(
                                   widget.titles[index],
@@ -477,8 +488,8 @@ class Tips_n_Topics_appbar extends StatefulWidget
 
   final void Function(int) onCategoryTapped;
 
-
-  Tips_n_Topics_appbar({super.key, 
+  Tips_n_Topics_appbar({
+    super.key,
     required this.title,
     required this.onCategoryTapped,
   });
@@ -499,12 +510,10 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
       child: AppBar(
         title: Row(
           children: [
-            const BackButton(color: Colors.white),
-            const SizedBox(width: 10.0),
             Text(
               widget.title,
-              style: const TextStyle(color: Colors.white, fontSize: 18),
-            ),
+              style: const TextStyle(color: Colors.white, fontSize: 20),
+            )
           ],
         ),
         bottom: PreferredSize(
@@ -579,6 +588,7 @@ class _Tips_n_Topics_appbarState extends State<Tips_n_Topics_appbar> {
         ),
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.transparent,
+        leading: const BackButton(color: Colors.white),
       ),
     );
   }

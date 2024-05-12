@@ -20,11 +20,53 @@ class HomeScreen extends StatelessWidget {
         body: ListView(
           children: <Widget>[
             const ProgressSection(),
-            buildSection('Categoria de Yoga', 70, 70, 8, backendService),
-            buildSection('Procesos Populares', 130, 120, 8, backendService),
-            buildSection('Videos de Cursos', 140, 200, 8, backendService),
-            buildSection('Nuestros últimos Blogs', 155, 120, 8, backendService),
-            buildSection('Consejos y temas', 155, 120, 8, backendService),
+            buildSection('Categoria de Yoga',
+                70,
+                70,
+                8,
+                onViewMorePressed: () {
+                  print('Ver más presionado');
+            }, backendService),
+            buildSection(
+              'Procesos Populares',
+              130,
+              120,
+              8,
+              onViewMorePressed: () {
+                print('Ver más presionado');
+              },
+              backendService,
+            ),
+            buildSection(
+              'Videos de Cursos',
+              140,
+              200,
+              8,
+              onViewMorePressed: () {
+                  Navigator.pushNamed(context, '/courses');
+              },
+              backendService,
+            ),
+            buildSection(
+              'Nuestros últimos Blogs',
+              155,
+              120,
+              8,
+              onViewMorePressed: () {
+                print('Ver más presionado');
+              },
+              backendService,
+            ),
+            buildSection(
+              'Consejos y temas',
+              155,
+              120,
+              8,
+              onViewMorePressed: () {
+                  Navigator.pushNamed(context, '/tipsTopics');
+              },
+              backendService,
+            ),
           ],
         ),
       ),
@@ -46,7 +88,6 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   String name = 'Nombre de Usuario';
   String uuid = 'ID de Usuario';
-  String imageUrl = 'URL de la imagen aquí';
   int? _selectedDayIndex = 1; // Por defecto, 'Hoy' está seleccionado
   final List<String> _days = ['Mañana', 'Hoy', 'Ayer'];
 
@@ -61,8 +102,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     setState(() {
       name = prefs.getString('name') ?? 'Nombre de Usuario';
       uuid = prefs.getString('uuid') ?? 'ID de Usuario';
-      imageUrl = prefs.getString('imageUrl') ??
-          'URL de la imagen aquí'; // Obtiene la URL de la imagen
+      // Obtiene la URL de la imagen
     });
   }
 
@@ -105,19 +145,17 @@ class _CustomAppBarState extends State<CustomAppBar> {
                               color: Colors.white)),
                     ],
                   ),
-                  CircleAvatar(
-                    backgroundImage:
-                        NetworkImage(imageUrl), // Usa la URL de la imagen
-                    radius: 30,
-                  ),
                 ],
               ),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
+                onTap: () {
+                  Navigator.pushNamed(context, '/popularSearch');
+                },
                 textAlign: TextAlign.center,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Buscar...',
                   filled: true,
                   fillColor: Colors.white,
@@ -159,21 +197,21 @@ class BackendService {
     // Aquí puedes agregar la lógica para obtener los ítems del backend
     // Como no hay conexión, devolvemos una lista de ítems de ejemplo
     return [
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 1'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 2'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 3'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 4'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 5'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 6'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 7'},
-      {'image': 'assets/image/no_image_100x100.png', 'title': 'Ítem 8'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 1'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 2'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 3'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 4'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 5'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 6'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 7'},
+      {'image': 'assets/image/no-image-found-360x250.png', 'title': 'Ítem 8'},
     ];
   }
 }
 
 Widget buildSection(String title, double height, double width, int itemCount,
     BackendService backendService,
-    {bool showMoreButton = true}) {
+    {bool showMoreButton = true, required Null Function() onViewMorePressed}) {
   var items = backendService.getItems(); // Obtenemos los items del backend
 
   return Column(
@@ -191,7 +229,7 @@ Widget buildSection(String title, double height, double width, int itemCount,
             if (showMoreButton)
               TextButton(
                 onPressed: () {
-                  // Acción del botón "Ver más"
+                  onViewMorePressed();
                 },
                 child: const Text('Ver más'),
               ),
@@ -205,7 +243,7 @@ Widget buildSection(String title, double height, double width, int itemCount,
           itemCount: itemCount,
           itemBuilder: (context, index) {
             var item = items[index];
-            String image = item['image'] ?? 'assets/image/no_image_100x100.png';
+            String image = item['image'] ?? 'assets/image/no-image-found-360x250.png';
             String title = item['title'] ?? 'Titulo';
 
             return Padding(
@@ -223,7 +261,7 @@ Widget buildSection(String title, double height, double width, int itemCount,
                         width: width,
                         child: FadeInImage(
                           placeholder: const AssetImage(
-                              'assets/image/no_image_100x100.png'),
+                              'assets/image/no-image-found-360x250.png'),
                           image: AssetImage(image),
                           fit: BoxFit.cover,
                         ),
