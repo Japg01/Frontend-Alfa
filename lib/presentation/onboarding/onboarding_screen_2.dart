@@ -1,6 +1,6 @@
+import 'package:alfa_soyzen/presentation/login/home.dart';
 import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_1.dart';
 import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_3.dart';
-import 'package:alfa_soyzen/presentation/auth/verification_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const OnBoardingScreen2());
@@ -10,32 +10,43 @@ class OnBoardingScreen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    MediaQueryData mediaQuery = MediaQuery.of(context);
+    double alturaPantalla = mediaQuery.size.height;
+    double alturaDeseada = alturaPantalla * 0.1;
+    double anchoPantalla = mediaQuery.size.width;
+    double padding = anchoPantalla * 0.05;
+
+    return Scaffold(
         body: Center(
-            child: Column(
-      children: [
-        SizedBox(height: 90),
-        YogaImage(),
-        SizedBox(height: 53),
-        YogaDaily(),
-        SizedBox(height: 90),
-        BarraNavegacion(),
-      ],
-    )));
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 165),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: alturaDeseada, vertical: padding),
+              child: yogaImage(),
+            ),
+            const SizedBox(height: 60),
+            const YogaDaily(),
+            const SizedBox(height: 215),
+            const BarraNavegacion(),
+          ],
+        ),
+      ),
+    ));
   }
 }
 
-class YogaImage extends StatelessWidget {
-  const YogaImage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 231.01,
-      width: 329.0,
-      child: Image.asset('assets/images/yoga2.png'),
-    );
-  }
+Widget yogaImage() {
+  return SizedBox(
+    height: 231.01,
+    width: 329.0,
+    child: Image.asset('assets/images/yoga2.png'),
+  );
 }
 
 class YogaDaily extends StatelessWidget {
@@ -46,14 +57,14 @@ class YogaDaily extends StatelessWidget {
     return const Column(
       children: [
         SizedBox(
-          width: 109,
-          height: 28,
+          width: 160,
+          height: 35,
           child: Text('Meditation',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Color(0xFF4F14A0),
                 fontWeight: FontWeight.w400,
-                fontSize: 22,
+                fontSize: 30,
                 fontFamily: 'PTSans',
               )),
         ),
@@ -72,19 +83,19 @@ class YogaDaily extends StatelessWidget {
             )),
         SizedBox(height: 20),
         SizedBox(
-          width: 260,
-          height: 45,
+          width: 350,
+          height: 60,
           child: Text(
             'Meditation is the key to Productivity. \nHappiness & Longevity',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Color(0xFF677294),
                 fontWeight: FontWeight.w400,
-                fontSize: 15,
+                fontSize: 20,
                 fontFamily: 'PTSans'),
           ),
         ),
-        SizedBox(height: 35),
+        SizedBox(height: 65),
         Buttom(),
       ],
     );
@@ -97,7 +108,7 @@ class Buttom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
-      size: const Size(130, 54), // button width and height
+      size: const Size(140, 60), // button width and height
       child: ElevatedButton(
         onPressed: () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -105,6 +116,7 @@ class Buttom extends StatelessWidget {
           ));
         },
         child: const Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
@@ -113,7 +125,7 @@ class Buttom extends StatelessWidget {
               style: TextStyle(
                   color: Color(0xFF222222),
                   fontWeight: FontWeight.w400,
-                  fontSize: 16,
+                  fontSize: 20,
                   fontFamily: 'PTSans'),
             ),
             Material(
@@ -138,56 +150,52 @@ class BarraNavegacion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 70,
-      child: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 100.0,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Row(
-            children: [
-              ElevatedButton(
+    return BottomAppBar(
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (_) => const WelcomeScreen(),
+                  ));
+                },
+                child: const Text('skip',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color(0xFF677294),
+                        fontWeight: FontWeight.w400,
+                        fontSize: 20,
+                        fontFamily: 'PTSans'))),
+            const SizedBox(width: 200),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.radio_button_unchecked),
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (_) => const VerificationScreen(),
+                      builder: (_) => const OnBoardingScreen1(),
                     ));
                   },
-                  child: const Text('skip',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color(0xFF677294),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          fontFamily: 'PTSans'))),
-              const SizedBox(width: 123),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.radio_button_unchecked),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (_) => const OnBoardingScreen1(),
-                      ));
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.radio_button_checked),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.radio_button_unchecked),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (_) => const OnBoardingScreen3(),
-                      ));
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.radio_button_checked),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(Icons.radio_button_unchecked),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (_) => const OnBoardingScreen3(),
+                    ));
+                  },
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

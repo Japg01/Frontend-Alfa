@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -153,93 +152,93 @@ class _RegisterPageState extends State<RegisterPage> {
     return ElevatedButton(
       onPressed: () {
         if (acceptTerms) {
-          // if (nameController.text.isNotEmpty &&
-          //     phoneController.text.isNotEmpty &&
-          //     emailController.text.isNotEmpty &&
-          //     passwordController.text.isNotEmpty) {
-          //   if (nameController.text.length >= 3 &&
-          //       nameController.text.length <= 30) {
-          //     if (phoneVerifi.hasMatch(phoneController.text) &&
-          //         phoneController.text.length == 11) {
-          //       if (EmailValidator.validate(emailController.text)) {
-          //         _registerUser();
-          //       } else {
-          //         showDialog(
-          //           context: context,
-          //           builder: (BuildContext context) {
-          //             return AlertDialog(
-          //               title: const Text("¡Attention!"),
-          //               content: const Text("You must put a email"),
-          //               actions: [
-          //                 TextButton(
-          //                   onPressed: () {
-          //                     Navigator.of(context).pop();
-          //                   },
-          //                   child: const Text("OK"),
-          //                 ),
-          //               ],
-          //             );
-          //           },
-          //         );
-          //       }
-          //     } else {
-          //       showDialog(
-          //         context: context,
-          //         builder: (BuildContext context) {
-          //           return AlertDialog(
-          //             title: const Text("¡Attention!"),
-          //             content: const Text("Please write a phone number valid"),
-          //             actions: [
-          //               TextButton(
-          //                 onPressed: () {
-          //                   Navigator.of(context).pop();
-          //                 },
-          //                 child: const Text("OK"),
-          //               ),
-          //             ],
-          //           );
-          //         },
-          //       );
-          //     }
-          //   } else {
-          //     showDialog(
-          //       context: context,
-          //       builder: (BuildContext context) {
-          //         return AlertDialog(
-          //           title: const Text("¡Attention!"),
-          //           content: const Text(
-          //               "The name must be between 3 and 30 caracters"),
-          //           actions: [
-          //             TextButton(
-          //               onPressed: () {
-          //                 Navigator.of(context).pop();
-          //               },
-          //               child: const Text("OK"),
-          //             ),
-          //           ],
-          //         );
-          //       },
-          //     );
-          //   }
-          // } else {
-          //   showDialog(
-          //     context: context,
-          //     builder: (BuildContext context) {
-          //       return AlertDialog(
-          //         title: const Text("¡Attention!"),
-          //         content: const Text("Please complete all the flieds"),
-          //         actions: [
-          //           TextButton(
-          //             onPressed: () {
-          //               Navigator.of(context).pop();
-          //             },
-          //             child: const Text("OK"),
-          //           ),
-          //         ],
-          //       );
-          //     },
-          //   );
-          // }
+          if (nameController.text.isNotEmpty &&
+              phoneController.text.isNotEmpty &&
+              emailController.text.isNotEmpty &&
+              passwordController.text.isNotEmpty) {
+            if (nameController.text.length >= 3 &&
+                nameController.text.length <= 30) {
+              if (phoneVerifi.hasMatch(phoneController.text) &&
+                  phoneController.text.length == 11) {
+                if (EmailValidator.validate(emailController.text)) {
+                  _registerUser();
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("¡Attention!"),
+                        content: const Text("You must put a email"),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("¡Attention!"),
+                      content: const Text("Please write a phone number valid"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text("¡Attention!"),
+                    content: const Text(
+                        "The name must be between 3 and 30 caracters"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("OK"),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("¡Attention!"),
+                  content: const Text("Please complete all the flieds"),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
           Navigator.pushNamed(context, "/home");
         } else {
           showDialog(
@@ -274,68 +273,10 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-//   Future<void> _registerUser() async {
-//     final url = Uri.parse(
-//         'https://backend-alfa-production.up.railway.app/auth/register');
-//     final response = await http.post(
-//       url,
-//       body: {
-//         'name': nameController.text,
-//         'phone': phoneController.text,
-//         'email': emailController.text,
-//         'password': passwordController.text,
-//       },
-//     );
-
-//     if (response.statusCode == 201) {
-//       // Si la respuesta es exitosa, mostrar un diálogo con la respuesta del backend
-//       showDialog(
-//         // ignore: use_build_context_synchronously
-//         context: context,
-//         builder: (BuildContext context) {
-//           return AlertDialog(
-//             title: const Text("Registro exitoso"),
-//             content: Text("Respuesta del servidor: ${response.body}"),
-//             actions: [
-//               TextButton(
-//                 onPressed: () {
-//                   Navigator.of(context).pop();
-//                 },
-//                 child: const Text("OK"),
-//               ),
-//             ],
-//           );
-//         },
-//       );
-//     } else {
-//       // Si la respuesta no es exitosa, mostrar un diálogo con un mensaje de error
-//       showDialog(
-//         // ignore: use_build_context_synchronously
-//         context: context,
-//         builder: (BuildContext context) {
-//           return AlertDialog(
-//             title: const Text("Error"),
-//             content: Text(
-//                 "No se pudo completar el registro. Error: ${response.body}"),
-//             actions: [
-//               TextButton(
-//                 onPressed: () {
-//                   Navigator.of(context).pop();
-//                 },
-//                 child: const Text("OK"),
-//               ),
-//             ],
-//           );
-//         },
-//       );
-//     }
-//   }
-// }
-
   Future<void> _registerUser() async {
     Dio dio = Dio();
-    const url = 'http://192.168.32.47/auth/register';
-    //const url = 'https://backend-alfa-production.up.railway.app/auth/register';
+    //const url = 'http://192.168.32.47/auth/register';
+    const url = 'https://backend-alfa-production.up.railway.app/auth/register';
     try {
       Response response = await dio.post(
         url,
