@@ -87,7 +87,14 @@ flutter:
     - assets/images/
     - assets/images/logo.png
     - assets/image/no_image_100x100.png
-    - assets/icons/Yoga Ejemplo.png
+    - assets/images/Yoga Ejemplo 1.png
+    - assets/images/Yoga Ejemplo 2.png
+    - assets/images/Yoga Ejemplo 3.png
+    - assets/images/Yoga Ejemplo 4.png
+    - assets/images/Yoga Ejemplo 5.png
+    - assets/images/Yoga Ejemplo 6.png
+    - assets/images/Yoga Ejemplo 7.png
+    - assets/images/Yoga Ejemplo 8.png
     - assets/logo/Fondo Morado.png
     - assets/videos/yogavideo.mp4
     - lib/presentation/Tips_Detailed.dart
