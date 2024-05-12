@@ -113,15 +113,15 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: TextField(
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   hintText: 'Buscar...',
                   filled: true,
                   fillColor: Colors.white,
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: Icon(Icons.search),
                 ),
               ),
             ),

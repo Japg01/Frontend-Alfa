@@ -4,7 +4,7 @@ import 'package:video_player/video_player.dart';
 class VideoPlayerScreen extends StatefulWidget {
   final String videoPath;
 
-  VideoPlayerScreen({Key? key, required this.videoPath}) : super(key: key);
+  const VideoPlayerScreen({super.key, required this.videoPath});
 
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
@@ -27,13 +27,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(
+        title: const Text(
           'Video Player',
           style: TextStyle(color: Colors.white),
         ),
         automaticallyImplyLeading: false,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -54,7 +54,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   child: VideoPlayer(_controller),
                 );
               } else {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               }
             },
           ),
