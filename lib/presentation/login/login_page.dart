@@ -221,7 +221,6 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     if (response.statusCode == 201) {
-      // Si el inicio de sesión es exitoso, puedes navegar a otra página o mostrar un mensaje de éxito
       final data = jsonDecode(response.body);
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('name', data['name'] ?? 'Nombre de Usuario');

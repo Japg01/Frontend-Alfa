@@ -3,7 +3,7 @@ import 'package:alfa_soyzen/widgets/videoplayer.dart';
 import 'package:alfa_soyzen/widgets/navegation.dart';
 
 class Videos extends StatefulWidget {
-  const Videos({Key? key}) : super(key: key);
+  const Videos({super.key});
 
   @override
   _VideosState createState() => _VideosState();
@@ -162,7 +162,7 @@ class _VideosState extends State<Videos> {
                               .grey, // Cambia el color del círculo según esté seleccionado o no
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     categoryName,
                     style: TextStyle(
