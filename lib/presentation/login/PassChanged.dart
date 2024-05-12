@@ -4,7 +4,7 @@ import 'package:alfa_soyzen/presentation/login/login_page.dart';
 void main() => runApp(const PasswordChanged());
 
 class PasswordChanged extends StatelessWidget {
-  const PasswordChanged({Key? key});
+  const PasswordChanged({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,9 @@ Widget buttonLogin(BuildContext context) {
     onPressed: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginPage()), // Reemplaza LoginScreen() con la pantalla a la que deseas navegar
+        MaterialPageRoute(
+            builder: (context) =>
+                const LoginPage()), // Reemplaza LoginScreen() con la pantalla a la que deseas navegar
       );
     },
     style: ElevatedButton.styleFrom(

@@ -3,17 +3,19 @@ import 'package:alfa_soyzen/presentation/login/forgotpass.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
-// import 'package:login/forgotpass.dart'; // Asegúrate de importar ForgotPasswordPage si no está definido
-// Importa la página de inicio de sesión si aún no lo has hecho
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
+  // Abre LoginPage
   const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
-}
+} // Cierra LoginPage
 
 class _LoginPageState extends State<LoginPage> {
+  // Abre _LoginPageState
   late Color myColor;
   late Size mediaSize;
   TextEditingController emailController = TextEditingController();
@@ -22,10 +24,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Abre build
     myColor = Theme.of(context).primaryColor;
     mediaSize = MediaQuery.of(context).size;
 
     return Container(
+      // Abre Container
       decoration: BoxDecoration(
         color: myColor,
         image: DecorationImage(
@@ -36,8 +40,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       child: Scaffold(
+        // Abre Scaffold
         backgroundColor: Colors.transparent,
         body: Stack(
+          // Abre Stack
           children: [
             Positioned(
               top: -65,
@@ -54,11 +60,12 @@ class _LoginPageState extends State<LoginPage> {
             Positioned(bottom: 0, child: _buildBottom()),
           ],
         ),
-      ),
-    );
-  }
+      ), // Cierra Scaffold
+    ); // Cierra Container
+  } // Cierra build
 
   Widget _buildBottom() {
+    // Abre _buildBottom
     return SizedBox(
       width: mediaSize.width,
       child: Card(
@@ -74,9 +81,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
+  } // Cierra _buildBottom
 
   Widget _buildForm() {
+    // Abre _buildForm
     return SizedBox(
       height: 560,
       child: Column(
@@ -106,7 +114,8 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+                MaterialPageRoute(
+                    builder: (context) => const ForgotPasswordPage()),
               );
             },
             child: const Text("Forgot password?"),
@@ -115,17 +124,19 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
-  }
+  } // Cierra _buildForm
 
   Widget _buildGreyText(String text) {
+    // Abre _buildGreyText
     return Text(
       text,
       style: const TextStyle(color: Colors.grey),
     );
-  }
+  } // Cierra _buildGreyText
 
   Widget _buildInputField(TextEditingController controller,
       {isPassword = false}) {
+    // Abre _buildInputField
     return TextField(
       controller: controller,
       decoration: InputDecoration(
@@ -135,9 +146,10 @@ class _LoginPageState extends State<LoginPage> {
       ),
       obscureText: isPassword,
     );
-  }
+  } // Cierra _buildInputField
 
   Widget _buildLoginButton() {
+    // Abre _buildLoginButton
     return ElevatedButton(
       onPressed: () {
         if (emailController.text.isNotEmpty &&
@@ -194,11 +206,12 @@ class _LoginPageState extends State<LoginPage> {
         style: TextStyle(color: Colors.white),
       ),
     );
-  }
+  } // Cierra _buildLoginButton
 
   Future<void> _loginUser() async {
-    final url = Uri.parse(
-        'https://backend-alfa-production.up.railway.app/auth/login'); // Reemplaza 'tu.backend.com' por la URL de tu backend
+    // Abre _loginUser
+    final url =
+        Uri.parse('https://backend-alfa-production.up.railway.app/auth/login');
     final response = await http.post(
       url,
       body: {
@@ -209,6 +222,11 @@ class _LoginPageState extends State<LoginPage> {
 
     if (response.statusCode == 201) {
       // Si el inicio de sesión es exitoso, puedes navegar a otra página o mostrar un mensaje de éxito
+      final data = jsonDecode(response.body);
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('name', data['name'] ?? 'Nombre de Usuario');
+      prefs.setString('uuid', data['id'] ?? 'ID de Usuario');
+
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -235,5 +253,5 @@ class _LoginPageState extends State<LoginPage> {
         },
       );
     }
-  }
-}
+  } // Cierra _loginUser
+} // Cierra _LoginPageState

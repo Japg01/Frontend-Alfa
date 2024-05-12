@@ -30,7 +30,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
         body: Stack(
           children: [
             Positioned(
-              top: 0,
+              top: -80,
               left: 0,
               right: 0,
               child: Transform.scale(

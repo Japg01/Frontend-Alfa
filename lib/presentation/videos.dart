@@ -1,11 +1,16 @@
-
-import 'package:alfa_soyzen/widgets/videoplayer.dart';
-
-import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:flutter/material.dart';
+import 'package:alfa_soyzen/widgets/videoplayer.dart';
+import 'package:alfa_soyzen/widgets/navegation.dart';
 
-class Videos extends StatelessWidget {
-  const Videos({super.key});
+class Videos extends StatefulWidget {
+  const Videos({Key? key}) : super(key: key);
+
+  @override
+  _VideosState createState() => _VideosState();
+}
+
+class _VideosState extends State<Videos> {
+  int _selectedCategoryIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +68,10 @@ class Videos extends StatelessWidget {
                 titleSpacing: 0.0,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                title: Row(
+                automaticallyImplyLeading: false,
+                title: const Row(
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                    const Text(
+                    Text(
                       'Videos',
                       style: TextStyle(
                         color: Colors.white,
@@ -105,7 +106,7 @@ class Videos extends StatelessWidget {
           ),
         ),
         GridView.builder(
-          physics: const ClampingScrollPhysics(), // Use ClampingScrollPhysics
+          physics: const ClampingScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10.0,
@@ -113,7 +114,7 @@ class Videos extends StatelessWidget {
             childAspectRatio: 0.75,
           ),
           itemCount: 8,
-          shrinkWrap: true, // Remove shrinkWrap
+          shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return cajaVideo(context, 'assets/icons/Yoga Ejemplo.png',
                 'assets/videos/yogavideo.mp4');
@@ -139,28 +140,41 @@ class Videos extends StatelessWidget {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           String categoryName = categories[index];
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 5,
-                  height: 20,
-                  child: Icon(
-                    Icons.circle,
-                    size: 10,
-                    color: Colors.white,
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                _selectedCategoryIndex = index;
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 5,
+                    height: 20,
+                    child: Icon(
+                      Icons.circle,
+                      size: 10,
+                      color: index == _selectedCategoryIndex
+                          ? Colors.white
+                          : Colors
+                              .grey, // Cambia el color del círculo según esté seleccionado o no
+                    ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  categoryName,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
+                  SizedBox(width: 8),
+                  Text(
+                    categoryName,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: index == _selectedCategoryIndex
+                          ? Colors.white
+                          : Colors
+                              .grey, // Cambia el color del texto según esté seleccionado o no
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
@@ -171,12 +185,12 @@ class Videos extends StatelessWidget {
   Widget cajaVideo(BuildContext context, String coverImage, String videoPath) {
     return GestureDetector(
       onTap: () {
-        /*Navigator.push(
+        Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => VideoPlayerWidget(videoPath: videoPath),
+            builder: (context) => VideoPlayerScreen(videoPath: videoPath),
           ),
-        );*/
+        );
       },
       child: Padding(
         padding: const EdgeInsets.only(
