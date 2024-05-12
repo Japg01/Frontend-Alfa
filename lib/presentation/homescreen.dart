@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:alfa_soyzen/widgets/sidebarmenu.dart';
 import 'package:alfa_soyzen/widgets/progressbar.dart';
+import 'package:alfa_soyzen/presentation/profile.dart' as profile;
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -20,12 +21,8 @@ class HomeScreen extends StatelessWidget {
         body: ListView(
           children: <Widget>[
             const ProgressSection(),
-            buildSection('Categoria de Yoga',
-                70,
-                70,
-                8,
-                onViewMorePressed: () {
-                  print('Ver más presionado');
+            buildSection('Categoria de Yoga', 70, 70, 8, onViewMorePressed: () {
+              print('Ver más presionado');
             }, backendService),
             buildSection(
               'Procesos Populares',
@@ -43,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               200,
               8,
               onViewMorePressed: () {
-                  Navigator.pushNamed(context, '/courses');
+                Navigator.pushNamed(context, '/courses');
               },
               backendService,
             ),
@@ -63,7 +60,7 @@ class HomeScreen extends StatelessWidget {
               120,
               8,
               onViewMorePressed: () {
-                  Navigator.pushNamed(context, '/tipsTopics');
+                Navigator.pushNamed(context, '/tipsTopics');
               },
               backendService,
             ),
@@ -102,89 +99,112 @@ class _CustomAppBarState extends State<CustomAppBar> {
     setState(() {
       name = prefs.getString('name') ?? 'Nombre de Usuario';
       uuid = prefs.getString('uuid') ?? 'ID de Usuario';
-      // Obtiene la URL de la imagen
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF4F14A0), Color(0xFF8066FF)],
-        ),
-        borderRadius: BorderRadius.only(
-          bottomRight: Radius.circular(30.0),
-        ),
-      ),
-      child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: AppBar(
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: const CircleAvatar(
+              backgroundImage: AssetImage('assets/icons/user.png'),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      profile.PerfilUsuario(backendService: BackendService()),
+                ),
+              );
+            },
+          ),
+        ],
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF4F14A0), Color(0xFF8066FF)],
+            ),
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(30.0), // Redondea la esquina aquí
+            ),
+          ),
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 20.0), // Aumenta el padding vertical aquí
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(name,
-                          style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
-                      Text(uuid,
-                          style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(name,
+                              style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                          Text(
+                              'ID: ${uuid.substring(0, 8)}', // Muestra solo los primeros 8 caracteres del ID aquí
+                              style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: TextField(
-                onTap: () {
-                  Navigator.pushNamed(context, '/popularSearch');
-                },
-                textAlign: TextAlign.center,
-                decoration: const InputDecoration(
-                  hintText: 'Buscar...',
-                  filled: true,
-                  fillColor: Colors.white,
-                  prefixIcon: Icon(Icons.search),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: _days.map((day) {
-                  int index = _days.indexOf(day);
-                  return FilterChip(
-                    label: Text(day),
-                    selected: _selectedDayIndex == index,
-                    onSelected: (bool selected) {
-                      setState(() {
-                        _selectedDayIndex = selected ? index : null;
-                      });
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: TextField(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/popularSearch');
                     },
-                    selectedColor: Colors.transparent,
-                    checkmarkColor: Colors.black,
-                    backgroundColor: Colors.transparent,
-                  );
-                }).toList(),
-              ),
+                    textAlign: TextAlign.center,
+                    decoration: const InputDecoration(
+                      hintText: 'Buscar...',
+                      filled: true,
+                      fillColor: Colors.white,
+                      prefixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: _days.map((day) {
+                      int index = _days.indexOf(day);
+                      return FilterChip(
+                        label: Text(day),
+                        selected: _selectedDayIndex == index,
+                        onSelected: (bool selected) {
+                          setState(() {
+                            _selectedDayIndex = selected ? index : null;
+                          });
+                        },
+                        selectedColor: Colors.transparent,
+                        checkmarkColor: Colors.black,
+                        backgroundColor: Colors.transparent,
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -243,7 +263,8 @@ Widget buildSection(String title, double height, double width, int itemCount,
           itemCount: itemCount,
           itemBuilder: (context, index) {
             var item = items[index];
-            String image = item['image'] ?? 'assets/image/no-image-found-360x250.png';
+            String image =
+                item['image'] ?? 'assets/image/no-image-found-360x250.png';
             String title = item['title'] ?? 'Titulo';
 
             return Padding(
