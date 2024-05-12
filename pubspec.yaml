@@ -40,10 +40,9 @@ dependencies:
   email_validator: ^2.1.17
   shared_preferences: ^2.0.8
   volume_control: ^0.1.5
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  flutter_launcher_icons: ^0.13.1
+  fl_chart: ^0.36.4
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +55,10 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: 'assets/images/logoblanco.png'
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -82,11 +85,13 @@ flutter:
     - assets/icons/user.png
     - assets/icons/notiBell.png
     - assets/images/
+    - assets/images/logo.png
     - assets/image/no_image_100x100.png
     - assets/icons/Yoga Ejemplo.png
     - assets/logo/Fondo Morado.png
     - assets/videos/yogavideo.mp4
     - lib/presentation/Tips_Detailed.dart
+    - assets/image/no-image-found-360x250.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

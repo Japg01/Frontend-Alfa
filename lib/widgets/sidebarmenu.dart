@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/profile.dart';
+import 'package:alfa_soyzen/presentation/homescreen.dart';
 
 class SideBarMenu extends StatelessWidget {
   const SideBarMenu({super.key});
@@ -70,7 +71,10 @@ class SideBarMenu extends StatelessWidget {
             if (texto == 'Cuenta') {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PerfilUsuario()),
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PerfilUsuario(backendService: BackendService()),
+                ),
               );
             }
           },

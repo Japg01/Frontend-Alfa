@@ -1,6 +1,6 @@
+import 'package:alfa_soyzen/presentation/login/home.dart';
 import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_2.dart';
 import 'package:alfa_soyzen/presentation/onboarding/onboarding_screen_3.dart';
-import 'package:alfa_soyzen/presentation/auth/verification_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const OnBoardingScreen1());
@@ -10,18 +10,34 @@ class OnBoardingScreen1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQuery = MediaQuery.of(context);
+    double alturaPantalla = mediaQuery.size.height;
+    double alturaDeseada = alturaPantalla * 0.1;
+    double anchoPantalla = mediaQuery.size.width;
+    double padding = anchoPantalla * 0.05;
+
     return Scaffold(
         body: Center(
-            child: Column(
-      children: [
-        const SizedBox(height: 50),
-        yogaImage(),
-        const SizedBox(height: 20),
-        yogaDaily(),
-        const SizedBox(height: 90),
-        const BarraNavegacion(),
-      ],
-    )));
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 85),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: alturaDeseada, vertical: padding),
+              child: yogaImage(),
+            ),
+            const SizedBox(height: 60),
+            yogaDaily(),
+            const SizedBox(height: 215),
+            const BarraNavegacion(),
+          ],
+        ),
+      ),
+    ));
   }
 }
 
@@ -37,14 +53,14 @@ Widget yogaDaily() {
   return const Column(
     children: [
       SizedBox(
-        width: 55,
-        height: 28,
+        width: 70,
+        height: 40,
         child: Text('Yoga',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Color(0xFF4F14A0),
               fontWeight: FontWeight.w400,
-              fontSize: 22,
+              fontSize: 30,
               fontFamily: 'PTSans',
             )),
       ),
@@ -63,19 +79,19 @@ Widget yogaDaily() {
           )),
       SizedBox(height: 20),
       SizedBox(
-        width: 290,
-        height: 45,
+        width: 400,
+        height: 60,
         child: Text(
           'Do your practice of physical exercise and \n relaxation make helthy',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: Color(0xFF677294),
               fontWeight: FontWeight.w400,
-              fontSize: 15,
+              fontSize: 20,
               fontFamily: 'PTSans'),
         ),
       ),
-      SizedBox(height: 35),
+      SizedBox(height: 60),
       Buttom(),
     ],
   );
@@ -87,7 +103,7 @@ class Buttom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
-      size: const Size(130, 54), // button width and height
+      size: const Size(140, 65), // button width and height
       child: ElevatedButton(
         onPressed: () {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -95,6 +111,7 @@ class Buttom extends StatelessWidget {
           ));
         },
         child: const Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
@@ -103,7 +120,7 @@ class Buttom extends StatelessWidget {
               style: TextStyle(
                   color: Color(0xFF222222),
                   fontWeight: FontWeight.w400,
-                  fontSize: 16,
+                  fontSize: 20,
                   fontFamily: 'PTSans'),
             ),
             Material(
@@ -123,24 +140,36 @@ class Buttom extends StatelessWidget {
   }
 }
 
-class BarraNavegacion extends StatelessWidget {
+class BarraNavegacion extends StatefulWidget {
   const BarraNavegacion({super.key});
 
   @override
+  State<BarraNavegacion> createState() => _BarraNavegacionState();
+}
+
+class _BarraNavegacionState extends State<BarraNavegacion> {
+  bool _botonBloqueado = false;
+
+  void _onPressed() {
+    setState(() {
+      _botonBloqueado = true;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 100,
-      child: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 100.0,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 20),
+    return BottomAppBar(
+      child: SafeArea(
+        child: FittedBox(
+          fit: BoxFit.fill,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
                   onPressed: () {
+                    _botonBloqueado ? null : _onPressed;
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (_) => const VerificationScreen(),
+                      builder: (_) => const WelcomeScreen(),
                     ));
                   },
                   child: const Text('skip',
@@ -148,9 +177,9 @@ class BarraNavegacion extends StatelessWidget {
                       style: TextStyle(
                           color: Color(0xFF677294),
                           fontWeight: FontWeight.w400,
-                          fontSize: 16,
+                          fontSize: 20,
                           fontFamily: 'PTSans'))),
-              const SizedBox(width: 123),
+              const SizedBox(width: 200),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
