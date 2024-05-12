@@ -1,3 +1,4 @@
+import 'package:alfa_soyzen/presentation/homescreen.dart';
 import 'package:alfa_soyzen/presentation/login/home.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +128,7 @@ class ButtomLogin extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (_) => const WelcomeScreen(),
+          builder: (_) => HomeScreen(),
         ));
       },
       style: ElevatedButton.styleFrom(

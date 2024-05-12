@@ -1,4 +1,4 @@
-import 'package:alfa_soyzen/presentation/homescreen.dart';
+import 'package:alfa_soyzen/presentation/auth/location_screen.dart';
 import 'package:alfa_soyzen/presentation/login/forgotpass.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -213,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                HomeScreen()), // Reemplaza NextPage() con la página a la que deseas navegar después del inicio de sesión exitoso
+                LocationScreen()), // Reemplaza NextPage() con la página a la que deseas navegar después del inicio de sesión exitoso
       );
     } else {
       // Si falla el inicio de sesión, puedes mostrar un mensaje de error

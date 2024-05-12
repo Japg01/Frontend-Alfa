@@ -1,3 +1,4 @@
+import 'package:alfa_soyzen/presentation/login/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
@@ -297,7 +298,7 @@ class _RegisterPageState extends State<RegisterPage> {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(WelcomeScreen());
                 },
                 child: const Text("OK"),
               ),
