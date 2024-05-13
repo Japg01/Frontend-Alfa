@@ -37,6 +37,7 @@ dependencies:
   video_player: ^2.2.8
   chewie: ^1.2.2
   http: ^1.2.1
+  connectivity: ^3.0.6
   email_validator: ^2.1.17
   shared_preferences: ^2.0.8
   volume_control: ^0.1.5
@@ -58,7 +59,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: 'assets/images/logoblanco.png'
+  image_path: "assets/images/logoblanco.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -85,7 +86,7 @@ flutter:
     - assets/icons/user.png
     - assets/icons/notiBell.png
     - assets/images/
-    - assets/images/logo.png
+    - assets/images/Logo.png
     - assets/image/no_image_100x100.png
     - assets/icons/Yoga Ejemplo.png
     - assets/logo/Fondo Morado.png

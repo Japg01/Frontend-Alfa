@@ -15,12 +15,14 @@ class Assets {
   static const String assetsIconsSilla = 'assets/icons/silla.png';
   static const String assetsIconsUser = 'assets/icons/user.png';
   static const String assetsIconsYoga_Ejemplo = 'assets/icons/Yoga Ejemplo.png';
-  static const String assetsImageNoImage100x100 = 'assets/image/no_image_100x100.png';
+  static const String assetsImageNoImage100x100 =
+      'assets/image/no_image_100x100.png';
   static const String assetsImagesGym = 'assets/images/gym.webp';
   static const String assetsLogoFondo_Morado = 'assets/logo/Fondo Morado.png';
   static const String assetsVideosYogavideo = 'assets/videos/yogavideo.mp4';
   static const String fontsPTSansBold = 'assets/fonts/PTSans-Bold.ttf';
-  static const String fontsPTSansBoldItalic = 'assets/fonts/PTSans-BoldItalic.ttf';
+  static const String fontsPTSansBoldItalic =
+      'assets/fonts/PTSans-BoldItalic.ttf';
   static const String fontsPTSansItalic = 'assets/fonts/PTSans-Italic.ttf';
   static const String fontsPTSansRegular = 'assets/fonts/PTSans-Regular.ttf';
   static const String iconsAjustes = 'assets/icons/ajustes.png';
@@ -37,14 +39,15 @@ class Assets {
   static const String iconsUser = 'assets/icons/user.png';
   static const String iconsYoga_Ejemplo = 'assets/icons/Yoga Ejemplo.png';
   static const String imageNoImage100x100 = 'assets/image/no_image_100x100.png';
-  static const String imageNoImageFound360x250 = 'assets/image/no-image-found-360x250.png';
+  static const String imageNoImageFound360x250 =
+      'assets/image/no-image-found-360x250.png';
   static const String imagesBg = 'assets/images/bg.png';
   static const String imagesCheck = 'assets/images/check.png';
   static const String imagesFacebook = 'assets/images/facebook.png';
   static const String imagesFondo = 'assets/images/fondo.png';
   static const String imagesGmail = 'assets/images/gmail.png';
   static const String imagesGym = 'assets/images/gym.png';
-  static const String imagesLogo = 'assets/images/logo.png';
+  static const String imagesLogo = 'assets/images/Logo.png';
   static const String imagesLogo_app = 'assets/images/Logo app.svg';
   static const String imagesLogoblanco = 'assets/images/logoblanco.png';
   static const String imagesSplash = 'assets/images/splash.png';
@@ -56,8 +59,9 @@ class Assets {
   static const String imagesYoga2 = 'assets/images/yoga2.png';
   static const String imagesYoga3 = 'assets/images/yoga3.png';
   static const String logoFondo_Morado = 'assets/logo/Fondo Morado.png';
-  static const String logoLogo_Gymnastic_Center = 'assets/logo/Logo Gymnastic Center.png';
-  static const String presentationTipsDetailed = 'lib/presentation/Tips_Detailed.dart';
+  static const String logoLogo_Gymnastic_Center =
+      'assets/logo/Logo Gymnastic Center.png';
+  static const String presentationTipsDetailed =
+      'lib/presentation/Tips_Detailed.dart';
   static const String videosYogavideo = 'assets/videos/yogavideo.mp4';
-
 }

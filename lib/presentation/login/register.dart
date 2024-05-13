@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:connectivity/connectivity.dart';
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:http/http.dart' as http;
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -16,6 +21,19 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final Connectivity _connectivity = Connectivity();
+  Dio createDio() {
+    Dio dio = Dio();
+
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+
+    return dio;
+  }
 
 // VAR
   String name = ''; //
@@ -161,7 +179,9 @@ class _RegisterPageState extends State<RegisterPage> {
               if (phoneVerifi.hasMatch(phoneController.text) &&
                   phoneController.text.length == 11) {
                 if (EmailValidator.validate(emailController.text)) {
-                  _registerUser();
+                  //_registerUser();
+                  _registerUserWithDio();
+                  //_checkIfServerIsReachable();
                 } else {
                   showDialog(
                     context: context,
@@ -274,9 +294,83 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> _registerUser() async {
-    Dio dio = Dio();
     //const url = 'http://192.168.32.47/auth/register';
+    final url = Uri.parse(
+        'https://backend-alfa-production.up.railway.app/auth/register');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+        },
+        body: jsonEncode({
+          'name': nameController.text,
+          'phone': phoneController.text,
+          'email': emailController.text,
+          'password': passwordController.text,
+        }),
+      );
+      if (response.statusCode == 201) {
+        // Si la respuesta es exitosa, mostrar un diálogo con la respuesta del backend
+        showDialog(
+          // ignore: use_build_context_synchronously
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Registro exitoso"),
+              content:
+                  Text("Respuesta del servidor: ${json.decode(response.body)}"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        // Si la respuesta no es exitosa, mostrar un diálogo con un mensaje de error
+        showDialog(
+          // ignore: use_build_context_synchronously
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: Text(
+                  "No se pudo completar el registro. Error: ${json.decode(response.body)}"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
+      print('Unknown error: $e');
+    }
+  }
+
+  Future<void> _registerUserWithDio() async {
+    //Dio dio = createDio();
+    Dio dio = Dio();
+    //const url = 'http://192.168.250.4:3000/auth/register';
     const url = 'https://backend-alfa-production.up.railway.app/auth/register';
+
+    // _checkIfServerIsReachable();
+
     try {
       Response response = await dio.post(
         url,
@@ -288,15 +382,55 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       );
 
-    if (response.statusCode == 201) {
-      // Si la respuesta es exitosa, mostrar un diálogo con la respuesta del backend
+      if (response.statusCode == 201) {
+        // Si la respuesta es exitosa, mostrar un diálogo con la respuesta del backend
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Registro exitoso"),
+              content: Text(
+                  "Respuesta del servidor: ${response.data}"), // Dio maneja la respuesta un poco diferente
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        // Si la respuesta no es exitosa, mostrar un diálogo con un mensaje de error
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: Text(
+                  "No se pudo completar el registro. Error: ${response.data}"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } on DioError catch (e) {
+      // Manejo de errores específicos de Dio
       showDialog(
-        // ignore: use_build_context_synchronously
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Registro exitoso"),
-            content: Text("Respuesta del servidor: ${response.body}"),
+            title: const Text("Error de Conexión"),
+            content: Text("No se pudo realizar la conexión: ${e.message}"),
             actions: [
               TextButton(
                 onPressed: () {
@@ -308,16 +442,56 @@ class _RegisterPageState extends State<RegisterPage> {
           );
         },
       );
-    } else {
-      // Si la respuesta no es exitosa, mostrar un diálogo con un mensaje de error
+    }
+  }
+
+  Future<void> _checkIfServerIsReachable() async {
+    try {
+      final result = await http.get(Uri.parse('https://www.google.com'));
+      if (result.statusCode == 200) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Servidor Alcanzable"),
+              content: const Text("El servidor está disponible"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: const Text("No se pudo alcanzar el servidor"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
       showDialog(
-        // ignore: use_build_context_synchronously
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text("Error"),
-            content: Text(
-                "No se pudo completar el registro. Error: ${response.body}"),
+            content: const Text("No se pudo alcanzar el servidor"),
             actions: [
               TextButton(
                 onPressed: () {
@@ -332,82 +506,3 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 }
-
-//   Future<void> _registerUser() async {
-//     Dio dio = Dio();
-//     const url = 'http://192.168.32.47/auth/register';
-//     //const url = 'https://backend-alfa-production.up.railway.app/auth/register';
-//     try {
-//       Response response = await dio.post(
-//         url,
-//         data: {
-//           'name': nameController.text,
-//           'phone': phoneController.text,
-//           'email': emailController.text,
-//           'password': passwordController.text,
-//         },
-//       );
-
-// //       if (response.statusCode == 201) {
-// //         // Si la respuesta es exitosa, mostrar un diálogo con la respuesta del backend
-// //         showDialog(
-// //           context: context,
-// //           builder: (BuildContext context) {
-// //             return AlertDialog(
-// //               title: const Text("Registro exitoso"),
-// //               content: Text(
-// //                   "Respuesta del servidor: ${response.data}"), // Dio maneja la respuesta un poco diferente
-// //               actions: [
-// //                 TextButton(
-// //                   onPressed: () {
-// //                     Navigator.of(context).pop();
-// //                   },
-// //                   child: const Text("OK"),
-// //                 ),
-// //               ],
-// //             );
-// //           },
-// //         );
-// //       } else {
-// //         // Si la respuesta no es exitosa, mostrar un diálogo con un mensaje de error
-// //         showDialog(
-// //           context: context,
-// //           builder: (BuildContext context) {
-// //             return AlertDialog(
-// //               title: const Text("Error"),
-// //               content: Text(
-// //                   "No se pudo completar el registro. Error: ${response.data}"),
-// //               actions: [
-// //                 TextButton(
-// //                   onPressed: () {
-// //                     Navigator.of(context).pop();
-// //                   },
-// //                   child: const Text("OK"),
-// //                 ),
-// //               ],
-// //             );
-// //           },
-// //         );
-// //       }
-// //     } on DioError catch (e) {
-// //       // Manejo de errores específicos de Dio
-// //       showDialog(
-// //         context: context,
-// //         builder: (BuildContext context) {
-// //           return AlertDialog(
-// //             title: const Text("Error de Conexión"),
-// //             content: Text("No se pudo realizar la conexión: ${e.message}"),
-// //             actions: [
-// //               TextButton(
-// //                 onPressed: () {
-// //                   Navigator.of(context).pop();
-// //                 },
-// //                 child: const Text("OK"),
-// //               ),
-// //             ],
-// //           );
-// //         },
-// //       );
-// //     }
-// //   }
-// // }
