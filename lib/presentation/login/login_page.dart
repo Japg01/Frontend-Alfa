@@ -209,7 +209,6 @@ class _LoginPageState extends State<LoginPage> {
   } // Cierra _buildLoginButton
 
   Future<void> _loginUser() async {
-    // Abre _loginUser
     final url =
         Uri.parse('https://backend-alfa-production.up.railway.app/auth/login');
     final response = await http.post(
@@ -228,12 +227,9 @@ class _LoginPageState extends State<LoginPage> {
 
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) =>
-                LocationScreen()), // Reemplaza NextPage() con la página a la que deseas navegar después del inicio de sesión exitoso
+        MaterialPageRoute(builder: (context) => LocationScreen()),
       );
     } else {
-      // Si falla el inicio de sesión, puedes mostrar un mensaje de error
       showDialog(
         context: context,
         builder: (BuildContext context) {
