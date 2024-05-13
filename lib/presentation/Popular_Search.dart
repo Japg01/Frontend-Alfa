@@ -1,4 +1,5 @@
 import 'package:alfa_soyzen/widgets/searchbar.dart';
+import 'package:alfa_soyzen/widgets/scrollHorizontal.dart';
 import 'package:flutter/material.dart';
 
 class PopularSearch extends StatefulWidget {
@@ -83,31 +84,47 @@ class _PopularSearch extends State<PopularSearch> {
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
-                  height: 200,
+                  height: 195,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      PopularCourses(
-                        '15 Minutes yoga practice the beginner in 30 days',
-                        'Trainning',
-                        'Feb 17, 2020',
-                        'assets/icons/Yoga Ejemplo.png',
+                    children: const [
+                      ScrollHorizontal(
+                        titulo:
+                            "15 Minutes yoga practice the beginner in 30 days",
+                        descripcion: "Descripcion",
+                        categoria: "Trainning",
+                        fecha: "Feb 17, 2020",
+                        foto: "assets/images/Yoga Ejemplo 1.png",
+                        disposicion: 2,
+                        isNew: false,
+                        conexion: "/videos",
                       ),
-                      PopularCourses(
-                        '23 Minutes yoga practice in the Trainning in 30 days',
-                        'Courses',
-                        'Feb 18, 2020',
-                        'assets/icons/Yoga Ejemplo.png',
+                      ScrollHorizontal(
+                        titulo:
+                            "23 Minutes yoga practice the beginner in 30 days",
+                        descripcion: "Descripcion",
+                        categoria: "Morning",
+                        fecha: "Feb 18, 2020",
+                        foto: "assets/images/Yoga Ejemplo 2.png",
+                        disposicion: 2,
+                        isNew: false,
+                        conexion: "/videos",
                       ),
-                      PopularCourses(
-                        '30 Minutes yoga practice for experts in 30 days',
-                        'Yoga',
-                        'Feb 19, 2020',
-                        'assets/icons/Yoga Ejemplo.png',
+                      ScrollHorizontal(
+                        titulo:
+                            "30 Minutes yoga practice the beginner in 30 days",
+                        descripcion: "Descripcion",
+                        categoria: "For Women",
+                        fecha: "Feb 20, 2020",
+                        foto: "assets/images/Yoga Ejemplo 3.png",
+                        disposicion: 2,
+                        isNew: false,
+                        conexion: "/videos",
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(height: 20),
                 const Text(
                   'Programs Master',
                   style: TextStyle(
@@ -120,25 +137,25 @@ class _PopularSearch extends State<PopularSearch> {
                   '30 day yoga challenge',
                   'Ralph Edwards',
                   'Level 5',
-                  'assets/icons/Yoga Ejemplo.png',
+                  'assets/images/Yoga Ejemplo 4.png',
                 ),
                 programsMaster(
                   '30 day yoga challenge',
                   'Ralph Edwards',
                   'Level 5',
-                  'assets/icons/Yoga Ejemplo.png',
+                  'assets/images/Yoga Ejemplo 5.png',
                 ),
                 programsMaster(
                   '30 day yoga challenge',
                   'Ralph Edwards',
                   'Level 5',
-                  'assets/icons/Yoga Ejemplo.png',
+                  'assets/images/Yoga Ejemplo 6.png',
                 ),
                 programsMaster(
                   '30 day yoga challenge',
                   'Ralph Edwards',
                   'Level 5',
-                  'assets/icons/Yoga Ejemplo.png',
+                  'assets/images/Yoga Ejemplo 7.png',
                 ),
               ],
             ),

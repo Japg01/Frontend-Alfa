@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/Course.dart';
-
-import 'package:alfa_soyzen/widgets/sidebarmenu.dart';
+import '../widgets/sidebarmenu.dart';
 
 class Widgets_Tips_Detailed extends StatefulWidget {
   final String title;

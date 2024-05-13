@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:alfa_soyzen/presentation/homescreen.dart';
+import 'package:alfa_soyzen/widgets/scrollHorizontal.dart';
+import 'package:alfa_soyzen/widgets/navegation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class PerfilUsuario extends StatelessWidget {
-  final BackendService backendService;
-
-  const PerfilUsuario({Key? key, required this.backendService})
-      : super(key: key);
+  const PerfilUsuario({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +20,142 @@ class PerfilUsuario extends StatelessWidget {
               child: Column(
                 children: [
                   buildAppBar(context, snapshot.data!),
-                  const SizedBox(height: 20.0), // Agrega espacio aquí
+                  const SizedBox(
+                      height: 5.0), // Espacio reducido después del AppBar
                   buildStatisticsSection(),
-                  buildSection("Mi entrenamiento", 130.0, 120.0, 8,
-                      onViewMorePressed: () {
-                    print('Ver más presionado');
-                  }, backendService),
-                  buildSection("Mis fotos", 130.0, 120.0, 8,
-                      onViewMorePressed: () {
-                    print('Ver más presionado');
-                  }, backendService),
+                  const SizedBox(
+                      height:
+                          0.4), // Espacio reducido después de las estadísticas
+                  SizedBox(
+                    height: 230,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(
+                              left: 20.0), // Aumenta el padding del título
+                          child: Text(
+                            'Mi Entrenamiento',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: const <Widget>[
+                              ScrollHorizontal(
+                                titulo: 'Tadasana Yaga',
+                                descripcion: 'Yoga App',
+                                categoria: 'Yoga',
+                                fecha: '',
+                                foto: 'assets/images/Yoga Ejemplo 1.png',
+                                disposicion: 2,
+                                isNew: false,
+                                conexion: '',
+                              ),
+                              ScrollHorizontal(
+                                titulo: 'Marvin McKinny',
+                                descripcion: '',
+                                categoria: 'Yoga',
+                                fecha: '',
+                                foto: 'assets/images/Yoga Ejemplo 2.png',
+                                disposicion: 2,
+                                isNew: false,
+                                conexion: '',
+                              ),
+                              ScrollHorizontal(
+                                titulo: 'Carlos Alonso',
+                                descripcion: '',
+                                categoria: 'Yoga',
+                                fecha: '',
+                                foto: 'assets/images/Yoga Ejemplo 4.png',
+                                disposicion: 2,
+                                isNew: false,
+                                conexion: '/tipsTopics',
+                              ),
+                              ScrollHorizontal(
+                                titulo: 'Ralph Tobirson',
+                                descripcion: 'Yoga App',
+                                categoria: 'Yoga',
+                                fecha: '',
+                                foto: 'assets/images/Yoga Ejemplo 6.png',
+                                disposicion: 2,
+                                isNew: false,
+                                conexion: '/tipsTopics',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                      height: 0.4), // Espacio reducido entre las secciones
+                  SizedBox(
+                    height: 200,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(
+                              left: 20.0), // Aumenta el padding del título
+                          child: Text(
+                            'Mis Fotos',
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: const <Widget>[
+                              ScrollHorizontal(
+                                titulo: '',
+                                descripcion: '',
+                                categoria: '',
+                                fecha: '',
+                                foto: 'assets/images/yoga_video_1.png',
+                                disposicion: 2,
+                                isNew: false,
+                                conexion: '',
+                              ),
+                              ScrollHorizontal(
+                                titulo: '',
+                                descripcion: '',
+                                categoria: '',
+                                fecha: '',
+                                foto: 'assets/images/yoga_video_2.png',
+                                disposicion: 2,
+                                isNew: false,
+                                conexion: '',
+                              ),
+                              ScrollHorizontal(
+                                titulo: '',
+                                descripcion: '',
+                                categoria: '',
+                                fecha: '',
+                                foto: 'assets/images/yoga_video_3.png',
+                                disposicion: 2,
+                                isNew: false,
+                                conexion: '',
+                              ),
+                              ScrollHorizontal(
+                                titulo: '',
+                                descripcion: '',
+                                categoria: '',
+                                fecha: '',
+                                foto: 'assets/images/yoga_video_4.png',
+                                disposicion: 2,
+                                isNew: false,
+                                conexion: '',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -44,7 +168,11 @@ class PerfilUsuario extends StatelessWidget {
   Future<UserData> _loadUserData() async {
     final prefs = await SharedPreferences.getInstance();
     String name = prefs.getString('name') ?? 'Nombre de Usuario';
-    return UserData(name: name);
+    int followers = prefs.getInt('followers') ??
+        0; // Asegúrate de tener un valor por defecto
+    int following = prefs.getInt('following') ??
+        0; // Asegúrate de tener un valor por defecto
+    return UserData(name: name, followers: followers, following: following);
   }
 
   Widget buildAppBar(BuildContext context, UserData userData) {
@@ -85,19 +213,30 @@ class PerfilUsuario extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 35.0,
+                  backgroundImage: AssetImage('assets/images/user.png'),
                 ),
                 const SizedBox(width: 10.0),
-                Text(
-                  userData.name,
-                  style: const TextStyle(fontSize: 24.0, color: Colors.white),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      userData.name,
+                      style:
+                          const TextStyle(fontSize: 24.0, color: Colors.white),
+                    ),
+                    Text(
+                      'Seguidores: ${userData.followers}    Seguidos: ${userData.following}',
+                      style:
+                          const TextStyle(fontSize: 16.0, color: Colors.white),
+                    ),
+                  ],
                 ),
               ],
             ),
             const SizedBox(height: 20.0),
-            Container(
+            const SizedBox(
               height: 10.0,
-              child: const LinearProgressIndicator(
-                  value: 0.5, color: Colors.white),
+              child: LinearProgressIndicator(value: 0.5, color: Colors.white),
             ),
           ],
         ),
@@ -187,8 +326,11 @@ class PerfilUsuario extends StatelessWidget {
 
 class UserData {
   final String name;
+  final int followers;
+  final int following;
 
-  UserData({required this.name});
+  UserData(
+      {required this.name, required this.followers, required this.following});
 }
 
 class WeekdayData {
@@ -196,74 +338,4 @@ class WeekdayData {
   final int sales;
 
   WeekdayData(this.day, this.sales);
-}
-
-class BarraNavegacion extends StatelessWidget {
-  const BarraNavegacion({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 10.0,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-              icon: Image.asset('assets/icons/hogar.png'),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Image.asset('assets/icons/silla.png'),
-              onPressed: () {},
-            ),
-            const SizedBox(width: 48),
-            IconButton(
-              icon: Image.asset('assets/icons/ajustes.png'),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Image.asset('assets/icons/campana.png'),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MiScaffold extends StatelessWidget {
-  final Widget body;
-  const MiScaffold({super.key, required this.body});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: body,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        height: 70.0,
-        width: 70.0,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF4F14A0), Color(0xFF8066FF)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          shape: BoxShape.circle,
-        ),
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          child: Image.asset('assets/icons/rayo.png',
-              color: Colors.white, width: 35.0, height: 35.0),
-        ),
-      ),
-      bottomNavigationBar: const BarraNavegacion(),
-    );
-  }
 }
