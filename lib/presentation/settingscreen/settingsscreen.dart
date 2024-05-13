@@ -1,5 +1,7 @@
 import 'package:alfa_soyzen/presentation/Course.dart';
 import 'package:alfa_soyzen/presentation/settingscreen/faqscreen.dart';
+import 'package:alfa_soyzen/presentation/notificationscreen/notificationscreen.dart';
+import 'package:alfa_soyzen/presentation/profile.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -96,6 +98,18 @@ class SettingsTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const FAQScreen()),
+          );
+        } else if (title == 'Account') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PerfilUsuario(),
+            ),
+          );
+        } else if (title == 'Notifications') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NotificationScreen()),
           );
         }
       },

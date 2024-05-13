@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:alfa_soyzen/presentation/Course.dart';
-
 import '../widgets/sidebarmenu.dart';
-
 
 class Widgets_Tips_Detailed extends StatefulWidget {
   final String title;
@@ -22,11 +20,31 @@ class Widgets_Tips_Detailed extends StatefulWidget {
 
 class _tips_detail extends State<Widgets_Tips_Detailed> {
   final List<Map<String, String>> panels = [
-    {'description': 'Descripcion de Paso 1', 'urlImage': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'},
-    {'description': 'Descripcion de Paso 2', 'urlImage': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'},
-    {'description': 'Descripcion de Paso 3', 'urlImage': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'},
-    {'description': 'Descripcion de Paso 4', 'urlImage': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'},
-    {'description': 'Descripcion de Paso 5', 'urlImage': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'},
+    {
+      'description': 'Descripcion de Paso 1',
+      'urlImage':
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'
+    },
+    {
+      'description': 'Descripcion de Paso 2',
+      'urlImage':
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'
+    },
+    {
+      'description': 'Descripcion de Paso 3',
+      'urlImage':
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'
+    },
+    {
+      'description': 'Descripcion de Paso 4',
+      'urlImage':
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'
+    },
+    {
+      'description': 'Descripcion de Paso 5',
+      'urlImage':
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/991px-Placeholder_view_vector.svg.png'
+    },
     // Add more panels as needed
   ];
 

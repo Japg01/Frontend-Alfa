@@ -1,7 +1,6 @@
 import 'package:alfa_soyzen/widgets/searchbar.dart';
 import 'package:alfa_soyzen/widgets/scrollHorizontal.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class PopularSearch extends StatefulWidget {
   const PopularSearch({super.key});
@@ -88,7 +87,7 @@ class _PopularSearch extends State<PopularSearch> {
                   height: 195,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: [
+                    children: const [
                       ScrollHorizontal(
                         titulo:
                             "15 Minutes yoga practice the beginner in 30 days",

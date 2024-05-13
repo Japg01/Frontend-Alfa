@@ -70,7 +70,7 @@ class _VideosState extends State<Videos> {
                 elevation: 0,
                 automaticallyImplyLeading: false,
                 leading: IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
