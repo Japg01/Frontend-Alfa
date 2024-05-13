@@ -162,6 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   phoneController.text.length == 11) {
                 if (EmailValidator.validate(emailController.text)) {
                   _registerUser();
+                  Navigator.pushNamed(context, "/login");
                 } else {
                   showDialog(
                     context: context,
@@ -239,7 +240,6 @@ class _RegisterPageState extends State<RegisterPage> {
               },
             );
           }
-          Navigator.pushNamed(context, "/home");
         } else {
           showDialog(
             context: context,
