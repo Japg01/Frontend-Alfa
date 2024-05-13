@@ -37,7 +37,7 @@ class ScrollHorizontal extends StatelessWidget {
   final bool isNew;
   final String conexion;
 
-  ScrollHorizontal({
+  const ScrollHorizontal({super.key, 
     required this.titulo,
     required this.descripcion,
     required this.categoria,
@@ -55,7 +55,7 @@ class ScrollHorizontal extends StatelessWidget {
         Navigator.pushNamed(context, conexion);
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10.0),
+        margin: const EdgeInsets.symmetric(horizontal: 10.0),
         width: 200.0,
         height: disposicion == 2 ? 80.0 : null,
         decoration: BoxDecoration(
@@ -66,7 +66,7 @@ class ScrollHorizontal extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildImage(),
-            SizedBox(height: 5.0),
+            const SizedBox(height: 5.0),
             _buildContent(),
           ],
         ),
@@ -101,7 +101,7 @@ class ScrollHorizontal extends StatelessWidget {
                         children: [
                           Text(
                             titulo,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 16.0,
@@ -111,7 +111,7 @@ class ScrollHorizontal extends StatelessWidget {
                           ),
                           Text(
                             descripcion,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 14.0,
                             ),
@@ -138,12 +138,12 @@ class ScrollHorizontal extends StatelessWidget {
             top: 5.0,
             right: 5.0,
             child: Container(
-              padding: EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 color: Colors.purple,
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              child: Text(
+              child: const Text(
                 'New',
                 style: TextStyle(
                   color: Colors.white,
@@ -159,7 +159,7 @@ class ScrollHorizontal extends StatelessWidget {
   Widget _buildContent() {
     switch (disposicion) {
       case 1:
-        return SizedBox(); // No se necesita contenido adicional
+        return const SizedBox(); // No se necesita contenido adicional
       case 2:
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -168,7 +168,7 @@ class ScrollHorizontal extends StatelessWidget {
             children: [
               Text(
                 titulo,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
@@ -176,14 +176,14 @@ class ScrollHorizontal extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              SizedBox(height: 5.0),
+              const SizedBox(height: 5.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Flexible(
                     child: Text(
                       categoria,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.purple,
                         fontSize: 12.0,
                       ),
@@ -192,7 +192,7 @@ class ScrollHorizontal extends StatelessWidget {
                   ),
                   Text(
                     fecha,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 12.0,
                     ),
@@ -203,9 +203,9 @@ class ScrollHorizontal extends StatelessWidget {
           ),
         );
       case 3:
-        return SizedBox(); // No se necesita contenido adicional
+        return const SizedBox(); // No se necesita contenido adicional
       default:
-        return SizedBox(); // En caso de que disposicion no sea 1, 2 o 3
+        return const SizedBox(); // En caso de que disposicion no sea 1, 2 o 3
     }
   }
 }
