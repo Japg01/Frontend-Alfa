@@ -3,7 +3,7 @@ import 'package:alfa_soyzen/widgets/videoplayer.dart';
 import 'package:alfa_soyzen/widgets/navegation.dart';
 
 class Videos extends StatefulWidget {
-  const Videos({Key? key}) : super(key: key);
+  const Videos({super.key});
 
   @override
   _VideosState createState() => _VideosState();
@@ -69,6 +69,12 @@ class _VideosState extends State<Videos> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 automaticallyImplyLeading: false,
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
                 title: const Row(
                   children: [
                     Text(
@@ -116,8 +122,8 @@ class _VideosState extends State<Videos> {
           itemCount: 8,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            return cajaVideo(context, 'assets/icons/Yoga Ejemplo.png',
-                'assets/videos/yogavideo.mp4');
+            String imagePath = 'assets/images/Yoga Ejemplo ${index + 1}.png';
+            return cajaVideo(context, imagePath, 'assets/videos/yogavideo.mp4');
           },
         ),
       ],
@@ -158,19 +164,17 @@ class _VideosState extends State<Videos> {
                       size: 10,
                       color: index == _selectedCategoryIndex
                           ? Colors.white
-                          : Colors
-                              .grey, // Cambia el color del círculo según esté seleccionado o no
+                          : Colors.grey,
                     ),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     categoryName,
                     style: TextStyle(
                       fontSize: 12,
                       color: index == _selectedCategoryIndex
                           ? Colors.white
-                          : Colors
-                              .grey, // Cambia el color del texto según esté seleccionado o no
+                          : Colors.grey,
                     ),
                   ),
                 ],
@@ -199,38 +203,40 @@ class _VideosState extends State<Videos> {
           right: 8,
           bottom: 20,
         ),
-        child: Container(
-          height: 250.0,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                spreadRadius: 1,
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.asset(
-                  coverImage,
-                  width: double.infinity,
-                  height: 250.0,
-                  fit: BoxFit.cover,
+        child: SizedBox(
+          height: 80.0,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.4),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
                 ),
-              ),
-              Icon(
-                Icons.play_arrow,
-                size: 70.0,
-                color: Colors.grey.withOpacity(0.8),
-              ),
-            ],
+              ],
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.asset(
+                    coverImage,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  size: 60.0,
+                  color: Colors.grey.withOpacity(0.9),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -67,11 +67,23 @@ class SideBarMenu extends StatelessWidget {
         child: ListTile(
           title: Text(texto, style: const TextStyle(color: Colors.white)),
           onTap: () {
-            if (texto == 'Cuenta') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const PerfilUsuario()),
-              );
+            switch (texto) {
+              case 'Cuenta':
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PerfilUsuario(),
+                  ),
+                );
+                break;
+              case 'Notificaciones':
+                Navigator.pushNamed(context, '/notification');
+                break;
+              case 'FAQ':
+                Navigator.pushNamed(context, '/faq');
+                break;
+              default:
+                break;
             }
           },
         ),

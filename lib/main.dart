@@ -7,10 +7,12 @@ import 'package:alfa_soyzen/presentation/splashscreen/splash_screen.dart';
 import 'package:alfa_soyzen/presentation/trainingscreen/trainingscreen.dart';
 import 'package:alfa_soyzen/presentation/videos.dart';
 import 'package:flutter/material.dart';
-import 'package:alfa_soyzen/presentation/Course.dart';
-import 'package:alfa_soyzen/presentation/Tips_topics.dart';
 import 'presentation/notificationscreen/notificationscreen.dart';
 import 'presentation/settingscreen/settingsscreen.dart';
+import 'package:alfa_soyzen/presentation/Tips_topics.dart';
+import 'package:alfa_soyzen/presentation/Course.dart';
+import 'package:alfa_soyzen/presentation/settingscreen/faqscreen.dart';
+import 'package:alfa_soyzen/presentation/blogs.dart';
 
 void main() => runApp(const MyApp());
 
@@ -38,6 +40,8 @@ class MyApp extends StatelessWidget {
         '/courses': (context) => const YogaHomePage(),
         '/location': (context) => const LocationScreen(),
         '/login': (context) => const LoginPage(),
+        '/faq': (context) => const FAQScreen(),
+        '/blogs': (context) => const YogaBlogScreen(),
       },
     );
   }

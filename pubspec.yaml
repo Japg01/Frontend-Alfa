@@ -42,6 +42,7 @@ dependencies:
   volume_control: ^0.1.5
   cupertino_icons: ^1.0.6
   flutter_launcher_icons: ^0.13.1
+  fl_chart: ^0.36.4
 
 dev_dependencies:
   flutter_test:
@@ -84,14 +85,19 @@ flutter:
     - assets/icons/user.png
     - assets/icons/notiBell.png
     - assets/images/
-    - assets/images/Tips_Courses/
     - assets/images/logo.png
-    - assets/image/no_image_100x100.png
-    - assets/icons/Yoga Ejemplo.png
+    - assets/images/Yoga Ejemplo 1.png
+    - assets/images/Yoga Ejemplo 2.png
+    - assets/images/Yoga Ejemplo 3.png
+    - assets/images/Yoga Ejemplo 4.png
+    - assets/images/Yoga Ejemplo 5.png
+    - assets/images/Yoga Ejemplo 6.png
+    - assets/images/Yoga Ejemplo 7.png
+    - assets/images/Yoga Ejemplo 8.png
     - assets/logo/Fondo Morado.png
     - assets/videos/yogavideo.mp4
     - lib/presentation/Tips_Detailed.dart
-    - assets/image/no-image-found-360x250.png
+    - assets/images/no-image-found-360x250.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -209,7 +209,6 @@ class _LoginPageState extends State<LoginPage> {
   } // Cierra _buildLoginButton
 
   Future<void> _loginUser() async {
-    // Abre _loginUser
     final url =
         Uri.parse('https://backend-alfa-production.up.railway.app/auth/login');
     final response = await http.post(
@@ -221,7 +220,6 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     if (response.statusCode == 201) {
-      // Si el inicio de sesión es exitoso, puedes navegar a otra página o mostrar un mensaje de éxito
       final data = jsonDecode(response.body);
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('name', data['name'] ?? 'Nombre de Usuario');
@@ -229,12 +227,9 @@ class _LoginPageState extends State<LoginPage> {
 
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) =>
-                LocationScreen()), // Reemplaza NextPage() con la página a la que deseas navegar después del inicio de sesión exitoso
+        MaterialPageRoute(builder: (context) => const LocationScreen()),
       );
     } else {
-      // Si falla el inicio de sesión, puedes mostrar un mensaje de error
       showDialog(
         context: context,
         builder: (BuildContext context) {
