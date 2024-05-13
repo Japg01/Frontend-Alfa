@@ -2,6 +2,7 @@ import 'package:alfa_soyzen/presentation/Popular_Search.dart';
 import 'package:alfa_soyzen/presentation/auth/location_screen.dart';
 import 'package:alfa_soyzen/presentation/auth/verification_screen.dart';
 import 'package:alfa_soyzen/presentation/homescreen.dart';
+import 'package:alfa_soyzen/presentation/login/login_page.dart';
 import 'package:alfa_soyzen/presentation/splashscreen/splash_screen.dart';
 import 'package:alfa_soyzen/presentation/trainingscreen/trainingscreen.dart';
 import 'package:alfa_soyzen/presentation/videos.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/videos': (context) => const Videos(),
         '/courses': (context) => const YogaHomePage(),
         '/location': (context) => const LocationScreen(),
+        '/login': (context) => const LoginPage(),
         '/faq': (context) => const FAQScreen(),
         '/blogs': (context) => const YogaBlogScreen(),
       },
